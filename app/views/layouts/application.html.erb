@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Police</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+    <% if current_administrator %>
+  <ul class="nav nav-pills">
+    <li><%= current_administrator.login %></li>
+    <li><%= link_to "Вийти", logout_path, method: "delete" %></li>
+  </ul>
+<% else %>
+  <ul class="nav nav-pills">
+    <li><%= link_to "Увійти", 'login' %></a></li>
+    <li><%= link_to "Зареєструватися", 'signup' %></a></li>
+  </ul>
+<% end %>
+
+
+<%= yield %>
+
+</body>
+</html>

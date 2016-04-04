@@ -1,0 +1,22 @@
+<div class="login">
+  <div class="container">
+    <div class="form">
+<div class="row">
+   <div class="col-lg-6">
+    <h1>Зареєструватися</h1>
+       <div class="field">
+      <%= form_for(@administrator) do |f| %>
+
+      <%= f.text_field :name, :placeholder => "Ім’я" %>
+      <%= f.text_field :login, :placeholder => "Логін" %>
+      <%= f.password_field :password, :placeholder => "Пароль" %>
+      <%= f.submit "Створити обліковий запис", class: "btn-submit" %>
+
+      <% end %>
+      </div>
+    </div>
+</div>
+
+    </div>
+  </div>
+</div>
