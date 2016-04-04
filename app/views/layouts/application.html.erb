@@ -9,12 +9,12 @@
 <body>
 
     <% if current_administrator %>
-  <ul class="nav nav-pills">
+  <ul class="nav nav-tabs">
     <li><%= current_administrator.login %></li>
     <li><%= link_to "Вийти", logout_path, method: "delete" %></li>
   </ul>
 <% else %>
-  <ul class="nav nav-pills">
+  <ul class="nav nav-tabs">
     <li><%= link_to "Увійти", 'login' %></a></li>
     <li><%= link_to "Зареєструватися", 'signup' %></a></li>
   </ul>
