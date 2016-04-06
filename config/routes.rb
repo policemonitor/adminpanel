@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
-  # You can have the root of your site routed with "root"
+  root to: 'administrators#new'
+    # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
   # Example of regular route:
