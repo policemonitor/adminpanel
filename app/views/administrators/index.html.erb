@@ -1,0 +1,21 @@
+			<table id="administrator">
+			    <thead>
+			          <tr>
+                    <th data-field="id"> ID</th>
+			              <th data-field="name"> <%=t :name %></th>
+                    <th data-field="login"> <%=t :login %></th>
+										<th data-field="created_at"> <%=t :created %></th>
+			          </tr>
+			    </thead>
+
+			    <tbody>
+			    	<% @administrators.each do |administrator| %>
+			          <tr>
+                  <td> <%= administrator.id %></td>
+			            <td> <%= administrator.name %></td>
+                  <td> <%= administrator.login %></td>
+                  <td> <%= administrator.created_at %></td>
+			          </tr>
+			        <% end %>
+			    <tbody>
+			</table>
