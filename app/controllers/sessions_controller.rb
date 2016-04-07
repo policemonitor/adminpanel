@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
       session[:administrator_id] = @administrator.id
       redirect_to root_path
     else
+      flash[:danger] = "Логін або пароль не вірний"
       redirect_to login_path
     end
   end

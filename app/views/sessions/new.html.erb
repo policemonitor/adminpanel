@@ -1,19 +1,12 @@
-<div class="page-header">
-  <h1>Проект "Громадська фіксація правопорушень"</h1>
-</div>
 <div class="login">
 	<div class="container">
 		<div class="form">
-
       <h1>Увійти в обліковий запис</h1>
       <%= form_for(:session, url: login_path) do |f| %>
-      <%= f.text_field :login, :placeholder => "Логін" %>
-      <%= f.password_field :password, :placeholder => "Пароль" %>
-      <%= f.submit "Увійти", class: "btn-submit" %>
-	 	 <% end %>
-
-
-
+        <%= f.text_field :login, :placeholder => "Логін" %>
+        <%= f.password_field :password, :placeholder => "Пароль" %>
+        <%= f.submit "Увійти", class: "btn-submit" %>
+	 	  <% end %>
     </div>
 	</div>
 </div>

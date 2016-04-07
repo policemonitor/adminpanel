@@ -1,4 +1,6 @@
 class AdministratorsController < ApplicationController
+  include AdministratorsHelper
+
   def new
     @administrator = Administrator.new
   end
@@ -9,10 +11,12 @@ class AdministratorsController < ApplicationController
 
   def create
     @administrator = Administrator.new(administrator_params)
+    @errors = @administrator.errors
     if @administrator.save
       session[:administrator_id] = @administrator.id
       redirect_to administrators_path
     else
+      flash[:danger] = flash_errors(@administrator)
       redirect_to signup_path
     end
   end

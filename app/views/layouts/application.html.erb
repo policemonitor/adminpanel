@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Police</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
+  <head>
+    <title>Громадська фіксація правопорушень</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
   <body>
     <%= render "/shared/header" %>
+      <div class="col-md-4 col-md-offset-4">
+        <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value.html_safe %></div>
+        <% end %>
+      </div>
     <%= yield %>
   </body>
 </html>
