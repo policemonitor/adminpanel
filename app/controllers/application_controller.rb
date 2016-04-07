@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   end
 
   def require_administrator
-    redirect_to '/login' unless current_administrator
+    redirect_to login_path unless current_administrator
   end
 end

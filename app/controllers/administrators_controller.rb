@@ -15,10 +15,11 @@ class AdministratorsController < ApplicationController
     else
       redirect_to signup_path
     end
-end
+  end
 
-def show
-end
+  def show
+    @administrator = current_administrator
+  end
 
   private
 

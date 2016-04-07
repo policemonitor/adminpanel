@@ -5,23 +5,10 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
-
-    <% if current_administrator %>
-  <ul class="nav nav-tabs">
-    <li><%= current_administrator.login %></li>
-    <li><%= link_to "Вийти", logout_path, method: "delete" %></li>
-  </ul>
-<% else %>
-  <ul class="nav nav-tabs">
-    <li><%= link_to "Увійти", login_path %></a></li>
-    <li><%= link_to "Зареєструватися", signup_path %></a></li>
-  </ul>
-<% end %>
-
-
-<%= yield %>
-
-</body>
+  <body>
+    <%= render "/shared/header" %>
+    <%= yield %>
+  </body>
 </html>
