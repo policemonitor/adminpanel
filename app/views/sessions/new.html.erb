@@ -1,11 +1,26 @@
 <div class="login">
 	<div class="container">
 		<div class="form">
-      <h1>Увійти в обліковий запис</h1>
-      <%= form_for(:session, url: login_path) do |f| %>
-        <%= f.text_field :login, :placeholder => "Логін" %>
-        <%= f.password_field :password, :placeholder => "Пароль" %>
-        <%= f.submit "Увійти", class: "btn-submit" %>
+      <h1>Вхід до облікового запису</h1>
+      <%= form_for(:session, url: login_path, data: {toggle: "validator"}) do |f| %>
+				<div class="form-group">
+					<%= f.label :login, "Логін",class: "control-label pull-left" %>
+					<%= f.text_field :login, placeholder: "ivan.komov",
+																	 class: "form-control",
+																	 required: true %>
+				</div>
+
+				<div class="form-group">
+					<%= f.label :login, "Логін",class: "control-label pull-left" %>
+					<%= f.password_field :login,
+																	 placeholder: "&#149;&#149;&#149;&#149;&#149;&#149;".html_safe,
+																	 class: "form-control",
+																	 required: true %>
+				</div>
+
+				<div class="form-group">
+        	<%= f.submit "Увійти", class: "btn-submit" %>
+				</div>
 	 	  <% end %>
     </div>
 	</div>
