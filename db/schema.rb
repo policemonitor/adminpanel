@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408204610) do
+ActiveRecord::Schema.define(version: 20160408210927) do
 
   create_table "administrators", force: :cascade do |t|
     t.string   "lastname"
@@ -19,6 +19,11 @@ ActiveRecord::Schema.define(version: 20160408204610) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "personal_number"
+    t.integer  "rank"
   end
+
+  add_index "administrators", ["login"], name: "index_administrators_on_login", unique: true
+  add_index "administrators", ["personal_number"], name: "index_administrators_on_personal_number", unique: true
 
 end

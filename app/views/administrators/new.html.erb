@@ -7,10 +7,18 @@
           <%= form_for(@administrator, data: {toggle: "validator"}) do |f| %>
 
             <div class="form-group">
-              <%= f.label :name, "Прізвище Ім’я Побатькові",class: "control-label pull-left" %>
+              <%= f.label :lastname, "Прізвище Ім’я Побатькові",class: "control-label pull-left" %>
               <%= f.text_field :lastname, placeholder: "Іван Васильович Комов",
                                       class: "form-control",
                                       required: true %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :personal_number, "Персональний номер",class: "control-label pull-left" %>
+              <%= f.text_field :personal_number, placeholder: "0000000",
+                                      class: "form-control",
+                                      required: true,
+                                      pattern: "[0-9]{7}" %>
             </div>
 
             <div class="form-group">
