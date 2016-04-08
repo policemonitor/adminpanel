@@ -7,10 +7,22 @@
           <%= form_for(@administrator, data: {toggle: "validator"}) do |f| %>
 
             <div class="form-group">
-              <%= f.label :lastname, "Прізвище Ім’я Побатькові",class: "control-label pull-left" %>
+              <%= f.label :lastname, "Прізвище Ім’я По батькові",class: "control-label pull-left" %>
               <%= f.text_field :lastname, placeholder: "Іван Васильович Комов",
                                       class: "form-control",
                                       required: true %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :rank, "Посада",class: "control-label pull-left" %>
+              <select class="selectpicker form-control size-override"
+                      id="administrator_rank"
+                      name="administrator[rank]"
+                      title="Оберіть посаду"
+                      data-width="100%">
+                        <option value="1">Адміністратор</option>
+                        <option value="2">Керівник відділу кадрів</option>
+              </select>
             </div>
 
             <div class="form-group">

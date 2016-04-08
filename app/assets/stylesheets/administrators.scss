@@ -10,3 +10,18 @@
 #error_explanation {
   color: red;
 }
+
+.dropdown-toggle {
+  padding: 20px 12px !important;
+  border-radius: 0px !important;
+  border-color: #E6E6E6 !important;
+}
+
+.btn-default:focus {
+  background-color: white !important;
+  border-color: #E6E6E6 !important;
+}
+
+.size-override {
+  height: 60px !important;
+}
