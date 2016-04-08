@@ -2,13 +2,35 @@
   <div class="container">
     <div class="form">
       <div class="row">
-        <h1>Зареєструватися</h1>
+        <h1>Регістрація</h1>
         <div class="field">
-          <%= form_for(@administrator) do |f| %>
-            <%= f.text_field :name, :placeholder => "Прізвище Ім’я Побатькові" %>
-            <%= f.text_field :login, :placeholder => "Логін" %>
-            <%= f.password_field :password, :placeholder => "Пароль" %>
-            <%= f.submit "Створити обліковий запис", class: "btn-submit" %>
+          <%= form_for(@administrator, data: {toggle: "validator"}, id: "registration_form") do |f| %>
+
+            <div class="form-group">
+              <%= f.label :name, "Прізвище Ім’я Побатькові",class: "control-label pull-left" %>
+              <%= f.text_field :name, placeholder: "Іван Васильович Комов",
+                                      class: "form-control",
+                                      required: true %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :login, "Логін",class: "control-label pull-left" %>
+              <%= f.text_field :login, placeholder: "ivan.komov",
+                                       class: "form-control",
+                                       required: true %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password, "Пароль",class: "control-label pull-left" %>
+              <%= f.password_field :password,
+                                       placeholder: "&#149;&#149;&#149;&#149;&#149;&#149;".html_safe,
+                                       class: "form-control",
+                                       required: true %>
+            </div>
+
+            <div class="form-group">
+              <%= f.submit "Створити обліковий запис", class: "btn-submit" %>
+            </div>
           <% end %>
         </div>
       </div>
