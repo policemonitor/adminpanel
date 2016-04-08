@@ -9,7 +9,7 @@ class Administrator < ActiveRecord::Base
               presence: {message: " не може бути порожнім"},
               uniqueness:  {case_sensitive: false, message: " вже зайнято" }
 
-  validates :name,
+  validates :lastname,
               presence: {message: " не може бути порожнім"},
               length: { minimum: 3, message: " закоротке"}
 end

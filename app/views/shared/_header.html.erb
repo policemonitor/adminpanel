@@ -11,7 +11,7 @@
     <ul class="nav navbar-nav navbar-right hidden-xs">
       <% if current_administrator %>
       <li>
-        <%= link_to current_administrator.name, current_administrator, class: "navbar-link" %>
+        <%= link_to current_administrator.lastname, current_administrator, class: "navbar-link" %>
       </li>
       <li>
         <%= link_to logout_path, method: "delete", class: "navbar-link" do %>

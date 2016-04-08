@@ -28,6 +28,6 @@ class AdministratorsController < ApplicationController
   private
 
   def administrator_params
-    params.require(:administrator).permit(:name, :login, :password)
+    params.require(:administrator).permit(:lastname, :login, :password)
   end
 end

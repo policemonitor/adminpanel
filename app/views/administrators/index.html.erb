@@ -2,7 +2,7 @@
 			    <thead>
 			          <tr>
                     <th data-field="id"> ID</th>
-			              <th data-field="name"> <%=t :name %></th>
+			              <th data-field="lastname"> <%=t :lastname %></th>
                     <th data-field="login"> <%=t :login %></th>
 										<th data-field="created_at"> <%=t :created %></th>
 			          </tr>
@@ -12,7 +12,7 @@
 			    	<% @administrators.each do |administrator| %>
 			          <tr>
                   <td> <%= administrator.id %></td>
-			            <td> <%= administrator.name %></td>
+			            <td> <%= administrator.lastname %></td>
                   <td> <%= administrator.login %></td>
                   <td> <%= administrator.created_at %></td>
 			          </tr>
