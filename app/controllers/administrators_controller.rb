@@ -2,8 +2,19 @@ class AdministratorsController < ApplicationController
   include AdministratorsHelper
   include SessionsHelper
 
-  before_action :signed_in_administrator, only: [:edit, :update, :show, :new]
-  before_action :correct_administrator,   only: [:edit, :update, :show, :new]
+  HR_RANK = 2
+
+  # Not signed in users can only create claim!
+
+  # Administrator's profile can be viewed only by current administrator
+  # Administrator's profile can be changed only by him self or buy HR
+  # New administrator can be added only by HR
+  # List of administrators can only been viewed by HR
+  # Any special features for administrators cannot be accessed by HR
+
+  before_action :signed_in_administrator, only: [:edit, :update, :show, :new, :index, :destroy]
+  before_action :correct_administrator,   only: [:edit, :update, :show, :destroy]
+  before_action :correct_hr,              only: [:new, :index, :destroy]
 
   def new
     @administrator = Administrator.new
@@ -26,11 +37,11 @@ class AdministratorsController < ApplicationController
   end
 
   def show
-    @administrator = current_administrator
+    @administrator = Administrator.find(params[:id])
   end
 
   def edit
-    @administrator = current_administrator
+    @administrator = Administrator.find(params[:id])
   end
 
   def update
@@ -58,7 +69,19 @@ class AdministratorsController < ApplicationController
   end
 
   def correct_administrator
-    @administrator = current_administrator
-    redirect_to(root_path) unless current_administrator?(@administrator)
+    @administrator = Administrator.find(params[:id])
+    if current_administrator.rank != HR_RANK
+      if !current_administrator?(@administrator)
+        flash[:danger] = "Немає прав на виконання цієї операції!"
+        redirect_to login_path
+      end
+    end
+  end
+
+  def correct_hr
+    if current_administrator.rank != HR_RANK
+      flash[:danger] = "Немає прав на виконання цієї операції!"
+      redirect_to login_path
+    end
   end
 end

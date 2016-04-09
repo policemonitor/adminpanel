@@ -17,4 +17,7 @@ class SessionsController < ApplicationController
     session[:administrator_id] = nil
     redirect_to root_path
   end
+
+  def landing
+  end
 end

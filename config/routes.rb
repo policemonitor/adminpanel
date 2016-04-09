@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :administrators
-  root :to => "administrators#new"
+  root :to => "sessions#landing"
 
   get    'login'    => 'sessions#new'
   post   'login'    => 'sessions#create'
