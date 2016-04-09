@@ -33,7 +33,8 @@
 // Rules
 select.bs-select-hidden,
 select.selectpicker {
-  display: none !important;
+  display: inherit !important;
+  border-radius: 0px !important;
 }
 
 .bootstrap-select {
