@@ -2,57 +2,8 @@
   <div class="container">
     <div class="form">
       <div class="row">
-        <h1>Регістрація</h1>
-        <div class="field">
-          <%= form_for(@administrator, data: {toggle: "validator"}) do |f| %>
-
-            <div class="form-group">
-              <%= f.label :lastname, "Прізвище Ім’я По батькові",class: "control-label pull-left" %>
-              <%= f.text_field :lastname, placeholder: "Іван Васильович Комов",
-                                      class: "form-control",
-                                      required: true %>
-            </div>
-
-            <div class="form-group">
-              <%= f.label :rank, "Посада",class: "control-label pull-left" %>
-              <select class="selectpicker form-control size-override"
-                      id="administrator_rank"
-                      name="administrator[rank]"
-                      title="Оберіть посаду"
-                      data-width="100%">
-                        <option value="1">Адміністратор</option>
-                        <option value="2">Керівник відділу кадрів</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <%= f.label :personal_number, "Персональний номер",class: "control-label pull-left" %>
-              <%= f.text_field :personal_number, placeholder: "0000000",
-                                      class: "form-control",
-                                      required: true,
-                                      pattern: "[0-9]{7}" %>
-            </div>
-
-            <div class="form-group">
-              <%= f.label :login, "Логін",class: "control-label pull-left" %>
-              <%= f.text_field :login, placeholder: "ivan.komov",
-                                       class: "form-control",
-                                       required: true %>
-            </div>
-
-            <div class="form-group">
-              <%= f.label :password, "Пароль",class: "control-label pull-left" %>
-              <%= f.password_field :password,
-                                       placeholder: "&#149;&#149;&#149;&#149;&#149;&#149;".html_safe,
-                                       class: "form-control",
-                                       required: true %>
-            </div>
-
-            <div class="form-group">
-              <%= f.submit "Створити обліковий запис", class: "btn-submit" %>
-            </div>
-          <% end %>
-        </div>
+        <h1>Реєстрація</h1>
+        <%= render "shared/form" %>
       </div>
     </div>
   </div>
