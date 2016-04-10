@@ -2,8 +2,6 @@ class AdministratorsController < ApplicationController
   include AdministratorsHelper
   include SessionsHelper
 
-  HR_RANK = 2
-
   # Not signed in users can only create claim!
 
   # Administrator's profile can be viewed only by current administrator
@@ -26,7 +24,6 @@ class AdministratorsController < ApplicationController
 
   def create
     @administrator = Administrator.new(administrator_params)
-    @errors = @administrator.errors
     if @administrator.save
       session[:administrator_id] = @administrator.id
       redirect_to administrators_path
@@ -51,7 +48,7 @@ class AdministratorsController < ApplicationController
       redirect_to @administrator
     else
       flash[:danger] = flash_errors(@administrator)
-      redirect_to current_administrator_edit_path
+      redirect_to edit_administrator_path(@administrator)
     end
   end
 
