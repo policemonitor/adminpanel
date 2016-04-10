@@ -25,8 +25,8 @@ class AdministratorsController < ApplicationController
   def create
     @administrator = Administrator.new(administrator_params)
     if @administrator.save
-      session[:administrator_id] = @administrator.id
-      redirect_to administrators_path
+      # session[:administrator_id] = @administrator.id
+      redirect_to @administrator
     else
       flash[:danger] = flash_errors(@administrator)
       redirect_to signup_path
@@ -50,6 +50,12 @@ class AdministratorsController < ApplicationController
       flash[:danger] = flash_errors(@administrator)
       redirect_to edit_administrator_path(@administrator)
     end
+  end
+
+  def destroy
+    Administrator.find(params[:id]).destroy
+    flash[:success] = "Співробітника звільнено!"
+    redirect_to current_administrator
   end
 
   private

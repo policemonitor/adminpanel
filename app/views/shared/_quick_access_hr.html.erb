@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Поточний кабінет</h3>
+      </div>
+      <div class="panel-body">
+        <p>
+          <h4><%= @administrator.lastname %><h4>
+        <p>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item"><b>Посада:</b> <%= rank_to_word(@administrator) %></li>
+        <li class="list-group-item"><b>Особистий номер:</b> <%= @administrator.personal_number %></li>
+      </ul>
+
+      <% if current_administrator != @administrator %>
+      <div class="panel-footer">
+        <p>
+          <%= button_to "Звільнити співробітника!", @administrator, class: "btn btn-danger btn-lg", method: :delete, data: { confirm: "You sure?" } %>
+        </p>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <%= link_to new_administrator_path do %>
+    <%= image_tag "system/person.png", class: "img-responsive", alt: "Новий співробітник" %>
+    <% end %>
+    <p>
+      <h3>Новий співробітник</h3>
+    </p>
+    <%= link_to "Додавання нового співробітника.", new_administrator_path, class: "simply-link" %>
+  </div>
+
+  <div class="col-md-3">
+    <%= link_to root_path do %>
+    <%= image_tag "system/people.png", class: "img-responsive", alt: "Співробітники" %>
+    <% end %>
+    <p>
+      <h3>Співробітники</h3>
+    </p>
+    <%= link_to "Перегляд та редагування штату співробітників.", root_path, class: "simply-link" %>
+  </div>
+
+  <div class="col-md-3">
+    <%= link_to root_path do %>
+    <%= image_tag "system/car.png", class: "img-responsive", alt: "Екіпажі" %>
+    <% end %>
+    <p>
+      <h3>Екіпажі</h3>
+    </p>
+    <%= link_to "Перегляд та зміна патрульних екіпажів.", root_path, class: "simply-link" %>
+  </div>
+</div>

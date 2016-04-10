@@ -2,6 +2,10 @@ module SessionsHelper
   ADMIN_RANK = 1
   HR_RANK = 2
 
+  def rank_to_word(administrator)
+    administrator.rank == ADMIN_RANK ? "Адміністратор" : "Керівник відділу кадрів" 
+  end
+
   def current_administrator?(administrator)
     administrator == current_administrator
   end

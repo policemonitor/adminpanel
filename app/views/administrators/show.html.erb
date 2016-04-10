@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="row">
+        <h1>Панель швидкого доступу</h1>
+      </div>
+
+      <% if signed_in_ADMIN? %>
+        <%= render "shared/quick_access_admin" %>
+      <% elsif signed_in_HR? %>
+        <%= render "shared/quick_access_hr" %>
+      <% end %>
+      <%= render "shared/settings" %>
+
+    </div>
+  </div>
+</div>
