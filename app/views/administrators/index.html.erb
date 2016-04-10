@@ -1,21 +1,33 @@
-			<table id="administrator">
-			    <thead>
-			          <tr>
-                    <th data-field="id"> ID</th>
-			              <th data-field="lastname"> <%=t :lastname %></th>
-                    <th data-field="login"> <%=t :login %></th>
-										<th data-field="created_at"> <%=t :created %></th>
-			          </tr>
-			    </thead>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <table id="administrator">
+            <thead>
+              <tr>
+                <th data-field="lastname">Прізвище Ім'я По батькові</th>
+                <th data-field="personal_number">Особистий номер</th>
+                <th data-field="login">Логін у системі</th>
+                <th data-field="edit"></th>
+                <th data-field="delete"></th>
+              </tr>
+            </thead>
 
-			    <tbody>
-			    	<% @administrators.each do |administrator| %>
-			          <tr>
-                  <td> <%= administrator.id %></td>
-			            <td> <%= administrator.lastname %></td>
-                  <td> <%= administrator.login %></td>
-                  <td> <%= administrator.created_at %></td>
-			          </tr>
-			        <% end %>
-			    <tbody>
-			</table>
+            <tbody>
+              <% @administrators.each do |administrator| %>
+              <tr>
+                <td><%= administrator.lastname %></td>
+                <td><%= administrator.personal_number %></td>
+                <td><%= administrator.login %></td>
+                <td><%= link_to "Редагувати", edit_administrator_path(administrator) %></td>
+                <td><%= link_to "Звільнити", administrator, method: :delete, data: { confirm: "You sure?" } %></td>
+              </tr>
+              <% end %>
+            <tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
