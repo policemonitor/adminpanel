@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :administrators
+  resources :claims
+
   root :to => "sessions#landing"
 
   get    'login'    => 'sessions#new'
