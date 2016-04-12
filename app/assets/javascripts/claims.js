@@ -1,0 +1,2 @@
+
+$('#law_preview').modal();

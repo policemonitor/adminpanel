@@ -1,0 +1,36 @@
+<div class="modal fade" id="law_preview" tabindex="-1" role="dialog" aria-labelledby="law_preview_label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="law_preview_label">Про захист персональних даних</h4>
+      </div>
+      <div class="modal-body">
+        <h3>Обробка даних</h3>
+          <p>
+            Усі введені Вами дані будуть зібрані та використані згідно з
+            <%= link_to "Законом України 'Про захист персональних даних'", "http://zakon5.rada.gov.ua/laws/show/2297-17" %>.
+          </p>
+        <h3>Для чого нам потрібні Ваші персональні дані</h3>
+          <p>
+            Надані Вами дані необхідні для координації роботи поліції та
+            вирішення проблем повязаних зі злочином. Також ці дані будуть
+            використані для контакту з Вами для визначення деталей скоєного
+            злочину.
+          </p>
+        <h3>Дані про місцезнаходження</h3>
+          <p>
+            Нам необхідні Ваші координати виключно для формування наказу для
+            поліцейського екіпажу, якому буде надан наказ на перевірку заяви.
+            Наша система намагається автоматично визначити Ваше місцезнаходження,
+            але Ви також маєте змогу вказати адресу вручну, якщо відправка
+            заяви відбувається не з місця скоєння злочину. <b>Ми не зможемо
+            надати Вам допомогу, якщо не знатимемо де Ви!</b>
+          </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Зачинити</button>
+      </div>
+    </div>
+  </div>
+</div>

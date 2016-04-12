@@ -1,0 +1,18 @@
+<script>
+  function getCoordinates() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      document.getElementById('coordinates').value = "Веб-переглядач не може визначити координати";
+    }
+  }
+  function showPosition(position) {
+    if (position == null) {
+      document.getElementById('coordinates').value = "Місцезнаходження не визначене!";
+    } else {
+      document.getElementById('coordinates').value = position.coords.latitude + " " + position.coords.longitude;
+    }
+  }
+
+  window.onload = getCoordinates();
+</script>
