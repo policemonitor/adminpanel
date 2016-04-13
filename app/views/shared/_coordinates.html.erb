@@ -1,7 +1,12 @@
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
 <script>
+  window.onload = getCoordinates();
+
+  // Automatic reciving users coordinates
   function getCoordinates() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
       document.getElementById('coordinates').value = "Веб-переглядач не може визначити координати";
     }
@@ -10,9 +15,50 @@
     if (position == null) {
       document.getElementById('coordinates').value = "Місцезнаходження не визначене!";
     } else {
-      document.getElementById('coordinates').value = position.coords.latitude + " " + position.coords.longitude;
+      document.getElementById('coordinates').value = "Місцезнаходження визначене!";
+      //document.getElementById('coordinates').value = position.coords.latitude + " " + position.coords.longitude;
     }
   }
 
-  window.onload = getCoordinates();
+  function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            document.getElementById('coordinates').value = "Ви заборонили визначати геолокацію."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            document.getElementById('coordinates').value = "Координати не визначені! Введіть адресу вручну."
+            break;
+        case error.TIMEOUT:
+            document.getElementById('coordinates').value = "Внутрішня помилка! Введіть адресу вручну."
+            break;
+        case error.UNKNOWN_ERROR:
+            document.getElementById('coordinates').value = "Невідома помилка! Введіть адресу вручну"
+            break;
+    }
+}
+
+  // Parsing user-inputed address
+  function geocodeAddress() {
+    var geocoder = new google.maps.Geocoder();
+    var address = document.getElementById('address_input').value;
+
+    geocoder.geocode({
+      'address': address
+    }, function (results, status) {
+
+      if (status == google.maps.GeocoderStatus.OK) {
+        var latitude = results[0].geometry.location.lat();
+        var longitude = results[0].geometry.location.lng();
+        document.getElementById('coordinates').value = "Адреса прийнята!";
+      } else {
+        document.getElementById('coordinates').value = "Адреса не розпізнана, спробуйте ще раз!";
+      }
+    });
+  }
+
+
+  // Activates when user trying to input it's address
+  function manual_input_detected() {
+    document.getElementById('coordinates').value = "Введіть адресу і натисніть кнопку Перевірити";
+  }
 </script>
