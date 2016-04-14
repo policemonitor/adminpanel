@@ -29,27 +29,19 @@
                                 required: true %>
       </div>
 
+
       <div class="form-group">
-        <div class="input-group">
-          <label class="control-label pull-left" for="claim_coordinates">Місце злочину</label>
-          <input placeholder="Дані про міцезнаходження" class="form-control" id="coordinates" required="required" type="text" readonly="readonly">
-          <span class="input-group-btn">
-            <button class="btn btn-default input-button" id="first-coordinates-button" type="button" onclick="getCoordinates()" >Поновити</button>
-          </span>
+        <label class="control-label pull-left" for="address_input">Місце злочину</label>
+        <input placeholder="Адреса місця злочину" class="form-control" id="address_input" type="text" onchange="geocodeAddress()" disabled required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="checkbox_coordinates" onclick="autoCoordinatesCheck()" checked >Визначити моє місцеположення автоматично.
+          </label>
         </div>
 
-        <div class="input-group">
-          <input placeholder="Ваша адреса" class="form-control" id="address_input" required="required" type="text" onclick="manual_input_detected()">
-          <span class="input-group-btn">
-            <button class="btn btn-default input-button" id="second-coordinates-button" type="button" onclick="geocodeAddress()" >Перевірити</button>
-          </span>
-        </div>
+        <%= f.text_field :latitude, id: "latitude_field", type: "hidden" %>
+        <%= f.text_field :longitude, id: "longitude_field", type: "hidden" %>
       </div>
-
-      TODO:
-        - Add hidden fields for coordinates
-        - Activate pattern for them
-        - Activate model check
 
       <div class="form-group">
         <%= f.label :text, "Текст повідомлення", class: "control-label pull-left" %>

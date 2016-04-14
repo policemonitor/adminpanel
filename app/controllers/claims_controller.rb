@@ -1,5 +1,7 @@
 class ClaimsController < ApplicationController
 
+  include ClaimsHelper
+
   def new
     @claim = Claim.new
   end
@@ -11,8 +13,8 @@ class ClaimsController < ApplicationController
       # In feature should redirect to "Thank you!" page
       redirect_to root_path
     else
-      flash[:danger] = "Виникли певні помилки"
-      redirect_to new_claim_path_path
+      flash[:danger] = flash_errors(@claim)
+      redirect_to new_claim_path
     end
   end
 

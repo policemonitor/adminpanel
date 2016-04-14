@@ -2,40 +2,41 @@
 
 <script>
   window.onload = getCoordinates();
+  var uniq_error = '';
 
   // Automatic reciving users coordinates
   function getCoordinates() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
-      document.getElementById('coordinates').value = "Веб-переглядач не може визначити координати";
+      // console.log("Веб-переглядач не може визначити координати");
+      uniq_error = "Веб-переглядач не може визначити координати";
     }
   }
   function showPosition(position) {
-    if (position == null) {
-      document.getElementById('coordinates').value = "Місцезнаходження не визначене!";
-    } else {
-      document.getElementById('coordinates').value = "Місцезнаходження визначене!";
-      //document.getElementById('coordinates').value = position.coords.latitude + " " + position.coords.longitude;
+    if (position == null) {} else {
+      document.getElementById('latitude_field').value = position.coords.latitude;
+      document.getElementById('longitude_field').value = position.coords.longitude;
+      uniq_error = '';
     }
   }
 
   function showError(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            document.getElementById('coordinates').value = "Ви заборонили визначати геолокацію."
-            break;
-        case error.POSITION_UNAVAILABLE:
-            document.getElementById('coordinates').value = "Координати не визначені! Введіть адресу вручну."
-            break;
-        case error.TIMEOUT:
-            document.getElementById('coordinates').value = "Внутрішня помилка! Введіть адресу вручну."
-            break;
-        case error.UNKNOWN_ERROR:
-            document.getElementById('coordinates').value = "Невідома помилка! Введіть адресу вручну"
-            break;
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        uniq_error = "Ви заборонили визначати геолокацію.";
+        break;
+      case error.POSITION_UNAVAILABLE:
+        uniq_error = "Координати не визначені! Введіть адресу вручну.";
+        break;
+      case error.TIMEOUT:
+        uniq_error = "Внутрішня помилка! Введіть адресу вручну."
+        break;
+      case error.UNKNOWN_ERROR:
+        uniq_error = "Невідома помилка! Введіть адресу вручну"
+        break;
     }
-}
+  }
 
   // Parsing user-inputed address
   function geocodeAddress() {
@@ -49,16 +50,38 @@
       if (status == google.maps.GeocoderStatus.OK) {
         var latitude = results[0].geometry.location.lat();
         var longitude = results[0].geometry.location.lng();
-        document.getElementById('coordinates').value = "Адреса прийнята!";
+
+        document.getElementById('latitude_field').value = latitude;
+        document.getElementById('longitude_field').value = longitude;
+
+        uniq_error = '';
       } else {
-        document.getElementById('coordinates').value = "Адреса не розпізнана, спробуйте ще раз!";
+        uniq_error = "Адреса не розпізнана, спробуйте ще раз!";
       }
     });
   }
 
-
-  // Activates when user trying to input it's address
-  function manual_input_detected() {
-    document.getElementById('coordinates').value = "Введіть адресу і натисніть кнопку Перевірити";
+  function autoCoordinatesCheck() {
+    if (document.getElementById('checkbox_coordinates').checked) {
+      document.getElementById('address_input').disabled = true;
+      document.getElementById('address_input').value = '';
+      getCoordinates();
+    } else {
+      document.getElementById('address_input').disabled = false;
+    }
   }
+
+  $('new_claim').submit(function () {
+    if (($('latitude_field').val() == '') || ($('longitude_field').val() == '')) {
+      uniq_error = 'Координати не отримано! Спробуйте ввести адресу вручну.';
+    }
+
+    if (uniq_error.length == 0) {
+      alert(uniq_error);
+      return true;
+    } else {
+      alert(uniq_error);
+      return false;
+    }
+  });
 </script>
