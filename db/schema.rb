@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411104604) do
+ActiveRecord::Schema.define(version: 20160415144028) do
 
   create_table "administrators", force: :cascade do |t|
     t.string   "lastname"
@@ -27,17 +27,17 @@ ActiveRecord::Schema.define(version: 20160411104604) do
   add_index "administrators", ["personal_number"], name: "index_administrators_on_personal_number", unique: true
 
   create_table "claims", force: :cascade do |t|
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "lastname"
     t.string   "phone"
     t.string   "latitude"
     t.string   "longitude"
     t.string   "theme"
     t.text     "text"
-    t.boolean  "status"
     t.integer  "crew_id"
     t.integer  "administrator_id"
+    t.boolean  "status",           default: false
   end
 
 end

@@ -29,3 +29,9 @@ en:
         text: "Текст звернення"
         latitude: "Широта"
         longitude: "Довгота"
+      administrator:
+        lastname: "ПІБ"
+        login: "Логін"
+        password_digest: "Пароль"
+        personal_number: "Особистий номер"
+        rank: "Звання"

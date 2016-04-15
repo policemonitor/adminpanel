@@ -2,7 +2,7 @@
 
 <script>
   window.onload = getCoordinates();
-  var uniq_error = '';
+  var uniq_error = 'Місцеположення не визначене! Введіть адресу вручну.';
 
   // Automatic reciving users coordinates
   function getCoordinates() {
@@ -70,18 +70,18 @@
       document.getElementById('address_input').disabled = false;
     }
   }
+  $(document).ready(function() {
+    $('#new_claim').submit(function () {
+      if (($('#latitude_field').val() == '') || ($('#longitude_field').val() == '')) {
+        uniq_error = 'Координати не отримано! Спробуйте ввести адресу вручну.';
+      }
 
-  $('new_claim').submit(function () {
-    if (($('latitude_field').val() == '') || ($('longitude_field').val() == '')) {
-      uniq_error = 'Координати не отримано! Спробуйте ввести адресу вручну.';
-    }
-
-    if (uniq_error.length == 0) {
-      alert(uniq_error);
-      return true;
-    } else {
-      alert(uniq_error);
-      return false;
-    }
+      if (uniq_error.length == 0) {
+        return true;
+      } else {
+        $("[data-toggle=popover]").popover({content: uniq_error, placement: 'right'});
+        return false;
+      }
+    });
   });
 </script>
