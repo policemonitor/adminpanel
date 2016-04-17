@@ -21,4 +21,11 @@ module SessionsHelper
   def signed_in_HR?
     current_administrator.rank == HR_RANK
   end
+
+  def signed_in_administrator
+    unless signed_in?
+      flash[:danger] = "Увійдіть до системи!"
+      redirect_to login_path
+    end
+  end
 end

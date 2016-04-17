@@ -2,7 +2,7 @@ class AdministratorsController < ApplicationController
   include AdministratorsHelper
   include SessionsHelper
 
-  # Not signed in users can only create claim!
+  # Not authorised users can only create claim!
 
   # Administrator's profile can be viewed only by current administrator
   # Administrator's profile can be changed only by him self or buy HR
@@ -62,13 +62,6 @@ class AdministratorsController < ApplicationController
 
   def administrator_params
     params.require(:administrator).permit(:lastname, :personal_number, :rank, :login, :password)
-  end
-
-  def signed_in_administrator
-    unless signed_in?
-      flash[:danger] = "Увійдіть до системи!"
-      redirect_to login_path
-    end
   end
 
   def correct_administrator
