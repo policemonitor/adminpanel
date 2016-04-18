@@ -13,6 +13,7 @@ class ClaimsController < ApplicationController
   # Administrator MUST UPDATE claim after recieving it.
 
   before_action :signed_in_administrator, only: [:index, :edit, :update, :destroy]
+  before_action :is_ADMIN, only: [:index, :edit, :update, :destroy, :map]
 
   def new
     @claim = Claim.new

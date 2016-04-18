@@ -14,6 +14,15 @@ module SessionsHelper
    !current_administrator.nil?
   end
 
+  def is_ADMIN
+    if current_administrator.nil?
+      signed_in_administrator
+    elsif current_administrator.rank != ADMIN_RANK
+      flash[:danger] = "Недостатньо прав на виконання цієї операції!"
+      redirect_to current_administrator
+    end
+  end
+
   def signed_in_ADMIN?
     current_administrator.rank == ADMIN_RANK
   end
