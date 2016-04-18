@@ -12,8 +12,8 @@ module ClaimsHelper
     message = "<div class='messagebox'>" +
                 "<h4>" + claim.theme + "</h4>" +
                 "<p>" + claim.text.truncate(200) + "</p>
-                  <div class='btn-group'>
-                    <a href='"+ claim_path(claim) + "' class='btn btn-primary pull-right' >Формувати наказ</a>" +
+                  <div class='btn-group pull-right'>
+                    <a href='"+ claim_path(claim) + "' class='btn btn-primary' >Формувати наказ</a>" +
                   "</div>
                 </div>"
     return message.html_safe
