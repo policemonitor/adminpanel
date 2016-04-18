@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   delete 'logout'   => 'sessions#destroy'
 
   get    'acceptedclaim' => 'claims#thankyoupage'
+  get    'map' => 'claims#map'
+
   post   'claims/new' => 'claims#new'
   post   'claims' => 'claims#create'
   get    'signup'   => 'administrators#new'

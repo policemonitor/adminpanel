@@ -22,6 +22,9 @@ gem 'jquery-turbolinks'
 
 gem 'will_paginate'
 
+gem 'geocoder'
+gem 'gmaps4rails'
+
 group :development, :test do
   gem 'byebug'
 

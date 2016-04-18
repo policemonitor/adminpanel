@@ -10,7 +10,7 @@ class ClaimsController < ApplicationController
   # it's claim by entering [id + phone] combination into secrch field
 
   # Administrator has all privileges to manipulate claims.
-  # Administrator MUST UPDATE claim after recieving it. 
+  # Administrator MUST UPDATE claim after recieving it.
 
   before_action :signed_in_administrator, only: [:index, :edit, :update, :destroy]
 
@@ -48,6 +48,15 @@ class ClaimsController < ApplicationController
 
   def index
     @claim = Claim.all
+  end
+
+  def map
+    @claim = Claim.where(status: 'f')
+    @hash = Gmaps4rails.build_markers(@claim) do |claim, marker|
+      marker.lat claim.latitude
+      marker.lng claim.longitude
+      marker.title claim.theme
+    end
   end
 
   def edit
