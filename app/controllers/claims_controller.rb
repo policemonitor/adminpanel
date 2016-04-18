@@ -56,6 +56,7 @@ class ClaimsController < ApplicationController
       marker.lat claim.latitude
       marker.lng claim.longitude
       marker.title claim.theme
+      marker.infowindow claim_card(claim)
     end
   end
 
