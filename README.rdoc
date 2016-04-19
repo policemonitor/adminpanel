@@ -1,13 +1,12 @@
-<h1>Tiny Documentation of project</h1>
-<p>
-<img src="http://s17.postimg.org/riqhk05gv/97107058_410721552.jpg">
-</p>
-<h2>JSON API<h/2>
+#Tiny Documentation of project</h1>
 
-<p>We accept incoming JSON request on address <em>/claim<em></p>
-<p>It should be formated in the next way:
-  <pre>
-    <code>
+http://s17.postimg.org/riqhk05gv/97107058_410721552.jpg">
+
+##JSON API
+
+We accept incoming JSON request on address __/claim__
+It should be formated in the next way:
+
     '{
       "claim":
         {
@@ -19,37 +18,27 @@
           "text":"Text of test message"
         }
       }'
-    </code>
-  </pre>
-</p>
-<p>If your request was successful than you'll get answer with code 201
-and your request id and its phone number</p>
 
-<p>In the other way you'll get code 421 (Unprocessable entity) and JSON array with
-errors.</p>
 
-<h3>Examples of requests</h3>
-<h4>Successful request answer</h4>
+If your request was successful than you'll get answer with code 201
+and your request id and its phone number.
 
-<pre>
-  <code>
-  ...
-  * upload completely sent off: 149 out of 149 bytes
-  < HTTP/1.1 201 Created
-  ...
-  {"claim_id":53,"phone":"+1(51)555555"}
-  ...
-  </pre>
-</code>
+In the other way you'll get code 421 (Unprocessable entity) and JSON array with
+errors.
 
-<h4>Failure answer</h4>
-<pre>
-  <code>
-  ...
-  * upload completely sent off: 129 out of 129 bytes
-  < HTTP/1.1 422 Unprocessable Entity
-  ...
-  {"text":[" не може бути порожнім"]}
-  ...
-  </pre>
-</code>
+###Examples of requests
+####Successful request answer
+    ...
+    * upload completely sent off: 149 out of 149 bytes
+    < HTTP/1.1 201 Created
+    ...
+    {"claim_id":53,"phone":"+1(51)555555"}
+    ...
+
+####Failure answer
+    ...
+    * upload completely sent off: 129 out of 129 bytes
+    < HTTP/1.1 422 Unprocessable Entity
+    ...
+    {"text":[" не може бути порожнім"]}
+    ...
