@@ -1,6 +1,6 @@
 #Tiny Documentation of project
 
-http://s17.postimg.org/riqhk05gv/97107058_410721552.jpg"
+[logo]: http://s17.postimg.org/riqhk05gv/97107058_410721552.jpg "Tiny Documentation"
 
 ##JSON API
 
