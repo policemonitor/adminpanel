@@ -1,1 +1,1 @@
-curl  -v -X POST -d '{"claim": {"lastname":"Jhon Smith","phone":"+1(51)555555","latitude":"10.4","longitude":"12.7","theme":"Test message","text":"Text of test message"}}'  -H "Content-Type:application/json" -H "Accept:application/json" http://localhost:3000/claims
+curl  -v -X POST -d '{"claim": {"lastname":"Jhon Smith","phone":"+1(51)555555","latitude":"10.4","longitude":"12.7","theme":"Test message","text":""}}'  -H "Content-Type:application/json" -H "Accept:application/json" http://localhost:3000/claims

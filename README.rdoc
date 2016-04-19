@@ -1,28 +1,55 @@
-== README
+<h1>Tiny Documentation of project</h1>
+<p>
+<img src="http://s17.postimg.org/riqhk05gv/97107058_410721552.jpg">
+</p>
+<h2>JSON API<h/2>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<p>We accept incoming JSON request on address <em>/claim<em></p>
+<p>It should be formated in the next way:
+  <pre>
+    <code>
+    '{
+      "claim":
+        {
+          "lastname":"Jhon Smith",
+          "phone":"+1(51)555555",
+          "latitude":"10.4",
+          "longitude":"12.7",
+          "theme":"Test message",
+          "text":"Text of test message"
+        }
+      }'
+    </code>
+  </pre>
+</p>
+<p>If your request was successful than you'll get answer with code 201
+and your request id and its phone number</p>
 
-Things you may want to cover:
+<p>In the other way you'll get code 421 (Unprocessable entity) and JSON array with
+errors.</p>
 
-* Ruby version
+<h3>Examples of requests</h3>
+<h4>Successful request answer</h4>
 
-* System dependencies
+<pre>
+  <code>
+  ...
+  * upload completely sent off: 149 out of 149 bytes
+  < HTTP/1.1 201 Created
+  ...
+  {"claim_id":53,"phone":"+1(51)555555"}
+  ...
+  </pre>
+</code>
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+<h4>Failure answer</h4>
+<pre>
+  <code>
+  ...
+  * upload completely sent off: 129 out of 129 bytes
+  < HTTP/1.1 422 Unprocessable Entity
+  ...
+  {"text":[" не може бути порожнім"]}
+  ...
+  </pre>
+</code>
