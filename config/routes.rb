@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post   'login'    => 'sessions#create'
   delete 'logout'   => 'sessions#destroy'
 
-  get    'acceptedclaim' => 'claims#thankyoupage'
+  get    'thanks' => 'claims#thankyoupage'
   get    'map' => 'claims#map'
 
   post   'claims/new' => 'claims#new'

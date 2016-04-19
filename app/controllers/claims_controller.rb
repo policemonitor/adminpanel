@@ -25,8 +25,7 @@ class ClaimsController < ApplicationController
     respond_to do |format|
       if @claim.save
         format.html do
-          redirect_to acceptedclaim_path
-          flash[:success] = "Ваша заява прийнята! Дякуємо за допомогу!"
+          redirect_to thanks_path(id: @claim.id)
         end
         format.json do
           render json: { claim_id: @claim.id, phone: @claim.phone }, status: :created

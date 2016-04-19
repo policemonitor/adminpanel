@@ -6,7 +6,7 @@
       </div>
       <div class="panel-body">
         <p>
-          <h4><%= @administrator.lastname %><h4>
+          <h4 id="lastname"><%= @administrator.lastname %><h4>
         <p>
       </div>
       <ul class="list-group">
@@ -17,7 +17,10 @@
       <% if current_administrator != @administrator %>
       <div class="panel-footer">
         <p>
-          <%= button_to "Звільнити!", @administrator, class: "btn btn-danger btn-lg", method: :delete, data: { confirm: "You sure?" } %>
+          <%= link_to "Звільнити!", "#",
+                      class: "btn btn-primary btn-danger btn-block btn-lg",
+                      data: { toggle: "modal", target: "#destroy_window"},
+                      onclick: "jQuery -> $('#destroy_window').modal();" %>
         </p>
       </div>
       <% end %>
@@ -25,13 +28,13 @@
   </div>
 
   <div class="col-md-3">
-    <%= link_to new_administrator_path do %>
+    <%= link_to new_administrator_path, data: { "no-turbolink": true } do %>
     <%= image_tag "system/person.png", class: "img-responsive", alt: "Новий співробітник" %>
     <% end %>
     <p>
       <h3>Новий співробітник</h3>
     </p>
-    <%= link_to "Додавання нового співробітника.", new_administrator_path, class: "simply-link" %>
+    <%= link_to "Додавання нового співробітника.", new_administrator_path, class: "simply-link", data: { "no-turbolink": true } %>
   </div>
 
   <div class="col-md-3">
@@ -54,3 +57,5 @@
     <%= link_to "Перегляд та зміна патрульних екіпажів.", root_path, class: "simply-link" %>
   </div>
 </div>
+
+<%= render "shared/destroy_employee" %>

@@ -1,1 +1,17 @@
-Пасибки родной
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="jumbotron alert-success">
+        <h2>Заява прийнята!</h2>
+        <p>
+          Ваша заява прийнята та буде розглянута найближчим часом!
+        </p>
+        <p>
+          Номер Вашої заяви <b><%= params[:id] %></b>.</br>
+          <b>Будь ласка, збережіть його!</b>
+        </p>
+        <div><%= link_to "На головну", root_path, class: "btn btn-primary btn-success btn-block btn-lg", role: "button" %></div>
+      </div>
+    </div>
+  </div>
+</div>

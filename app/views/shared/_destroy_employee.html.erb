@@ -1,0 +1,32 @@
+<div class="modal fade" id="destroy_window" tabindex="-1" role="dialog" aria-labelledby="destroy_window_label">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3>Обережно!</h3>
+        <h4>Цю дію неможливо вімінити!</h4>
+        <p>Для того щоб звільнити співробітника, будь ласка, введіть
+          <b>ПІБ</b>
+          співробітника у поле нижче.
+        </p>
+        <div class="form-group">
+          <input placeholder="ПІБ співробітника" class="form-control" id="confirmation_input" type="text" onchange="check_confirmation()">
+        </div>
+        <%= button_to "Звільнити!", @administrator, id: "fire_button", class: "btn btn-primary btn-danger btn-lg  btn-block", method: :delete, disabled: true %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function check_confirmation() {
+    var sample_data = document.getElementById('lastname').innerHTML;
+    var inputed_data = document.getElementById('confirmation_input').value;
+
+    if (sample_data == inputed_data) {
+      document.getElementById('fire_button').disabled = false;
+    }
+  };
+</script>

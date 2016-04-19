@@ -1,2 +1,1 @@
-
 $('#law_preview').modal();

@@ -7,9 +7,10 @@
             <thead>
               <tr>
                 <th data-field="lastname">Прізвище Ім'я По батькові</th>
+                <th data-field="login">Посада</th>
                 <th data-field="personal_number">Особистий номер</th>
                 <th data-field="login">Логін у системі</th>
-                <th data-field="edit"></th>
+                <th data-field="view"></th>
                 <th data-field="delete"></th>
               </tr>
             </thead>
@@ -18,10 +19,11 @@
               <% @administrators.each do |administrator| %>
               <tr>
                 <td><%= administrator.lastname %></td>
+                <td><%= rank_to_word(administrator) %></td>
                 <td><%= administrator.personal_number %></td>
                 <td><%= administrator.login %></td>
-                <td><%= link_to "Редагувати", edit_administrator_path(administrator) %></td>
-                <td><%= link_to "Звільнити", administrator, method: :delete, data: { confirm: "You sure?" } %></td>
+                <td><%= link_to "Переглянути", administrator, data: { "no-turbolink": true } %></td>
+                <td><%= link_to "Редагувати", edit_administrator_path(administrator), data: { "no-turbolink": true } %></td>
               </tr>
               <% end %>
             <tbody>
