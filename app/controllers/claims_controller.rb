@@ -29,7 +29,7 @@ class ClaimsController < ApplicationController
           flash[:success] = "Ваша заява прийнята! Дякуємо за допомогу!"
         end
         format.json do
-          render json: @claim, status: :created
+          render json: { claim_id: @claim.id, phone: @claim.phone }, status: :created
         end
       else
         format.html do
