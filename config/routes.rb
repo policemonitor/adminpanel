@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get    'thanks' => 'claims#thankyoupage'
   get    'map' => 'claims#map'
 
+  get    'search' => 'claims#search'
+
   post   'claims/new' => 'claims#new'
   post   'claims' => 'claims#create'
   get    'signup'   => 'administrators#new'

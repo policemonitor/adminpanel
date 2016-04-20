@@ -46,6 +46,10 @@ class ClaimsController < ApplicationController
     @claim = Claim.find(params[:id])
   end
 
+  def search
+    @claim = Claim.search(params[:claim_id], params[:phone_number])
+  end
+
   def index
     @claim = Claim.all
   end
