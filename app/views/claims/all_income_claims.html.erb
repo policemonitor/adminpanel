@@ -6,30 +6,38 @@
           <h3 class="panel-title">Керування заявами</h3>
         </div>
         <div class="panel-body">
-
+          <h4>Нових заяв
+            <% if @claim %>
+              <span class="label label-primary"><%= @claim.count %></span>
+            <% else %>
+              не надійшло.
+            <% end %>
+          </h4>
         </div>
       </div>
     </div>
     <div class="col-md-10">
-      <div class="panel panel-primary">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Перегляд усіх прийнятих заяв</h3>
+        </div>
         <div class="panel-body">
           <table id="claims">
             <thead>
               <tr>
-                <th data-field="victim">ПІБ свідка</th>
+                <th data-field="victim">ПІБ Свідка</th>
                 <th data-field="phone_number">Номер телефону</th>
                 <th data-field="created_at">Статус</th>
                 <th data-field="theme">Тема звернення</th>
                 <th data-field="created_at">Надіслано</th>
-                <th data-field="view"></th>
               </tr>
             </thead>
 
             <tbody>
               <% @claim.each do |claim| %>
-              <tr class="<%= claim.status == false ? 'danger' : '' %>">
+              <tr class="<%= claim.status == false ? 'info' : '' %>">
                 <td>
-                  <%= claim.lastname %>
+                  <%= link_to claim.lastname, claim %>
                 </td>
                 <td>
                   <%= claim.phone %>
@@ -42,9 +50,6 @@
                 </td>
                 <td>
                   <%= claim.created_at.strftime("%d.%m.%Y") %>
-                </td>
-                <td>
-                  <%= link_to "Переглянути", claims_path(claim) %>
                 </td>
               </tr>
               <% end %>
