@@ -22,6 +22,9 @@ gem 'jquery-turbolinks'
 
 gem 'will_paginate'
 
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary', '~> 0.9.9'
+
 gem 'geocoder'
 gem 'gmaps4rails'
 

@@ -48,6 +48,12 @@ class ClaimsController < ApplicationController
 
   def index
     @claim = Claim.search(params[:claim_id], params[:phone_number])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'report', template: 'claims/pdf.html.erb', encoding: 'utf8'
+      end
+    end
   end
 
   def all_income_claims

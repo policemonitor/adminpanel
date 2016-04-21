@@ -38,7 +38,7 @@ class Claim < ActiveRecord::Base
 
   def self.search(claim_id, phone_number)
     if claim_id && phone_number
-      where(id: claim_id, phone: phone_number)
+      where(id: claim_id, phone: phone_number).first
     else
       nil
     end
