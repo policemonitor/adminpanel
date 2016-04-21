@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
   resources :administrators
-  resources :claims
+  resources :claims do
+    collection do
+      get 'search'
+      post 'search'
+    end
+  end
+  
+  resources :crews
 
-  root :to => "sessions#landing"
+  root to: 'sessions#landing'
 
   get    'login'    => 'sessions#new'
   post   'login'    => 'sessions#create'
@@ -15,5 +22,5 @@ Rails.application.routes.draw do
 
   post   'claims/new' => 'claims#new'
   post   'API' => 'claims#create'
-  get    'signup'   => 'administrators#new'
+  get    'signup' => 'administrators#new'
 end

@@ -1,0 +1,29 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <h1>Дані про новий екіпаж</h1>
+      <%= form_for @crew do |f| %>
+      <div class="form-group vertical-space">
+        <%= f.label :car_number, "Номер автомобіля екіпажу", class: "control-label pull-left" %>
+        <%= f.text_field :car_number,
+                                placeholder: "АА4121ВМ",
+                                class: "form-control",
+                                pattern: "[A-Z]{2}[0-9]{4}[A-Z]{2}",
+                                required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :vin_number, "VIM автомобіля екіпажу", class: "control-label pull-left" %>
+        <%= f.text_field :vin_number,
+                                placeholder: "0231",
+                                class: "form-control",
+                                required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit "Зберегти дані", class: "btn-submit" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-md-3">
-    <%= link_to map_path, data: { "no-turbolink": true } do %>
+    <%= link_to map_path, data: { "no-turbolink" => true } do %>
     <%= image_tag "system/map.png", class: "img-responsive", alt: "Мапа" %>
     <% end %>
     <p>
       <h3>Перегляд мапи</h3>
     </p>
-    <%= link_to "Відображення поточних заяв на мапі, а також місцезнаходження патрулів.", map_path, class: "simply-link", data: { "no-turbolink": true } %>
+    <%= link_to "Відображення поточних заяв на мапі, а також місцезнаходження патрулів.", map_path, class: "simply-link", data: { "no-turbolink" => true } %>
   </div>
   <div class="col-md-3">
     <%= link_to new_claim_path do %>
@@ -27,12 +27,12 @@
     <%= link_to "Пошук наявних у базі даних заяв.", root_path, class: "simply-link" %>
   </div>
   <div class="col-md-3">
-    <%= link_to root_path do %>
+    <%= link_to crews_path do %>
     <%= image_tag "system/car.png", class: "img-responsive", alt: "Керування екіпажами" %>
     <% end %>
     <p>
       <h3>Керування екіпажами</h3>
     </p>
-    <%= link_to "Перегляд наявних екіпажів та їх редагування", root_path, class: "simply-link" %>
+    <%= link_to "Перегляд наявних екіпажів та їх редагування", crews_path, class: "simply-link" %>
   </div>
 </div>
