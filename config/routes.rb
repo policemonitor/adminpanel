@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   get    'search' => 'claims#search'
 
   post   'claims/new' => 'claims#new'
-  post   'claims' => 'claims#create'
+  post   'API' => 'claims#create'
   get    'signup'   => 'administrators#new'
 end
