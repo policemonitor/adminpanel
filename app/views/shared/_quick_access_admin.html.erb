@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-md-3">
-    <%= link_to map_path, data: { "no-turbolink": true } do %>
+    <%= link_to map_path, data: { "no-turbolink" => true } do %>
     <%= image_tag "system/map.png", class: "img-responsive", alt: "Мапа" %>
     <% end %>
     <p>
       <h3>Перегляд мапи</h3>
     </p>
-    <%= link_to "Відображення поточних заяв на мапі, а також місцезнаходження патрулів.", map_path, class: "simply-link", data: { "no-turbolink": true } %>
+    <%= link_to "Відображення поточних заяв на мапі, а також місцезнаходження патрулів.", map_path, class: "simply-link", data: { "no-turbolink" => true } %>
   </div>
   <div class="col-md-3">
     <%= link_to new_claim_path do %>

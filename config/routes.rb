@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :administrators
   resources :claims
+  resources :crews
 
   root :to => "sessions#landing"
 
