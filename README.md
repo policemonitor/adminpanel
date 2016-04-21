@@ -1,10 +1,10 @@
 #Tiny Documentation of project
 
-[logo]: http://s17.postimg.org/riqhk05gv/97107058_410721552.jpg "Tiny Documentation"
+http://s17.postimg.org/riqhk05gv/97107058_410721552.jpg
 
-##JSON API
+##JSON API for incoming claims
 
-We accept incoming JSON request on address __/claim__
+We accept incoming JSON request on address __/API__
 It should be formated in the next way:
 
     '{

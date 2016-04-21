@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       post 'search'
     end
   end
-  
+
   resources :crews
 
   root to: 'sessions#landing'
@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   get    'thanks' => 'claims#thankyoupage'
   get    'map' => 'claims#map'
 
-  get    'search' => 'claims#search'
+  get    'search' => 'claims#index'
+  get    'allincomeclaims' => 'claims#all_income_claims'
 
   post   'claims/new' => 'claims#new'
   post   'API' => 'claims#create'
