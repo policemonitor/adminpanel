@@ -33,6 +33,6 @@ class CrewsController < ApplicationController
   private
 
   def crew_params
-    params.require(:crew).permit(:lastname, :phone, :latitude, :longitude, :theme, :text)
+    params.require(:crew).permit(:car_number, :vin_number, :underway, :on_a_mission, :latitude, :longtitude)
   end
 end
