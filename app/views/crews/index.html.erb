@@ -10,7 +10,7 @@
             <%= label_tag :query, "Введіть пошуковий запит", class: "control-label pull-left" %>
             <%= text_field_tag :query,
                                   params[:query],
-                                  placeholder: "Державний номер автівки, VIN або код екіпажу",
+                                  placeholder: "Державний номер, VIN, назва екіпажу або його номер ID",
                                   class: "form-control" %>
           </div>
         </div>
@@ -39,7 +39,7 @@
 
               <div class="media-body media-middle">
                 <%= link_to edit_crew_path(crew), data: { "no-turbolink" => true } do %>
-                  <h3 class="media-heading">Екіпаж: <%= crew.id %></h3>
+                  <h3 class="media-heading">Екіпаж: <%= crew.crew_name %></h3>
                 <% end %>
                 <p>
                   <h5>Держ. номер: <%= crew.car_number %></h5>

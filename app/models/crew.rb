@@ -21,7 +21,7 @@ class Crew < ActiveRecord::Base
 
   def self.search(query)
     if query != ''
-      where("car_number = ? OR vin_number = ?", query, query)
+      where("car_number = ? OR vin_number = ? OR crew_name = ? OR id = ?", query, query, query, query)
     else
       all
     end
