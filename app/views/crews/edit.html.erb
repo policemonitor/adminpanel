@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h1>Редагування даних про екіпаж <b><%= @crew.crew_name %></b></h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <%= form_for @crew do |f| %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= image_tag "system/car", class: "img-responsive" %>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group vertical-space">
+            <%= f.label :crew_name, "Номер екіпажу", class: "control-label pull-left" %>
+            <%= f.text_field :crew_name,
+                                    placeholder: "0904",
+                                    class: "form-control",
+                                    pattern: "[0-9]{4}",
+                                    required: true %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :car_number, "Номер автомобіля екіпажу", class: "control-label pull-left" %>
+            <%= f.text_field :car_number,
+                                    placeholder: "АА4121ВМ",
+                                    class: "form-control",
+                                    pattern: "[A-Z]{2}[0-9]{4}[A-Z]{2}",
+                                    required: true %>
+          </div>
+
+          <div class="form-group">
+            <%= link_to "#",
+                        data: { toggle: "modal", target: "#vin_window"},
+                        onclick: "jQuery -> $('#vin_window').modal();" do %>
+              <%= f.label :vin_number, "VIN автомобіля екіпажу", class: "control-label pull-left" %>
+            <% end %>
+
+            <%= f.text_field :vin_number,
+                                      placeholder: "JN6JD16S9HW000317",
+                                      class: "form-control",
+                                      pattern: "[A-Z0-9]{15,20}",
+                                      required: true %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= f.label :on_duty, "Статус",class: "control-label pull-left" %>
+            <select class="selectpicker form-control size-override"
+                    id="on_duty"
+                    name="crew[on_duty]"
+                    data-width="100%">
+                      <option value=true>На ходу</option>
+                      <option value=false>У ремонті</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= f.label :on_a_mission, "Завдання",class: "control-label pull-left" %>
+            <select class="selectpicker form-control size-override"
+                    id="on_a_mission"
+                    name="on_a_mission"
+                    data-width="100%">
+                    <option value="true"><b>На завданні</b></option>
+                    <option value="false">Вільний</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= f.submit "Зберегти дані", class: "btn-submit btn-block", id: "update-button" %>
+          </div>
+        </div>
+
+      </div>
+    <% end %>
+    </div>
+  </div>
+
+    <%= render "shared/vin_modal" %>
+</div>
