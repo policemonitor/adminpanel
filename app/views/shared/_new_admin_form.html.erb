@@ -1,4 +1,5 @@
-<div class="field">
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
   <%= form_for(@administrator, data: {toggle: "validator"}) do |f| %>
 
     <div class="form-group">
@@ -47,4 +48,5 @@
       <%= f.submit "Зберегти дані", class: "btn-submit" %>
     </div>
   <% end %>
+  </div>
 </div>
