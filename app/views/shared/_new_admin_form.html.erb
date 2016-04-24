@@ -11,13 +11,10 @@
     <% if signed_in_HR? %>
     <div class="form-group">
       <%= f.label :rank, "Посада",class: "control-label pull-left" %>
-      <select class="selectpicker form-control size-override"
-              id="administrator_rank"
-              name="administrator[rank]"
-              data-width="100%">
-                <option value="1">Адміністратор</option>
-                <option value="2">Керівник відділу кадрів</option>
-      </select>
+      <%= f.select :rank, [
+                        ["Адміністратор", 1],
+                        ["Керівник відділу кадрів", 2]
+                        ], {}, {class: "selectpicker form-control size-override"} %>
     </div>
 
     <div class="form-group">

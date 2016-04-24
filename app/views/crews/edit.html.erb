@@ -51,26 +51,20 @@
         <div class="col-md-4">
           <div class="form-group">
             <%= f.label :on_duty, "Статус",class: "control-label pull-left" %>
-            <select class="selectpicker form-control size-override"
-                    id="on_duty"
-                    name="crew[on_duty]"
-                    data-width="100%">
-                      <option value=true>На ходу</option>
-                      <option value=false>У ремонті</option>
-            </select>
+            <%= f.select :on_duty, [
+                              ["На ходу", true],
+                              ["У ремонті", false]
+                              ], {}, {class: "selectpicker form-control size-override"} %>
           </div>
         </div>
 
         <div class="col-md-4">
           <div class="form-group">
             <%= f.label :on_a_mission, "Завдання",class: "control-label pull-left" %>
-            <select class="selectpicker form-control size-override"
-                    id="on_a_mission"
-                    name="on_a_mission"
-                    data-width="100%">
-                    <option value="true"><b>На завданні</b></option>
-                    <option value="false">Вільний</option>
-            </select>
+            <%= f.select :on_a_mission, [
+                              ["На завданні", true],
+                              ["Вільний", false]
+                              ], {}, {class: "selectpicker form-control size-override"} %>
           </div>
         </div>
 

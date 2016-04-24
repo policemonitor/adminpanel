@@ -5,7 +5,7 @@
     </div>
     <div class="panel-body">
       <ul class="nav nav-pills nav-justified">
-        <li role="presentation" class="bg-info"><%= link_to "Редагування кабінету", edit_administrator_path(@administrator) %></li>
+        <li role="presentation" class="bg-info"><%= link_to "Редагування кабінету", edit_administrator_path(@administrator), data: {"no-turbolink" => true} %></li>
         <li role="presentation" class="bg-info"><%= link_to "Вихід", logout_path, method: "delete" %></li>
       </ul>
     </div>
