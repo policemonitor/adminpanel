@@ -1,41 +1,50 @@
-<table id="feedback">
-  <thead>
-    <tr>
-      <th data-field="car_number">Номер автомобіля екіпажу</th>
-      <th data-field="vin_number">VIM номер екіпажу</th>
-      <th data-field="underway">Стан автомобіля</th>
-      <th data-field="on_a_mission">Статус екіпажу</th>
-      <th data-field="coordinates">Координати</th>
-      <th data-field="created_at">Запис створено</th>
-      <th data-field="delete">Delete</th>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-2">
+      <%= link_to "Додати новий екіпаж до системи", new_crew_path, class: "btn btn-lg btn-primary btn-block", id: "new-crew-button" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <table id="crews">
+            <thead>
+              <tr>
+                <th data-field="car_number">Номер автомобіля екіпажу</th>
+                <th data-field="vin_number">VIM номер екіпажу</th>
+                <th data-field="underway">Стан автомобіля</th>
+                <th data-field="on_a_mission">Статус екіпажу</th>
+                <th data-field="created_at">Запис створено</th>
+                <th data-field="delete">Delete</th>
+              </tr>
+            </thead>
 
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @crews.each do |crew| %>
-    <tr>
-      <td>
-        <%=crew.car_number%>
-      </td>
-      <td>
-        <%=crew.vin_number%>
-      </td>
-      <td>
-        <%=crew.underway ? "Робочий" : "На ремонті"%>
-      </td>
-      <td>
-        <%=crew.on_a_mission ? "Вільний" : "На завданні"%>
-      </td>
-      <td>
-        <%=crew.longitude%>
-      </td>
-      <td>
-        <%=crew.created_at%>
-      </td>
-      <td><%= link_to "delete"%></td>
-
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+            <tbody>
+              <% @crews.each do |crew| %>
+              <tr>
+                <td>
+                  <%= crew.car_number%>
+                </td>
+                <td>
+                  <%= crew.vin_number%>
+                </td>
+                <td>
+                  <%= crew.underway ? "Робочий" : "На ремонті"%>
+                </td>
+                <td>
+                  <%= crew.on_a_mission ? "Вільний" : "На завданні"%>
+                </td>
+                <td>
+                  <%= crew.created_at%>
+                </td>
+                <td><%= link_to "delete"%></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

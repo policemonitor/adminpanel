@@ -18,21 +18,21 @@
     <%= link_to "Реєстрація термінових викликів за телефоном.", new_claim_path, class: "simply-link" %>
   </div>
   <div class="col-md-3">
-    <%= link_to root_path do %>
+    <%= link_to allincomeclaims_path do %>
     <%= image_tag "system/search.png", class: "img-responsive", alt: "Пошук у системі" %>
     <% end %>
     <p>
       <h3>Пошук у системі</h3>
     </p>
-    <%= link_to "Пошук наявних у базі даних заяв.", root_path, class: "simply-link" %>
+    <%= link_to "Пошук наявних у базі даних заяв.", allincomeclaims_path, class: "simply-link" %>
   </div>
   <div class="col-md-3">
-    <%= link_to root_path do %>
+    <%= link_to crews_path do %>
     <%= image_tag "system/car.png", class: "img-responsive", alt: "Керування екіпажами" %>
     <% end %>
     <p>
       <h3>Керування екіпажами</h3>
     </p>
-    <%= link_to "Перегляд наявних екіпажів та їх редагування", root_path, class: "simply-link" %>
+    <%= link_to "Перегляд наявних екіпажів та їх редагування", crews_path, class: "simply-link" %>
   </div>
 </div>

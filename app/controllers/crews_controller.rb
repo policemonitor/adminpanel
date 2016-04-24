@@ -1,4 +1,7 @@
 class CrewsController < ApplicationController
+
+  include CrewsHelper
+
   def index
     @crews = Crew.all
   end
@@ -14,9 +17,10 @@ class CrewsController < ApplicationController
   def create
     @crew = Crew.new(crew_params)
     if @crew.save
-      redirect_to '/crews'
+      redirect_to @crew
     else
-      render 'new'
+      flash[:danger] = flash_errors(@crew)
+      redirect_to action: 'new'
     end
   end
 
@@ -33,6 +37,6 @@ class CrewsController < ApplicationController
   private
 
   def crew_params
-    params.require(:crew).permit(:car_number, :vin_number, :underway, :on_a_mission, :latitude, :longtitude)
+    params.require(:crew).permit(:car_number, :vin_number)
   end
 end

@@ -12,8 +12,8 @@ class ClaimsController < ApplicationController
   # Administrator has all privileges to manipulate claims.
   # Administrator MUST UPDATE claim after recieving it.
 
-  before_action :signed_in_administrator, only: [:index, :edit, :update, :destroy]
-  before_action :is_ADMIN, only: [:index, :edit, :update, :destroy, :map]
+  before_action :signed_in_administrator, only: [:all_income_claims, :edit, :update, :destroy]
+  before_action :is_ADMIN, only: [:all_income_claims, :edit, :update, :destroy, :map]
 
   def new
     @claim = Claim.new
@@ -47,6 +47,16 @@ class ClaimsController < ApplicationController
   end
 
   def index
+    @claim = Claim.search(params[:claim_id], params[:phone_number])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'report', template: 'claims/pdf.html.erb', encoding: 'utf8'
+      end
+    end
+  end
+
+  def all_income_claims
     @claim = Claim.all
   end
 
