@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   get    'thanks' => 'claims#thankyoupage'
   get    'map' => 'claims#map'
+  get    'fulllist' => 'crews#fulllist'
 
   get    'search' => 'claims#index'
   get    'allincomeclaims' => 'claims#all_income_claims'

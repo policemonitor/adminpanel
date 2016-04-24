@@ -21,6 +21,8 @@ gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 
 gem 'will_paginate'
+gem 'will_paginate-bootstrap'
+
 
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.9.9'
