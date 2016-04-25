@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424200901) do
+ActiveRecord::Schema.define(version: 20160425120526) do
 
   create_table "administrators", force: :cascade do |t|
     t.string   "lastname"
@@ -40,6 +40,11 @@ ActiveRecord::Schema.define(version: 20160424200901) do
     t.boolean  "status",           default: false
   end
 
+  create_table "claims_crews", id: false, force: :cascade do |t|
+    t.integer "crew_id",  null: false
+    t.integer "claim_id", null: false
+  end
+
   create_table "crews", force: :cascade do |t|
     t.string   "car_number"
     t.string   "vin_number"
@@ -54,5 +59,12 @@ ActiveRecord::Schema.define(version: 20160424200901) do
 
   add_index "crews", ["car_number"], name: "index_crews_on_car_number", unique: true
   add_index "crews", ["vin_number"], name: "index_crews_on_vin_number", unique: true
+
+  create_table "sent_crews", force: :cascade do |t|
+    t.integer  "claim_id"
+    t.integer  "crew_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

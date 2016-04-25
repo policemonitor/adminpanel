@@ -77,9 +77,32 @@ class ClaimsController < ApplicationController
   def thankyoupage
   end
 
+  def update
+    @claim = Claim.find(params[:id])
+    @claim.status = true
+    if @claim.update_attributes(claim_update_params)
+
+      @claim.crew_ids.each do |crew|
+        @crew = Crew.find(crew)
+        @crew.on_a_mission = true
+        @crew.save
+      end
+
+      flash[:success] = 'Наказ надано! Повідомьте екіпажі!'
+      redirect_to root_path
+    else
+      flash[:danger] = "Виникла помилка під час виконання!"
+      redirect_to @claim
+    end
+  end
+
   private
 
   def claim_params
     params.require(:claim).permit(:lastname, :phone, :latitude, :longitude, :theme, :text)
+  end
+
+  def claim_update_params
+    params.require(:claim).permit(crew_ids: [])
   end
 end

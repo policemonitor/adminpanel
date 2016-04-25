@@ -3,6 +3,8 @@ class Crew < ActiveRecord::Base
   VALID_VIM_NUM_REGEX = /\w{15,20}/
   VALID_CREW_NAME = /[0-9]{4}/
 
+  has_and_belongs_to_many :claims
+
   validates :car_number,
             presence: { message: " не може бути порожньою" } ,
             format: { with: VALID_CARS_NUMBER, message: "має неправильний формат" }

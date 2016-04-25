@@ -2,6 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.card {
+  margin: 5px;
+  margin-top: 10px;
+  height: 60px;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.2);
+}
+
 .text-area {
   border-radius: 0px !important;
   height: 150px !important;

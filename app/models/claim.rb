@@ -4,14 +4,7 @@ class Claim < ActiveRecord::Base
   COORDINATES_REGEX_LATITUDE = /[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)/
   COORDINATES_REGEX_LONGITUDE = /[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)/
 
-  HUMANIZED_ATTRIBUTES = {
-    lastname: "ПІБ",
-    phone: "Телефон",
-    theme: "Тема звернення",
-    text: "Текст звернення",
-    latitude: "Широта",
-    longitude: "Довгота"
-  }.freeze
+  has_and_belongs_to_many :crews
 
   validates :lastname,
             presence: { message: " не може бути порожнім" },
