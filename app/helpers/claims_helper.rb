@@ -13,7 +13,7 @@ module ClaimsHelper
                 "<h4>" + claim.theme + "</h4>" +
                 "<p>" + claim.text.truncate(200) + "</p>
                   <div class='btn-group pull-right'>
-                    <a href='"+ claim_path(claim) + "' class='btn btn-primary' >Формувати наказ</a>" +
+                    <a href='"+ edit_claim_path(claim) + "' class='btn btn-primary' data-turbolink='false' >Формувати наказ</a>" +
                   "</div>
                 </div>"
     return message.html_safe

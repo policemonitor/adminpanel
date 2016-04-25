@@ -14,7 +14,7 @@ class CrewsController < ApplicationController
   def create
     @crew = Crew.new(crew_params)
     if @crew.save
-      redirect_to @crew
+      redirect_to crews_path
     else
       flash[:danger] = flash_errors(@crew)
       redirect_to action: 'new'
@@ -45,7 +45,7 @@ class CrewsController < ApplicationController
     @crew = Crew.find(params[:id])
     if @crew.update_attributes(crew_update_params)
       flash[:success] = 'Обліковий запис змінено'
-      redirect_to crew_path
+      redirect_to crews_path
     else
       flash[:danger] = flash_errors(@crew)
       redirect_to edit_crew_path(@crew)

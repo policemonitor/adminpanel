@@ -33,7 +33,7 @@
 
               <div class="media-left">
                 <%= link_to edit_crew_path(crew), data: { "no-turbolink" => true } do %>
-                  <%= image_tag crew.on_duty ? "signs/on_duty.png" : "signs/out_of_duty.png", class: "media-object", size: "96x96" %>
+                  <%= image_tag crew.on_a_mission ? "signs/out_of_mission.png" : "signs/on_a_mission.png", class: "media-object", size: "96x96" %>
                   <% end %>
               </div>
 
@@ -43,7 +43,7 @@
                 <% end %>
                 <p>
                   <h5>Держ. номер: <%= crew.car_number %></h5>
-                  <h5>Статус: <%= crew.on_a_mission ? "На завданні" : "Вільний" %></h5>
+                  <h5>Статус: <%= crew.on_duty ? "На ходу" : "У ремонті" %></h5>
                 </p>
               </div>
 
