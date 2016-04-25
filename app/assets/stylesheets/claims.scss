@@ -3,73 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 /* Base for label styling */
-[type="checkbox"]:not(:checked),
-[type="checkbox"]:checked {
-  position: absolute;
-  left: -9999px;
-}
-[type="checkbox"]:not(:checked) + label,
-[type="checkbox"]:checked + label {
-  position: relative;
-  padding-left: 60px;
-  cursor: pointer;
-  padding-top: 18px;
-}
-
-/* checkbox aspect */
-[type="checkbox"]:not(:checked) + label:before,
-[type="checkbox"]:checked + label:before {
-  content: '';
-  position: absolute;
-  left: 2px; top: 2px;
-  width: 46px; height: 46px;
-  border: 1px solid #aaa;
-  background: #f8f8f8;
-  border-radius: 100%;
-}
-/* checked mark aspect */
-[type="checkbox"]:not(:checked) + label:after,
-[type="checkbox"]:checked + label:after {
-  content: '✔';
-  position: absolute;
-  top: 2px; left: 7px;
-  font-size: 60px;
-  line-height: 0.8;
-  color: #09ad7e;
-  transition: all .2s;
-}
-/* checked mark aspect changes */
-[type="checkbox"]:not(:checked) + label:after {
-  opacity: 0;
-  transform: scale(0);
-}
-[type="checkbox"]:checked + label:after {
-  opacity: 1;
-  transform: scale(1);
-}
-/* disabled checkbox */
-[type="checkbox"]:disabled:not(:checked) + label:before,
-[type="checkbox"]:disabled:checked + label:before {
-  box-shadow: none;
-  border-color: #bbb;
-  background-color: #ddd;
-}
-[type="checkbox"]:disabled:checked + label:after {
-  color: #999;
-}
-[type="checkbox"]:disabled + label {
-  color: #aaa;
-}
-/* accessibility */
-[type="checkbox"]:checked:focus + label:before,
-[type="checkbox"]:not(:checked):focus + label:before {
-  border: 1px dotted blue;
-}
-
-/* hover style just for information */
-label:hover:before {
-  border: 1px solid #4778d9!important;
-}
 
 .card-element {
   height: 60px;
@@ -80,7 +13,16 @@ label:hover:before {
   background-color: white;
 }
 
+.bottom-space {
+    margin-bottom: 30px !important ;
+}
+
+.bottom-double-space {
+    margin-bottom: 60px !important ;
+}
+
 .fixed-list {
+  margin-top: -53px;
 }
 
 .text-area {
@@ -90,6 +32,12 @@ label:hover:before {
   resize: none !important;
   padding-top: 25px !important;
   padding-left: 20px !important;
+}
+
+.centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .vertical-space {
@@ -113,6 +61,7 @@ label:hover:before {
 
 #send-crew-button {
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .messagebox {
@@ -131,7 +80,7 @@ label:hover:before {
   width: 100%;
   position: fixed;
   margin-left: -15px;
-  margin-top: -20px;
+  margin-top: -73px;
   height: 100vh;
  }
  #map-canvas {

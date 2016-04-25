@@ -37,7 +37,7 @@
               <% @claim.each do |claim| %>
               <tr class="<%= claim.status == false ? 'info' : '' %>">
                 <td>
-                  <%= link_to claim.lastname, edit_claim_path(claim), data: {"no-turbolink" => true } %>
+                  <%= link_to claim.lastname, claim.status == false ? edit_claim_path(claim) : claim_path(claim), data: {"no-turbolink" => true } %>
                 </td>
                 <td>
                   <%= claim.phone %>

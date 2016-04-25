@@ -11,19 +11,21 @@
     </div>
     <div class="col-md-2">
       <div class="fixed-list">
-        <%= form_for @claim do |f| %>
-        <div class="row">
-          <%= f.collection_check_boxes :crew_ids, Crew.all, :id, :crew_name do |field| %>
-          <div class="col-md-12">
-            <div class="card-element">
-              <%= field.check_box %> Екіпаж <%= field.label %>
+        <% if !@claim.status %>
+          <%= form_for @claim do |f| %>
+          <div class="row">
+            <%= f.collection_check_boxes :crew_ids, Crew.all, :id, :crew_name do |field| %>
+            <div class="col-md-12">
+              <div class="card-element">
+                Екіпаж <%= field.check_box %> <%= field.label %>
+              </div>
+            </div>
+            <% end %>
+            <div class="col-md-12">
+              <%= f.submit "Надати наказ", class: "btn btn-danger  btn-block", id: "send-crew-button" %>
             </div>
           </div>
           <% end %>
-          <div class="col-md-12">
-            <%= f.submit "Надати наказ", class: "btn btn-danger  btn-block", id: "send-crew-button" %>
-          </div>
-        </div>
         <% end %>
       </div>
     </div>
@@ -37,7 +39,7 @@
   marker.lat claim.latitude
   marker.lng claim.longitude
   marker.title claim.theme
-  marker.infowindow claim_card(claim)
+  marker.infowindow claim_card(claim, true)
 end
 %>
 <script type="text/javascript">

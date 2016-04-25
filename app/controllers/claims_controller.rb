@@ -66,7 +66,7 @@ class ClaimsController < ApplicationController
       marker.lat claim.latitude
       marker.lng claim.longitude
       marker.title claim.theme
-      marker.infowindow claim_card(claim)
+      marker.infowindow claim_card(claim, false)
     end
   end
 
@@ -80,6 +80,7 @@ class ClaimsController < ApplicationController
   def update
     @claim = Claim.find(params[:id])
     @claim.status = true
+    @claim.administrator_id = current_administrator.id
     if @claim.update_attributes(claim_update_params)
 
       @claim.crew_ids.each do |crew|
