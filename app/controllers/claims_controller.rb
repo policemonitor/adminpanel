@@ -77,6 +77,11 @@ class ClaimsController < ApplicationController
   def thankyoupage
   end
 
+  def crews_list
+    @claim = Claim.find(params[:claim])
+    @crews = @claim.crews
+  end
+
   def update
     @claim = Claim.find(params[:id])
     @claim.status = true
@@ -90,7 +95,7 @@ class ClaimsController < ApplicationController
       end
 
       flash[:success] = 'Наказ надано! Повідомьте екіпажі!'
-      redirect_to root_path
+      redirect_to crews_list_path(claim: @claim.id)
     else
       flash[:danger] = "Виникла помилка під час виконання!"
       redirect_to @claim
