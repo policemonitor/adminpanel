@@ -5,7 +5,6 @@ class CrewsController < ApplicationController
   # There is no access by unauthorised persons!
 
   before_action :signed_in_administrator, only: [:new, :create, :edit, :update, :destroy, :fulllist]
-  before_action :is_ADMIN, only: [:new, :create, :edit, :update, :destroy, :fulllist]
 
   def new
     @crew = Crew.new

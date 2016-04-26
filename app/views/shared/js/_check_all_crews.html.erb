@@ -1,0 +1,11 @@
+<script>
+  function check_proceed() {
+    var count = $("[type='checkbox']:checked").length;
+    console.log("PUSHED " + count);
+    if (count == <%= @crews.count %>) {
+      document.getElementById('proceed_button').disabled = false;
+    } else {
+      document.getElementById('proceed_button').disabled = true;
+    }
+  };
+</script>

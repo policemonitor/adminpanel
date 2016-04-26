@@ -1,0 +1,16 @@
+<script>
+$(document).ready(function() {
+  $('#new_claim').submit(function () {
+    if (($('#latitude_field').val() == '') || ($('#longitude_field').val() == '')) {
+      uniq_error = 'Координати не отримано! Спробуйте ввести адресу вручну.';
+    }
+
+    if (uniq_error.length == 0) {
+      return true;
+    } else {
+      $("[data-toggle=popover]").popover({content: uniq_error, placement: 'right'});
+      return false;
+    }
+  });
+});
+</script>

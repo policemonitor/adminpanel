@@ -12,8 +12,8 @@ class ClaimsController < ApplicationController
   # Administrator has all privileges to manipulate claims.
   # Administrator MUST UPDATE claim after recieving it.
 
-  before_action :signed_in_administrator, only: [:all_income_claims, :edit, :update, :destroy]
-  before_action :is_ADMIN, only: [:all_income_claims, :edit, :update, :destroy, :map]
+  before_action :signed_in_administrator, only: [:all_income_claims, :edit, :update, :destroy, :map, :crews_list]
+  before_action :is_ADMIN, only: [:all_income_claims, :crews_list, :edit, :update, :destroy, :map]
 
   def new
     @claim = Claim.new
@@ -94,8 +94,8 @@ class ClaimsController < ApplicationController
         @crew.save
       end
 
-      flash[:success] = 'Наказ надано! Повідомьте екіпажі!'
-      redirect_to crews_list_path(claim: @claim.id)
+      flash[:success] = 'Наказ надано! Повідомте екіпажі!'
+      redirect_to crewslist_path(claim: @claim.id), turbolinks: false
     else
       flash[:danger] = "Виникла помилка під час виконання!"
       redirect_to @claim
