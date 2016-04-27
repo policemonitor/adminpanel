@@ -34,9 +34,8 @@
         <label class="control-label pull-left" for="address_input">Місце злочину</label>
         <input placeholder="Адреса місця злочину" class="form-control" id="address_input" type="text" onchange="geocodeAddress()" disabled required>
         <div class="checkbox">
-          <label>
-            <input type="checkbox" id="checkbox_coordinates" onclick="autoCoordinatesCheck()" checked >Визначити моє місцеположення автоматично.
-          </label>
+          <input type="checkbox" id="checkbox_coordinates" name="checkbox_coordinates" onclick="autoCoordinatesCheck()" checked >
+          <label for="checkbox_coordinates">Визначити моє місцеположення автоматично.</label>
         </div>
 
         <%= f.text_field :latitude, id: "latitude_field", type: "hidden" %>

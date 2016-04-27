@@ -35,3 +35,9 @@ en:
         password_digest: "Пароль"
         personal_number: "Особистий номер"
         rank: "Звання"
+      crew:
+        crew_name: "Назва екіпажу"
+        vin_number: "VIN номер"
+        car_number: "Державний номер"
+        on_duty: "Ремонтний статус"
+        on_a_mission: "Статус завдання"

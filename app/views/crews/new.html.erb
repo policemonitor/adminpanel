@@ -1,29 +1,58 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-8 col-md-offset-2">
       <h1>Дані про новий екіпаж</h1>
-      <%= form_for @crew do |f| %>
-      <div class="form-group vertical-space">
-        <%= f.label :car_number, "Номер автомобіля екіпажу", class: "control-label pull-left" %>
-        <%= f.text_field :car_number,
-                                placeholder: "АА4121ВМ",
-                                class: "form-control",
-                                pattern: "[A-Z]{2}[0-9]{4}[A-Z]{2}",
-                                required: true %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :vin_number, "VIM автомобіля екіпажу", class: "control-label pull-left" %>
-        <%= f.text_field :vin_number,
-                                placeholder: "0231",
-                                class: "form-control",
-                                required: true %>
-      </div>
-
-      <div class="form-group">
-        <%= f.submit "Зберегти дані", class: "btn-submit" %>
-      </div>
-      <% end %>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="row">
+        <div class="col-md-6">
+          <%= image_tag "system/car", class: "img-responsive" %>
+        </div>
+        <div class="col-md-6">
+          <%= form_for @crew do |f| %>
+          <div class="form-group vertical-space">
+            <%= f.label :crew_name, "Номер екіпажу", class: "control-label pull-left" %>
+            <%= f.text_field :crew_name,
+                                    placeholder: "0904",
+                                    class: "form-control",
+                                    pattern: "[0-9]{4}",
+                                    required: true %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :car_number, "Номер автомобіля екіпажу", class: "control-label pull-left" %>
+            <%= f.text_field :car_number,
+                                    placeholder: "АА4121ВМ",
+                                    class: "form-control",
+                                    pattern: "[A-Z]{2}[0-9]{4}[A-Z]{2}",
+                                    required: true %>
+          </div>
+
+          <div class="form-group">
+            <%= link_to "#",
+                        data: { toggle: "modal", target: "#vin_window"},
+                        onclick: "jQuery -> $('#vin_window').modal();" do %>
+              <%= f.label :vin_number, "VIN автомобіля екіпажу", class: "control-label pull-left" %>
+            <% end %>
+
+            <%= f.text_field :vin_number,
+                                      placeholder: "JN6JD16S9HW000317",
+                                      class: "form-control",
+                                      pattern: "[A-Z0-9]{15,20}",
+                                      required: true %>
+          </div>
+
+          <div class="form-group">
+            <%= f.submit "Зберегти дані", class: "btn-submit btn-block" %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <%= render "shared/vin_modal" %>
 </div>

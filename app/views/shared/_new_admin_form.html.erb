@@ -1,4 +1,5 @@
-<div class="field">
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
   <%= form_for(@administrator, data: {toggle: "validator"}) do |f| %>
 
     <div class="form-group">
@@ -11,14 +12,10 @@
     <% if signed_in_HR? %>
     <div class="form-group">
       <%= f.label :rank, "Посада",class: "control-label pull-left" %>
-      <select class="selectpicker form-control size-override"
-              id="administrator_rank"
-              name="administrator[rank]"
-              title="Оберіть посаду"
-              data-width="100%">
-                <option value="1">Адміністратор</option>
-                <option value="2">Керівник відділу кадрів</option>
-      </select>
+      <%= f.select :rank, [
+                        ["Адміністратор", 1],
+                        ["Керівник відділу кадрів", 2]
+                        ], {}, {class: "selectpicker form-control size-override"} %>
     </div>
 
     <div class="form-group">
@@ -27,9 +24,8 @@
                               class: "form-control",
                               required: true,
                               pattern: "[0-9]{7}" %>
+      <% end %>
     </div>
-    <% end %>
-
 
 
     <div class="form-group">
@@ -51,4 +47,5 @@
       <%= f.submit "Зберегти дані", class: "btn-submit" %>
     </div>
   <% end %>
+  </div>
 </div>

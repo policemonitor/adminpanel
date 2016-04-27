@@ -2,6 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+/* Base for label styling */
+
+.card-element {
+  height: 60px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
+  box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.2);
+  background-color: white;
+}
+
+.bottom-space {
+    margin-bottom: 30px !important ;
+}
+
+.bottom-double-space {
+    margin-bottom: 60px !important ;
+}
+
+.fixed-list {
+  margin-top: -53px;
+}
+
 .text-area {
   border-radius: 0px !important;
   height: 150px !important;
@@ -9,6 +32,12 @@
   resize: none !important;
   padding-top: 25px !important;
   padding-left: 20px !important;
+}
+
+.centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .vertical-space {
@@ -30,6 +59,11 @@
   margin-top: 6px;
 }
 
+#send-crew-button {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
 .messagebox {
   height: auto;
   min-height: 120px;
@@ -46,7 +80,7 @@
   width: 100%;
   position: fixed;
   margin-left: -15px;
-  margin-top: -20px;
+  margin-top: -73px;
   height: 100vh;
  }
  #map-canvas {

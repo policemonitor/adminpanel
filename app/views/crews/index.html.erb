@@ -1,50 +1,61 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-4 col-md-offset-2">
-      <%= link_to "Додати новий екіпаж до системи", new_crew_path, class: "btn btn-lg btn-primary btn-block", id: "new-crew-button" %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <table id="crews">
-            <thead>
-              <tr>
-                <th data-field="car_number">Номер автомобіля екіпажу</th>
-                <th data-field="vin_number">VIM номер екіпажу</th>
-                <th data-field="underway">Стан автомобіля</th>
-                <th data-field="on_a_mission">Статус екіпажу</th>
-                <th data-field="created_at">Запис створено</th>
-                <th data-field="delete">Delete</th>
-              </tr>
-            </thead>
 
-            <tbody>
-              <% @crews.each do |crew| %>
-              <tr>
-                <td>
-                  <%= crew.car_number%>
-                </td>
-                <td>
-                  <%= crew.vin_number%>
-                </td>
-                <td>
-                  <%= crew.underway ? "Робочий" : "На ремонті"%>
-                </td>
-                <td>
-                  <%= crew.on_a_mission ? "Вільний" : "На завданні"%>
-                </td>
-                <td>
-                  <%= crew.created_at%>
-                </td>
-                <td><%= link_to "delete"%></td>
-              </tr>
-              <% end %>
-            </tbody>
-          </table>
+  <div class="row">
+    <%= form_tag crews_path, method: 'get' do %>
+    <div class="col-md-8 col-md-offset-2">
+      <h3>Шукайте екіпажі або <%= link_to "додавайте нові", new_crew_path %></h3>
+      <div class="row">
+        <div class="col-md-9">
+          <div class="form-group">
+            <%= label_tag :query, "Введіть пошуковий запит", class: "control-label pull-left" %>
+            <%= text_field_tag :query,
+                                  params[:query],
+                                  placeholder: "Державний номер, VIN, назва екіпажу або його номер ID",
+                                  class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <%= submit_tag "Search", :name => nil, class: "btn btn-lg btn-primary btn-block", id: "first-coordinates-button", value: "Шукати" %>
+          </div>
         </div>
       </div>
     </div>
+    <% end %>
   </div>
+
+  <div class="row">
+    <% if !@crews.nil? %>
+      <% @crews.each do |crew| %>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="media">
+
+              <div class="media-left">
+                <%= link_to edit_crew_path(crew), data: { "no-turbolink" => true } do %>
+                  <%= image_tag crew.on_a_mission ? "signs/on_a_mission.png" : "signs/out_of_mission.png", class: "media-object", size: "96x96" %>
+                  <% end %>
+              </div>
+
+              <div class="media-body media-middle">
+                <%= link_to edit_crew_path(crew), data: { "no-turbolink" => true } do %>
+                  <h3 class="media-heading">Екіпаж: <%= crew.crew_name %></h3>
+                <% end %>
+                <p>
+                  <h5>Держ. номер: <%= crew.car_number %></h5>
+                  <h5>Статус: <%= crew.on_duty ? "На ходу" : "У ремонті" %></h5>
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col-md-6 col-md-offset-3">
+        <h3>У базі даних не міститься жодної інформації стосовно екіпажей!</h3>
+      </div>
+    <% end %>
+  </div>
+
 </div>

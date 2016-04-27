@@ -8,7 +8,7 @@
         <div class="panel-body">
           <h4>Нових заяв
             <% if @claim %>
-              <span class="label label-primary"><%= @claim.count %></span>
+              <span class="label label-primary"><%= @claim.where("status = ?", false).count %></span>
             <% else %>
               не надійшло.
             <% end %>
@@ -37,13 +37,13 @@
               <% @claim.each do |claim| %>
               <tr class="<%= claim.status == false ? 'info' : '' %>">
                 <td>
-                  <%= link_to claim.lastname, claim %>
+                  <%= link_to claim.lastname, claim.status == false ? edit_claim_path(claim) : claim_path(claim), data: {"no-turbolink" => true } %>
                 </td>
                 <td>
                   <%= claim.phone %>
                 </td>
                 <td>
-                  <%= claim.status == true ? "Розглянуто" : "<b>Не розглянуто</b>".html_safe  %>
+                  <%= claim.status == true ? "Розглянуто (#{claim.updated_at.strftime("%d.%m.%Y")})" : "<b>Не розглянуто</b>".html_safe  %>
                 </td>
                 <td>
                   <%= truncate(claim.theme, length: 65) %>
