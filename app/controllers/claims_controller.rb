@@ -12,7 +12,7 @@ class ClaimsController < ApplicationController
   # Administrator has all privileges to manipulate claims.
   # Administrator MUST UPDATE claim after recieving it.
 
-  before_action :signed_in_administrator, only: [:all_income_claims, :edit, :update, :destroy, :map, :crews_list]
+  before_action :signed_in_administrator, only: [:all_income_claims, :edit, :update, :destroy, :map, :crews_list, :show]
   before_action :is_ADMIN, only: [:all_income_claims, :crews_list, :edit, :update, :destroy, :map]
 
   def new
