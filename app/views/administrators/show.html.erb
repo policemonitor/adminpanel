@@ -6,11 +6,11 @@
       </div>
 
       <% if signed_in_ADMIN? %>
-        <%= render "shared/quick_access_admin" %>
+        <%= render "shared/navs/quick_access_admin" %>
       <% elsif signed_in_HR? %>
-        <%= render "shared/quick_access_hr" %>
+        <%= render "shared/navs/quick_access_hr" %>
       <% end %>
-      <%= render "shared/settings" %>
+      <%= render "shared/navs/settings" %>
 
     </div>
   </div>

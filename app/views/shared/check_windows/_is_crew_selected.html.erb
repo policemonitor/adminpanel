@@ -1,0 +1,12 @@
+<script>
+  $(document).ready(function() {
+    $("#send-crew-button").submit(function () {
+      if ($("[type='checkbox']:checked").length > 0) {
+        return true;
+      } else {
+        $("[data-toggle=send-crew]").popover({content: "Оберіть щонайменше один екіпаж!", placement: 'left'});
+        return false;
+      }
+    });
+  });
+</script>
