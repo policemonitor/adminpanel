@@ -16,12 +16,12 @@
             <%= f.collection_check_boxes :crew_ids, Crew.where("on_duty = ? AND on_a_mission = ?", true, false), :id, :crew_name do |field| %>
             <div class="col-md-12">
               <div class="card-element">
-                Екіпаж <%= field.check_box %> <%= field.label %>
+                Екіпаж <%= field.check_box  %> <%= field.label %>
               </div>
             </div>
             <% end %>
             <div class="col-md-12">
-              <%= f.submit "Надати наказ", class: "btn btn-danger  btn-block", id: "send-crew-button" %>
+              <%= f.submit "Надати наказ", class: "btn btn-danger  btn-block", id: "send-crew-button", data: {toggle: "send-crew"} %>
             </div>
           </div>
           <% end %>
@@ -31,7 +31,7 @@
   </div>
 </div>
 
-
+<%= render "shared/check_windows/is_crew_selected" %>
 
 <% @claim = Claim.find(params[:id]) %>
 <% @hash = Gmaps4rails.build_markers(@claim) do |claim, marker|
