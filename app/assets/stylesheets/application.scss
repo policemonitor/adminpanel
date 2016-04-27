@@ -18,6 +18,8 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ @import "font-awesome-sprockets";
+ @import "font-awesome";
 
  #map-container #map-canvas img {
    max-width: none;

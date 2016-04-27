@@ -22,7 +22,7 @@ gem 'jquery-turbolinks'
 
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
-
+gem 'font-awesome-sass'
 
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.9.9'
