@@ -66,12 +66,25 @@ class ClaimsController < ApplicationController
       marker.lat claim.latitude
       marker.lng claim.longitude
       marker.title claim.theme
-      marker.infowindow claim_card(claim, false)
+      marker.infowindow claim_card(claim)
     end
   end
 
   def edit
     @claim = Claim.find(params[:id])
+    @crews = Crew.where("on_duty = ? AND on_a_mission = ?", true, false)
+
+    @hash_crews = Gmaps4rails.build_markers(@crews) do |crew, marker|
+      marker.lat "50"  #crew.latitude
+      marker.lng "30"  #crew.longitude
+      marker.infowindow "Екіпаж: <b>#{crew.crew_name}</b>"
+      marker.title "Екіпаж: #{crew.crew_name}"
+      marker.picture({
+                    :url => "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                    :width   => 32,
+                    :height  => 32
+                   })
+    end
   end
 
   def thankyoupage

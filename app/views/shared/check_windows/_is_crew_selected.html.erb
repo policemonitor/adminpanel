@@ -1,10 +1,10 @@
 <script>
   $(document).ready(function() {
-    $("#send-crew-button").submit(function () {
+    $("#send-crew-button").click(function () {
       if ($("[type='checkbox']:checked").length > 0) {
         return true;
       } else {
-        $("[data-toggle=send-crew]").popover({content: "Оберіть щонайменше один екіпаж!", placement: 'left'});
+        $("[data-toggle=send-crew]").popover({html : true, content: "Оберіть щонайменше</br><b>один</b> екіпаж та</br>повторіть спробу!", placement: 'left'});
         return false;
       }
     });

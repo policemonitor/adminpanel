@@ -8,17 +8,15 @@ module ClaimsHelper
     return notice
   end
 
-  def claim_card(claim, order)
+  def claim_card(claim)
 
     message = "<div class='messagebox'>" +
                 "<h4>" + claim.theme + "</h4>" +
                 "<p>" + claim.text.truncate(200) + "</p>
                   <div class='btn-group pull-right'>
-                    <a href='"+ claim_path(claim) + "' class='btn btn-primary' data-turbolink='false' >Деталі</a>"
-                    if !order
-                      message += "<a href='"+ edit_claim_path(claim) + "' class='btn btn-primary' data-turbolink='false' >Наказ</a>"
-                    end
-    message +=    "</div>
+                    <a href='"+ claim_path(claim) + "' class='btn btn-primary' data-turbolink='false' >Деталі</a>" +
+                    "<a href='"+ edit_claim_path(claim) + "' class='btn btn-primary' data-turbolink='false' >Наказ</a>" +
+                 "</div>
               </div>"
     return message.html_safe
   end

@@ -1,0 +1,27 @@
+<script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({
+    provider: {
+      zoom: 10
+    },
+    internal: {
+      id: 'map-canvas'
+    }
+  }, function () {
+    markers = handler.addMarkers(<%=raw @hash_crews.to_json %>);
+    main_marker = handler.addMarker(
+      {
+        "lat": <%= @claim.latitude %>,
+        "lng": <%= @claim.longitude %>,
+        "picture": {
+          "url": "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+          "width":  36,
+          "height": 36
+        },
+        "infowindow": "<b><%= @claim.theme %></b></br>Свідок: <%= @claim.lastname %>",
+        "title": "<%= @claim.lastname %>"
+      }
+    );
+    handler.map.centerOn(main_marker);
+  });
+</script>

@@ -7,3 +7,5 @@ capybara-*.html
 /db/*.sqlite3-journal
 /public/system
 /db/development.sqlite3
+/public/assets/
+public/assets/
