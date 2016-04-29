@@ -44,6 +44,7 @@ class ClaimsController < ApplicationController
 
   def show
     @claim = Claim.find(params[:id])
+    @paragraphs = claim_cut_to_document(@claim.text.dup.chomp)
   end
 
   def index

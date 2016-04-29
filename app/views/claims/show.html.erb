@@ -1,20 +1,23 @@
 <div class="container-fluid">
+  <% @paragraphs.each_with_index do |paragraph, index| %>
   <div class="a4-document centered">
-    <%= render "claims/document/header" %>
+    <% if index == 0 %>
+      <%= render "claims/document/header" %>
+    <% else %>
+      <%= render "claims/document/document_title" %>
+    <% end %>
     <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <p><%= @claim.text %></p>
-        <p>pppppppppppppppppp ppppppppppppppppppppppp pppppppppppppppppppppp ppppppppppppppp pppppppp pppppppppppppppppppppppppppp</p>
+      <div class="col-md-10 col-md-offset-1 a4-document-header-space">
+        <p><%= paragraph %></p>
       </div>
     </div>
-    <%= render "claims/document/status" %>
-    <%= render "claims/document/footer" %>
-  </div>
-  <div class="a4-document centered">
-    <div class="col-md-10 col-md-offset-1 vertical-space">
-      <p><%= @claim.text %></p>
-      <p>pppppppppppppppppp ppppppppppppppppppppppp pppppppppppppppppppppp ppppppppppppppp pppppppp pppppppppppppppppppppppppppp</p>
+    <% if index == @paragraphs.count - 1 %>
+      <%= render "claims/document/status" %>
+      <%= render "claims/document/footer" %>
+    <% end %>
+    <div id="a4-page-number">
+      <%= index + 1 if @paragraphs.count != 1 %>
     </div>
   </div>
-  </div>
+  <% end %>
 </div>

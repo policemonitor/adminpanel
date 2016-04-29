@@ -1,0 +1,31 @@
+<%= render "claims/document/document_title" %>
+<div class="row">
+  <div class="col-md-5 col-md-offset-7">
+    <small>
+      Потерпілий:
+      <b><%= @claim.lastname %></b>
+    </small>
+  </div>
+  <div class="col-md-5 col-md-offset-7">
+    <small>
+      Тел.:
+      <b><%= @claim.phone %></b>
+    </small>
+  </div>
+</div>
+<div class="row">
+  <%= image_tag "system/gerald", class: "centered vertical-space", height: "80" %>
+  <h2 class="text-center">
+    <b>Національна Поліція України</b>
+  </h2>
+</div>
+<div class="row vertical-space">
+  <h3 class="text-center">Заява</h3>
+</div>
+<div class="row vertical-space">
+  <div class="col-md-10 col-md-offset-1">
+    <p>
+      <b>Тема звернення:
+      </b><%= @claim.theme %></p>
+  </div>
+</div>

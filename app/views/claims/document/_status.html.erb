@@ -1,0 +1,16 @@
+<% if @claim.status %>
+<div class="row vertical-space bottom-space">
+  <div class="col-md-10 col-md-offset-1">
+    <% @officer = Administrator.find(@claim.administrator_id)  %>
+    <b>Статус заяви:</b> <i>Розглянуто</i></br>
+    <b>Заяву розглянув:</b> <%= @officer.lastname %></br>
+    <b>Персональний номер:</b> <%= @officer.personal_number %>
+  </div>
+</div>
+<% else %>
+<div class="row vertical-space bottom-space">
+  <div class="col-md-10 col-md-offset-1">
+    <b>Статус заяви:</b> <i>Не розглянуто</i>
+  </div>
+</div>
+<% end %>

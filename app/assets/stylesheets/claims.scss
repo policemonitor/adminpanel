@@ -12,11 +12,36 @@
   padding: 5px;
   box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.2);
   background-color: white;
+  position: relative;
 }
 
-.a-document-header-space {
-  margin-top: 50px;
+.a4-document-header-space {
+  margin-top: 50px !important;
 }
+
+#a4-sign-box {
+  position: relative;
+}
+
+#a4-sign-line {
+  position: absolute;
+  left: 100px;
+  bottom: 100px;
+}
+
+#a4-time-stamp {
+  position: absolute;
+  right: 100px;
+  bottom: 100px;
+}
+
+#a4-page-number {
+  width: 650px;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+}
+
 
 .card-element {
   height: 60px;

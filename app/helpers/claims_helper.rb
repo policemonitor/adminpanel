@@ -1,4 +1,8 @@
 module ClaimsHelper
+  FIRST_PARAGRAPH_SIZE = 1000
+  LIST_SIZE = 2600
+  LAST_PARAGRAPH_SIZE = 430
+
   def flash_errors(claim)
     notice = "Виникли помилки. Усього їх #{claim.errors.count}.<ul>"
     claim.errors.full_messages.each do |msg|
@@ -19,5 +23,21 @@ module ClaimsHelper
                  "</div>
               </div>"
     return message.html_safe
+  end
+
+  def claim_cut_to_document(text)
+    paragraphs = []
+    paragraphs << text.slice!(0, FIRST_PARAGRAPH_SIZE)
+
+    while text.length > LIST_SIZE
+      paragraphs << text.slice!(0, LIST_SIZE)
+    end
+
+    paragraphs << text if !text.empty?
+
+    if paragraphs.last.length >= (LIST_SIZE - LAST_PARAGRAPH_SIZE)
+      paragraphs << []
+    end
+    return paragraphs
   end
 end
