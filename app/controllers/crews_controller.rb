@@ -14,7 +14,7 @@ class CrewsController < ApplicationController
   def create
     @crew = Crew.new(crew_params)
     if @crew.save
-      if add_crew_to_support_server(@crew.dup)
+      if Synchronization.add_crew_to_support_server(@crew.dup)
         flash[:success] = "Новий екіпаж додано!"
         redirect_to crews_path
       else
@@ -29,7 +29,6 @@ class CrewsController < ApplicationController
   end
 
   def index
-    daemon_synchronize
     if (params.has_key?(:query))
       @crews = Crew.search(params[:query])
     else

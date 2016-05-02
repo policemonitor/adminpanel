@@ -30,6 +30,8 @@ gem 'wkhtmltopdf-binary', '~> 0.9.9'
 gem 'geocoder'
 gem 'gmaps4rails'
 
+gem 'whenever', require: false
+
 group :development, :test do
   gem 'byebug'
 

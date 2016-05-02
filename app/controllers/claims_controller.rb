@@ -76,10 +76,10 @@ class ClaimsController < ApplicationController
     @crews = Crew.where("on_duty = ? AND on_a_mission = ?", true, false)
 
     @hash_crews = Gmaps4rails.build_markers(@crews) do |crew, marker|
-      marker.lat "50"  #crew.latitude
-      marker.lng "30"  #crew.longitude
-      marker.infowindow "Екіпаж: <b>#{crew.crew_name}</b>"
+      marker.lat crew.latitude
+      marker.lng crew.longitude
       marker.title "Екіпаж: #{crew.crew_name}"
+      marker.infowindow "Екіпаж: <b>#{crew.crew_name}</b></br>Lat.: #{crew.longitude}</br>Lon.: #{crew.latitude}"
       marker.picture({
                     :url => "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
                     :width   => 32,

@@ -1,8 +1,12 @@
 module Synchronization
+
+  # Inter-server synchronization
+  # See notices in 'schedule.rb'
+
   require 'json'
   CARS_SERVER_ADDRESS = "http://localhost:5000/cars.json"
 
-  def add_crew_to_support_server(car)
+  def self.add_crew_to_support_server(car)
     uri = URI.parse(CARS_SERVER_ADDRESS)
 
     post_params = {
@@ -20,26 +24,26 @@ module Synchronization
       http = Net::HTTP.new(uri.host, uri.port)
       response = http.start {|htt| htt.request(req)}
     rescue StandardError
-      logger.error "Unnable to POST information from cars server! (#{CARS_SERVER_ADDRESS})"
+      Rails.logger.error "Unnable to POST information from cars server! (#{CARS_SERVER_ADDRESS})"
       return false
     end
-      logger.info "Synchronization is succesfull!"
+      Rails.logger.info "Synchronization is succesfull!"
       return true
   end
 
-  def daemon_synchronize
+  def self.daemon_synchronize
     require 'open-uri'
     begin
       requests = JSON.load(open(CARS_SERVER_ADDRESS))
 
     rescue StandardError
-      logger.error "Unnable to fetch information from cars server #{CARS_SERVER_ADDRESS} !"
-      logger.info  "Using old data about crews!"
+      Rails.logger.error "Unnable to fetch information from cars server #{CARS_SERVER_ADDRESS} !"
+      Rails.logger.info  "Using old data about crews!"
       return false
     end
 
     requests.each do |request|
-      logger.info  "Updating car with VIN #{request["details"]["vin_number"]}"
+      Rails.logger.info  "Updating car with VIN #{request["details"]["vin_number"]}"
       crew = Crew.find_by(
                           crew_name: request["car"],
                           vin_number: request["details"]["vin_number"],
@@ -51,9 +55,9 @@ module Synchronization
                           latitude: request["details"]["latitude"]
                        )
 
-        logger.info "Crews #{request["car"]} coordinates succesfully updated!"
+        Rails.logger.info "Crews #{request["car"]} coordinates succesfully updated!"
       else
-        logger.error "There is no such car with VIN  #{request["details"]["vin"]}!"
+        Rails.logger.error "There is no such car with VIN  #{request["details"]["vin"]}!"
       end
     end
   end
