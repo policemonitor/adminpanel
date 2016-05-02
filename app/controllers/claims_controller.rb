@@ -79,7 +79,7 @@ class ClaimsController < ApplicationController
       marker.lat crew.latitude
       marker.lng crew.longitude
       marker.title "Екіпаж: #{crew.crew_name}"
-      marker.infowindow "Екіпаж: <b>#{crew.crew_name}</b></br>Lat.: #{crew.longitude}</br>Lon.: #{crew.latitude}"
+      marker.infowindow "Екіпаж: <b>#{crew.crew_name}</b></br>Lat.: #{crew.latitude}</br>Lon.: #{crew.longitude}"
       marker.picture({
                     :url => "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
                     :width   => 32,

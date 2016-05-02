@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
-gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -26,6 +25,8 @@ gem 'font-awesome-sass'
 
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.9.9'
+
+gem 'pg'
 
 gem 'geocoder'
 gem 'gmaps4rails'

@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160425120526) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "administrators", force: :cascade do |t|
     t.string   "lastname"
     t.string   "login"
@@ -23,8 +26,8 @@ ActiveRecord::Schema.define(version: 20160425120526) do
     t.integer  "rank"
   end
 
-  add_index "administrators", ["login"], name: "index_administrators_on_login", unique: true
-  add_index "administrators", ["personal_number"], name: "index_administrators_on_personal_number", unique: true
+  add_index "administrators", ["login"], name: "index_administrators_on_login", unique: true, using: :btree
+  add_index "administrators", ["personal_number"], name: "index_administrators_on_personal_number", unique: true, using: :btree
 
   create_table "claims", force: :cascade do |t|
     t.datetime "created_at",                       null: false
@@ -57,14 +60,7 @@ ActiveRecord::Schema.define(version: 20160425120526) do
     t.string   "crew_name"
   end
 
-  add_index "crews", ["car_number"], name: "index_crews_on_car_number", unique: true
-  add_index "crews", ["vin_number"], name: "index_crews_on_vin_number", unique: true
-
-  create_table "sent_crews", force: :cascade do |t|
-    t.integer  "claim_id"
-    t.integer  "crew_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  add_index "crews", ["car_number"], name: "index_crews_on_car_number", unique: true, using: :btree
+  add_index "crews", ["vin_number"], name: "index_crews_on_vin_number", unique: true, using: :btree
 
 end
