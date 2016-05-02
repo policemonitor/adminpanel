@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :administrators
+  resources :crews
   resources :claims do
     collection do
       get 'search'
@@ -7,9 +8,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :crews
 
-  root to: 'sessions#landing'
+  root to: 'static_pages#landing'
 
   get    'login'    => 'sessions#new'
   post   'login'    => 'sessions#create'
