@@ -1,6 +1,7 @@
 class CrewsController < ApplicationController
   include CrewsHelper
   include SessionsHelper
+  include Synchronization
 
   # There is no access by unauthorised persons!
 
@@ -13,7 +14,14 @@ class CrewsController < ApplicationController
   def create
     @crew = Crew.new(crew_params)
     if @crew.save
-      redirect_to crews_path
+      if add_crew_to_support_server(@crew.dup)
+        flash[:success] = "Новий екіпаж додано!"
+        redirect_to crews_path
+      else
+        @crew.destroy
+        flash[:danger] = "Помилка синхронізації з сервером автомобілів!"
+        redirect_to crews_path
+      end
     else
       flash[:danger] = flash_errors(@crew)
       redirect_to action: 'new'
@@ -21,6 +29,7 @@ class CrewsController < ApplicationController
   end
 
   def index
+    daemon_synchronize
     if (params.has_key?(:query))
       @crews = Crew.search(params[:query])
     else
