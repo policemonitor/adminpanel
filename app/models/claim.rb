@@ -1,8 +1,8 @@
 class Claim < ActiveRecord::Base
-  VALID_LASTNAME_REGEX = /\D{5,50}/
-  TELEPHONE_FORMAT_REGEX = /[\+]\d{1,2}[\(]\d{2,6}[\)]\d{3,10}/
-  COORDINATES_REGEX_LATITUDE = /[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)/
-  COORDINATES_REGEX_LONGITUDE = /[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)/
+  VALID_LASTNAME_REGEX = /\A\D{5,50}\z/
+  TELEPHONE_FORMAT_REGEX = /\A[\+]\d{1,2}[\(]\d{2,6}[\)]\d{3,10}\z/
+  COORDINATES_REGEX_LATITUDE = /\A[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)\z/
+  COORDINATES_REGEX_LONGITUDE = /\A[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)\z/
 
   has_and_belongs_to_many :crews
 

@@ -1,7 +1,7 @@
 class Crew < ActiveRecord::Base
-  VALID_CARS_NUMBER = /[A-Z]{2}[\d]{4}[A-Z]{2}/
-  VALID_VIM_NUM_REGEX = /\w{15,20}/
-  VALID_CREW_NAME = /[0-9]{4}/
+  VALID_CARS_NUMBER = /\A[A-Z]{2}[\d]{4}[A-Z]{2}\z/
+  VALID_VIM_NUM_REGEX = /\A\w{15,20}\z/
+  VALID_CREW_NAME = /\A[0-9]{4}\z/
 
   has_and_belongs_to_many :claims
 

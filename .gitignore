@@ -9,3 +9,4 @@ capybara-*.html
 /db/development.sqlite3
 /public/assets/
 public/assets/
+/output.html

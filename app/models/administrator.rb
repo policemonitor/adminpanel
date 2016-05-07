@@ -2,8 +2,8 @@ class Administrator < ActiveRecord::Base
   include SessionsHelper
 
   has_secure_password
-  VALID_PERSONAL_NUMBER_REGEX = /\d{7}/                                         # Personal number is 7 digits number
-  VALID_LASTNAME_REGEX = /\D{5,50}/
+  VALID_PERSONAL_NUMBER_REGEX = /\A\d{7}\z/                                         # Personal number is 7 digits number
+  VALID_LASTNAME_REGEX = /\A\D{5,50}\z/
 
   validates :lastname,
               presence: {message: " не може бути порожнім"},
