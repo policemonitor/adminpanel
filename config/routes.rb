@@ -26,5 +26,7 @@ Rails.application.routes.draw do
 
   post   'claims/new' => 'claims#new'
   post   'API' => 'claims#create'
+
   get    'signup' => 'administrators#new'
+  post   'disable'    => 'administrators#disable'
 end

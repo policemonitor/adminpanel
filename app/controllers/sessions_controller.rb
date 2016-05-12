@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def create
     @administrator = Administrator.find_by_login(params[:session][:login])
-    if @administrator && @administrator.authenticate(params[:session][:password])
+    if @administrator && @administrator.authenticate(params[:session][:password]) && !@administrator.fired
       session[:administrator_id] = @administrator.id
       redirect_to root_path
     else

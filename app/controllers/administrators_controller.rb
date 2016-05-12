@@ -10,16 +10,16 @@ class AdministratorsController < ApplicationController
   # List of administrators can only been viewed by HR
   # Any special features for administrators cannot be accessed by HR
 
-  before_action :signed_in_administrator, only: [:edit, :update, :show, :new, :index, :destroy]
-  before_action :correct_administrator,   only: [:edit, :update, :show, :destroy]
-  before_action :correct_hr,              only: [:new, :index, :destroy]
+  before_action :signed_in_administrator, only: [:edit, :update, :show, :new, :index, :destroy, :disable]
+  before_action :correct_administrator,   only: [:edit, :update, :show]
+  before_action :correct_hr,              only: [:new, :index, :destroy, :disable]
 
   def new
     @administrator = Administrator.new
   end
 
   def index
-    @administrators = Administrator.all
+    @administrators = Administrator.where(fired: false)
   end
 
   def create
@@ -53,9 +53,13 @@ class AdministratorsController < ApplicationController
   end
 
   def destroy
-    Administrator.find(params[:id]).destroy
-    flash[:success] = "Співробітника звільнено!"
-    redirect_to current_administrator
+    if Administrator.find(params[:id]).update_attribute(:fired, true)
+      flash[:success] = "Співробітника звільнено!"
+    else
+      flash[:danger] = "Виникла помилка!"
+    end
+
+    redirect_to administrators_path
   end
 
   private

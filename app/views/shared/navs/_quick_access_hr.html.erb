@@ -17,10 +17,14 @@
       <% if current_administrator != @administrator %>
       <div class="panel-footer">
         <p>
+          <% if !@administrator.fired? %>
           <%= link_to "Звільнити!", "#",
                       class: "btn btn-primary btn-danger btn-block btn-lg",
                       data: { toggle: "modal", target: "#destroy_window"},
                       onclick: "jQuery -> $('#destroy_window').modal();" %>
+          <% else %>
+            <h3 class="text-center">Звільнено!</h3>
+          <% end %>
         </p>
       </div>
       <% end %>
