@@ -31,12 +31,17 @@ gem 'pg'
 gem 'geocoder'
 gem 'gmaps4rails'
 
+gem 'web-console', group: :development
+
 gem 'whenever', require: false
 
 group :development, :test do
   gem 'byebug'
   gem 'brakeman', :require => false
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  #gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'rspec-rails', '~> 3.4'
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
