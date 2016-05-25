@@ -73,13 +73,21 @@ class ClaimsController < ApplicationController
 
   def edit
     @claim = Claim.find(params[:id])
-    @crews = Crew.where("on_duty = ? AND on_a_mission = ?", true, false)
+    @crews = Crew.where("on_duty = ? AND on_a_mission = ? AND latitude IS NOT NULL AND longitude IS NOT NULL", true, false)
+    @crews.each do |crew|
+      crew.class.module_eval { attr_accessor :distance }
+      crew.distance = Geocoder::Calculations.distance_between(
+                                    [@claim.latitude, @claim.longitude],
+                                    [crew.latitude, crew.longitude]).round(2)
+    end
+
+    @crews.sort_by {|crew| crew.distance}
 
     @hash_crews = Gmaps4rails.build_markers(@crews) do |crew, marker|
       marker.lat crew.latitude
       marker.lng crew.longitude
-      marker.title "Екіпаж: #{crew.crew_name}"
-      marker.infowindow "Екіпаж: <b>#{crew.crew_name}</b></br>Lat.: #{crew.latitude}</br>Lon.: #{crew.longitude}"
+      marker.title "Екіпаж: #{crew.crew_name}, Відстань: #{crew.distance} км"
+      marker.infowindow "Екіпаж: <b>#{crew.crew_name}</b></br>Відстань: #{crew.distance} км"
       marker.picture({
                     :url => "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
                     :width   => 32,
