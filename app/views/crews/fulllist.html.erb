@@ -17,6 +17,7 @@
                 <th data-field="underway">Стан автомобіля</th>
                 <th data-field="on_a_mission">Статус екіпажу</th>
                 <th data-field="created_at">Запис створено</th>
+                <th data-field="created_at">GPS</th>
               </tr>
             </thead>
 
@@ -39,7 +40,10 @@
                   <%= crew.on_a_mission ? "Вільний" : "На завданні" %>
                 </td>
                 <td>
-                  <%= crew.created_at%>
+                  <%= crew.created_at %>
+                </td>
+                <td>
+                  <%= (gps_unreachable crew) ? "Не отримано!" : "Отримано" %>
                 </td>
               </tr>
               <% end %>

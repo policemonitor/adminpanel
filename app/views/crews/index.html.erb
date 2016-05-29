@@ -43,7 +43,11 @@
                 <% end %>
                 <p>
                   <h5>Держ. номер: <%= crew.car_number %></h5>
-                  <h5>Статус: <%= crew.on_duty ? "На ходу" : "У ремонті" %></h5>
+                  <h5>Статус: <%= crew.on_duty ? "На ходу" : "У ремонті" %>
+                    <% if gps_unreachable crew%>
+                      <span class="text-danger">GPS <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
+                    <% end %>
+                  </h5>
                 </p>
               </div>
 
