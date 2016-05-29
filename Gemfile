@@ -34,6 +34,8 @@ gem 'web-console', group: :development
 
 gem 'whenever', require: false
 
+gem 'twilio-ruby'
+
 group :development, :test do
   gem 'railroady'
   gem 'byebug'

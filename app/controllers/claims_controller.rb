@@ -24,6 +24,12 @@ class ClaimsController < ApplicationController
 
     respond_to do |format|
       if @claim.save
+        client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
+        client.account.sms.messages.create(
+          from: TWILIO_CONFIG['from'],
+          to: @claim.phone,
+          body: "Звернення №#{@claim.id} зареєстровано!"
+        )
         format.html do
           redirect_to thanks_path(id: @claim.id)
         end
@@ -115,6 +121,13 @@ class ClaimsController < ApplicationController
         @crew.on_a_mission = true
         @crew.save
       end
+
+      client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
+      client.account.sms.messages.create(
+        from: TWILIO_CONFIG['from'],
+        to: @claim.phone,
+        body: "Звернення №#{@claim.id} розглянуто!"
+      )
 
       flash[:success] = 'Наказ надано! Повідомте екіпажі!'
       redirect_to crewslist_path(claim: @claim.id), turbolinks: false
