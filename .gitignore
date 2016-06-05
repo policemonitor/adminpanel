@@ -10,4 +10,3 @@ capybara-*.html
 /public/assets/
 public/assets/
 /output.html
-/config/twilio.yml
