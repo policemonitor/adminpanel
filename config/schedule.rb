@@ -12,7 +12,8 @@
 
 # Help: whenever --help
 
-set :environment, RAILS_ENV
+
+set :output, File.join(Whenever.path, "log", "cron.log")
 
 every 1.minute do
   runner "Synchronization.daemon_synchronize"

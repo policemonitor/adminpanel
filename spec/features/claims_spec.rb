@@ -7,7 +7,7 @@ describe "Features" do
       click_on 'Надати заяву'
       expect(page).to have_content('Заява про правопорушення')
       fill_in 'Ваше Прізвище Ім’я По батькові', :with => 'Галущак Андрій Миколайович'
-      fill_in 'Ваш номер телефону', :with=>"+38(063)6688742"
+      fill_in 'Ваш номер телефону', :with=>"+38(050)2424424"
       fill_in 'Тема звернення', :with=>"Бійка"
       find(:xpath, ".//*[@id='new_claim']/div[4]/div/label", :visible => false).click
       fill_in 'Місце злочину', :with=>"Київ вул. Янгеля 20"
