@@ -20,13 +20,13 @@ describe "Features" do
 
     it "should find claims by it`s id", :js => true do
       visit 'http://localhost:3000/'
-      click_on "Пошук заяви у системі"
+      click_on 'Пошук заяви у системі'
       fill_in 'Номер Вашої заяви', :with => "#{@claim_id}"
-      fill_in 'Ваш номер телефону', :with => "+38(063)6688742"
+      fill_in 'Ваш номер телефону', :with => "+38(050)2424424"
       click_on 'Шукати'
       expect(page).to have_content('Заяву знайдено')
       click_on 'Завантажити PDF файл заяви'
-      expect(page).to have_content('+38(063)6688742')
+      expect(page).to have_content('+38(050)2424424')
     end
 
   end

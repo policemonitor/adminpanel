@@ -26,9 +26,9 @@ class ClaimsController < ApplicationController
       if @claim.save
         client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
         client.account.sms.messages.create(
-          from: TWILIO_CONFIG['from'],
-          to: @claim.phone,
-          body: "Звернення №#{@claim.id} зареєстровано!"
+           from: TWILIO_CONFIG['from'],
+           to: @claim.phone,
+           body: "Звернення №#{@claim.id} зареєстровано!"
         )
         format.html do
           redirect_to thanks_path(id: @claim.id)
@@ -112,8 +112,8 @@ class ClaimsController < ApplicationController
 
   def update
     @claim = Claim.find(params[:id])
-    @claim.status = true
-    @claim.administrator_id = current_administrator.id
+    @claim.update_attribute(:status, true)
+    @claim.update_attribute(:administrator_id, current_administrator.id)
     if @claim.update_attributes(claim_update_params)
 
       @claim.crew_ids.each do |crew|
@@ -144,6 +144,6 @@ class ClaimsController < ApplicationController
   end
 
   def claim_update_params
-    params.require(:claim).permit(crew_ids: [])
+    params.require(:claim).permit(:administrator_id, crew_ids: [])
   end
 end

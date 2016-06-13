@@ -5,6 +5,7 @@ class Claim < ActiveRecord::Base
   COORDINATES_REGEX_LONGITUDE = /\A[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)\z/
 
   has_and_belongs_to_many :crews
+  belongs_to :administrators
 
   validates :lastname,
             presence: { message: " не може бути порожнім" },
