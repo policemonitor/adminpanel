@@ -26,6 +26,7 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.9.9'
 
 gem 'pg'
+gem 'validates_timeliness', '~> 4.0'
 
 gem 'geocoder'
 gem 'gmaps4rails'

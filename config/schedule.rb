@@ -18,3 +18,7 @@ set :output, File.join(Whenever.path, "log", "cron.log")
 every 1.minute do
   runner "Synchronization.daemon_synchronize"
 end
+
+every 1.minute do
+  runner "Synchronization.daemon_unlock"
+end

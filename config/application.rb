@@ -10,6 +10,7 @@ module Police
   class Application < Rails::Application
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     config.active_record.raise_in_transactional_callbacks = true
+    config.time_zone = 'Kyiv'
     config.autoload_paths << Rails.root.join('lib')
     config.generators do |g|
       g.test_framework :rspec, fixtures: true, views: false

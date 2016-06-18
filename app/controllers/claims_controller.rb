@@ -12,8 +12,9 @@ class ClaimsController < ApplicationController
   # Administrator has all privileges to manipulate claims.
   # Administrator MUST UPDATE claim after recieving it.
 
-  before_action :signed_in_administrator, only: [:all_income_claims, :edit, :update, :destroy, :map, :crews_list, :show]
+  before_action :signed_in_administrator, only: [:all_income_claims, :edit, :update, :destroy, :map, :crews_list, :show, :blocked]
   before_action :is_ADMIN, only: [:all_income_claims, :crews_list, :edit, :update, :destroy, :map]
+  before_action :is_accessable, only: [:edit]
 
   def new
     @claim = Claim.new
@@ -105,6 +106,9 @@ class ClaimsController < ApplicationController
   def thankyoupage
   end
 
+  def blocked
+  end
+
   def crews_list
     @claim = Claim.find(params[:claim])
     @crews = @claim.crews
@@ -118,9 +122,11 @@ class ClaimsController < ApplicationController
 
       @claim.crew_ids.each do |crew|
         @crew = Crew.find(crew)
-        @crew.on_a_mission = true
+        @crew.update_attribute(:on_a_mission, true)
         @crew.save
       end
+
+      @claim.access.delete
 
       client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
       client.account.sms.messages.create(
@@ -145,5 +151,23 @@ class ClaimsController < ApplicationController
 
   def claim_update_params
     params.require(:claim).permit(:administrator_id, crew_ids: [])
+  end
+
+  def access_params
+    params.require(:access).permit(:claim_id)
+  end
+
+  def is_accessable
+    # TODO
+    # if this claim is accessable -> create block row in Access and add 5 minutes expiration
+    # else push a message that this page is now accessed
+
+    claim = Claim.find(params[:id])
+
+    if claim.access.eql? nil
+      Access.create(claim_id: claim.id)
+    else
+      redirect_to blocked_path(id: claim.id)
+    end
   end
 end

@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="jumbotron alert-warning">
+        <h2>Заява вже розглядається!</h2>
+        <p>
+          Заява <b><%= params[:id] %></b> вже розглядається іншим адміністратором.</br>
+        </p>
+        <div><%= link_to "До усіх звернень", allincomeclaims_path, class: "btn btn-primary btn-warning btn-block btn-lg", role: "button" %></div>
+      </div>
+    </div>
+  </div>
+</div>

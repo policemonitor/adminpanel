@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get    'thanks' => 'claims#thankyoupage'
   get    'map' => 'claims#map'
   get    'fulllist' => 'crews#fulllist'
+  get    'blocked' => 'claims#blocked'
 
   get    'crewslist' => 'claims#crews_list'
 

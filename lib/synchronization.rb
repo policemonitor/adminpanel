@@ -61,4 +61,21 @@ module Synchronization
       end
     end
   end
+
+  def self.daemon_unlock
+    Rails.logger.error "Unlocker has started! (#{Time.now})"
+    access = Access.all
+    Rails.logger.error "Found #{access.count} bloked claims."
+
+    access.each do |claim|
+      Rails.logger.error "Checking claim #{claim.claim_id}"
+      if claim.expiration < Time.now
+        Rails.logger.error "Unlocking claim."
+        claim.delete
+        access.save
+      else
+        Rails.logger.error "Will be unlocked on #{claim.expiration}"
+      end
+    end
+  end
 end
