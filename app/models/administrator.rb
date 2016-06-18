@@ -3,6 +3,7 @@ class Administrator < ActiveRecord::Base
 
   has_secure_password
   has_many :claims
+  has_many :accesses
   VALID_PERSONAL_NUMBER_REGEX = /\A\d{7}\z/                                         # Personal number is 7 digits number
   VALID_LASTNAME_REGEX = /\A\D{5,50}\z/
 

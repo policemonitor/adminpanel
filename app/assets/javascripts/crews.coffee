@@ -4,4 +4,4 @@
 
 jQuery -> $('#crews').dataTable();
 jQuery -> $('#crews').removeClass('display').addClass('table table-striped table-bordered');
-jQuery -> $('.dataTables_filter input[type="search"]').attr('class', 'form-control').attr('placeholder','Введіть інформацію про екіпаж').css({'width':'450px', 'height':'45px', 'display':'inline-block', 'border-radius':'0px'});
+jQuery -> $('.dataTables_filter input[type="search"]').attr('class', 'form-control').attr('placeholder','Введіть інформацію для пошуку').css({'width':'450px', 'height':'45px', 'display':'inline-block', 'border-radius':'0px'});

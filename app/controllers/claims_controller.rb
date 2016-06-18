@@ -15,6 +15,7 @@ class ClaimsController < ApplicationController
   before_action :signed_in_administrator, only: [:all_income_claims, :edit, :update, :destroy, :map, :crews_list, :show, :blocked]
   before_action :is_ADMIN, only: [:all_income_claims, :crews_list, :edit, :update, :destroy, :map]
   before_action :is_accessable, only: [:edit]
+  before_action :is_blocked_by_me, only: [:update]
 
   def new
     @claim = Claim.new
@@ -126,7 +127,7 @@ class ClaimsController < ApplicationController
         @crew.save
       end
 
-      @claim.access.delete
+      @claim.access.delete if !@claim.access.nil?
 
       client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
       client.account.sms.messages.create(
@@ -135,7 +136,7 @@ class ClaimsController < ApplicationController
         body: "Звернення №#{@claim.id} розглянуто!"
       )
 
-      flash[:success] = 'Наказ надано! Повідомте екіпажі!'
+      flash[:success] = 'Наказ надано! Повідомьте екіпажі!'
       redirect_to crewslist_path(claim: @claim.id), turbolinks: false
     else
       flash[:danger] = "Виникла помилка під час виконання!"
@@ -144,6 +145,11 @@ class ClaimsController < ApplicationController
   end
 
   private
+
+  def is_blocked_by_me
+    @claim = Claim.find(params[:id])
+    redirect_to blocked_path(id: @claim.id) if @claim.status == true || @claim.access.administrator_id != current_administrator.id
+  end
 
   def claim_params
     params.require(:claim).permit(:lastname, :phone, :latitude, :longitude, :theme, :text)
@@ -154,18 +160,20 @@ class ClaimsController < ApplicationController
   end
 
   def access_params
-    params.require(:access).permit(:claim_id)
+    params.require(:access).permit(:claim_id, :administrator_id)
   end
 
   def is_accessable
     # TODO
-    # if this claim is accessable -> create block row in Access and add 5 minutes expiration
+    # if this claim is accessable -> create block row in Access and add 3 minutes expiration
     # else push a message that this page is now accessed
 
     claim = Claim.find(params[:id])
 
-    if claim.access.eql? nil
-      Access.create(claim_id: claim.id)
+    if claim.access.nil?
+      Access.create(claim_id: claim.id, administrator_id: current_administrator.id)
+    elsif claim.access.administrator_id == current_administrator.id
+      # DO not do anything, just pass it
     else
       redirect_to blocked_path(id: claim.id)
     end

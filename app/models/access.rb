@@ -1,9 +1,15 @@
 class Access < ActiveRecord::Base
   belongs_to :claims
+  belongs_to :administrators
+
   before_validation :set_expiration_date
   TIME_TO_BLOCKING = 3.minutes
 
   validates :claim_id,
+            presence: { message: " не може бути порожнім" },
+            numericality: { only_integer: true }
+
+  validates :administrator_id,
             presence: { message: " не може бути порожнім" },
             numericality: { only_integer: true }
 

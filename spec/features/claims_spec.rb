@@ -73,7 +73,7 @@ describe "Features" do
       click_on "Галущак Андрій Миколайович"
       find('label', :text => '0911').click
       click_on "Надати наказ"
-      expect(page).to have_content "Наказ надано! Повідомте екіпажі!"
+      expect(page).to have_content "Наказ надано! Повідомьте екіпажі!"
       find(:xpath, "html/body/div[2]/div/div/div/div[2]/div/div/div/label", :visible => false).click
       click_on "Завершити"
       expect(page).to have_content "Надати заяву"
