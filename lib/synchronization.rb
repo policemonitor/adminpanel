@@ -5,6 +5,33 @@ module Synchronization
 
   require 'json'
   CARS_SERVER_ADDRESS = "http://localhost:5000/cars.json"
+  CARS_SERVER_ADDRESS_CUSTOM_CAR = "http://localhost:5000/cars/"
+
+  def self.update_crew_on_support_server(car)
+    car_identifier = CARS_SERVER_ADDRESS_CUSTOM_CAR + car.id.to_s + ".json"
+    uri = URI.parse(car_identifier)
+
+    post_params = {
+      :car_number => car.car_number,
+      :crew_name  => car.crew_name,
+      :vin_number => car.vin_number
+    }
+
+    req = Net::HTTP::Put.new(uri.path)
+    req.body = JSON.generate(post_params)
+    req["Content-Type"] = "application/json"
+    req["Accept"] = "application/json"
+
+    begin
+      http = Net::HTTP.new(uri.host, uri.port)
+      response = http.start {|htt| htt.request(req)}
+    rescue StandardError
+      Rails.logger.error "Unnable to POST information on cars server to update #{car.crew_name}! (#{car_identifier})"
+      return false
+    end
+      Rails.logger.info "Synchronization is succesfull! (Car #{car.crew_name} updated)"
+      return true
+  end
 
   def self.add_crew_to_support_server(car)
     uri = URI.parse(CARS_SERVER_ADDRESS)
@@ -24,7 +51,7 @@ module Synchronization
       http = Net::HTTP.new(uri.host, uri.port)
       response = http.start {|htt| htt.request(req)}
     rescue StandardError
-      Rails.logger.error "Unnable to POST information from cars server! (#{CARS_SERVER_ADDRESS})"
+      Rails.logger.error "Unnable to POST information on cars server! (#{CARS_SERVER_ADDRESS})"
       return false
     end
       Rails.logger.info "Synchronization is succesfull!"
@@ -37,7 +64,7 @@ module Synchronization
       requests = JSON.load(open(CARS_SERVER_ADDRESS))
 
     rescue StandardError
-      Rails.logger.error "Unnable to fetch information from cars server #{CARS_SERVER_ADDRESS} !"
+      Rails.logger.error "Unnable to fetch information on cars server #{CARS_SERVER_ADDRESS} !"
       Rails.logger.info  "Using old data about crews!"
       return false
     end

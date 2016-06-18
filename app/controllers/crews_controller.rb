@@ -50,9 +50,21 @@ class CrewsController < ApplicationController
 
   def update
     @crew = Crew.find(params[:id])
+    rollback = {
+      car_number: @crew.car_number,
+      vin_number: @crew.vin_number,
+      crew_name: @crew.crew_name
+    }
     if @crew.update_attributes(crew_update_params)
-      flash[:success] = 'Обліковий запис змінено'
-      redirect_to crews_path
+      if Synchronization.update_crew_on_support_server(@crew.clone)
+        flash[:success] = "Екіпаж оновленно!"
+        redirect_to crews_path
+      else
+        @crew.update_attributes(rollback)
+
+        flash[:danger] = "Помилка синхронізації з сервером автомобілів!"
+        redirect_to crews_path
+      end
     else
       flash[:danger] = flash_errors(@crew)
       redirect_to edit_crew_path(@crew)
