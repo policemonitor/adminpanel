@@ -13,9 +13,9 @@ module ClaimsHelper
   end
 
   def claim_card(claim)
-
     message = "<div class='messagebox'>" +
                 "<h4>" + claim.theme + "</h4>" +
+                "#{'<h5>Вже розглядається!</h5>' if is_under_viewing(claim)}" +
                 "<p>" + claim.text.truncate(200) + "</p>
                   <div class='btn-group pull-right'>
                     <a href='"+ claim_path(claim) + "' class='btn btn-primary' data-turbolink='false' >Деталі</a>" +
@@ -39,5 +39,9 @@ module ClaimsHelper
       paragraphs << []
     end
     return paragraphs
+  end
+
+  def is_under_viewing(claim)
+    return claim.access != nil ? true : false
   end
 end

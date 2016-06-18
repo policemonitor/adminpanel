@@ -44,6 +44,9 @@
                 </td>
                 <td>
                   <%= claim.status == true ? "Розглянуто (#{claim.updated_at.strftime("%d.%m.%Y")})" : "<b>Не розглянуто</b>".html_safe  %>
+                  <% if is_under_viewing(claim) %>
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                  <% end %>
                 </td>
                 <td>
                   <%= truncate(claim.theme, length: 65) %>
