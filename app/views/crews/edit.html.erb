@@ -1,7 +1,17 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <h1>Редагування даних про екіпаж <b><%= @crew.crew_name %></b></h1>
+      <h1>Редагування даних про екіпаж <b><%= @crew.crew_name %></b>
+        <% if !@crew.deleted %>
+          <%= link_to "#",
+                  data: { toggle: "modal", target: "#destroy_crew_window"},
+                  onclick: "jQuery -> $('#destroy_crew_window').modal();",
+                  id: "destroy-button" do %>
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          <% end %>
+        <% else %>
+          <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+        <% end %>
     </div>
   </div>
 
@@ -35,14 +45,15 @@
             <%= link_to "#",
                         data: { toggle: "modal", target: "#vin_window"},
                         onclick: "jQuery -> $('#vin_window').modal();" do %>
-              <%= f.label :vin_number, "VIN автомобіля екіпажу", class: "control-label pull-left" %>
+            <%= f.label :vin_number, "VIN автомобіля екіпажу", class: "control-label pull-left" %>
             <% end %>
 
             <%= f.text_field :vin_number,
                                       placeholder: "JN6JD16S9HW000317",
                                       class: "form-control",
                                       pattern: "[A-Z0-9]{15,20}",
-                                      required: true %>
+                                      required: true,
+                                      id: "vin_number" %>
           </div>
         </div>
       </div>
@@ -73,11 +84,11 @@
             <%= f.submit "Зберегти дані", class: "btn-submit btn-block", id: "update-button" %>
           </div>
         </div>
-
       </div>
     <% end %>
     </div>
   </div>
 
-    <%= render "shared/modals/vin_modal" %>
+  <%= render "shared/check_windows/destroy_crew" %>
+  <%= render "shared/modals/vin_modal" %>
 </div>

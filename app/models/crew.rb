@@ -35,14 +35,21 @@ class Crew < ActiveRecord::Base
     end
   end
 
-  def self.update_coordinates name, vin, number, latitude, longitude
+  def self.update_crew name, vin, number, latitude, longitude, duty, mission
     car = extract_crew name, vin, number
     if (validate_coordinates? latitude, longitude) && !car.nil?
-      car.update_attributes latitude: latitude, longitude: longitude
+      car.update_attributes latitude:     latitude,
+                            longitude:    longitude,
+                            on_duty:      duty,
+                            on_a_mission: mission
       return true
     else
       return false
     end
+  end
+
+  def self.available
+    where("on_duty = ? AND on_a_mission = ? AND latitude IS NOT NULL AND longitude IS NOT NULL AND DELETED = ?", true, false, false)
   end
 
   private

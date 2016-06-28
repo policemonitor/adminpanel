@@ -7,38 +7,12 @@ module Synchronization
   CARS_SERVER_ADDRESS = "http://localhost:5000/cars.json"
   CARS_SERVER_ADDRESS_CUSTOM_CAR = "http://localhost:5000/cars/"
 
-  def self.update_crew_on_support_server(car)
-    car_identifier = CARS_SERVER_ADDRESS_CUSTOM_CAR + car.id.to_s + ".json"
-    uri = URI.parse(car_identifier)
-
-    post_params = {
-      :car_number => car.car_number,
-      :crew_name  => car.crew_name,
-      :vin_number => car.vin_number
-    }
-
-    req = Net::HTTP::Put.new(uri.path)
-    req.body = JSON.generate(post_params)
-    req["Content-Type"] = "application/json"
-    req["Accept"] = "application/json"
-
-    begin
-      http = Net::HTTP.new(uri.host, uri.port)
-      response = http.start {|htt| htt.request(req)}
-    rescue StandardError
-      Rails.logger.error "Unnable to POST information on cars server to update #{car.crew_name}! (#{car_identifier})"
-      return false
-    end
-      Rails.logger.info "Synchronization is succesfull! (Car #{car.crew_name} updated)"
-      return true
-  end
-
   def self.add_crew_to_support_server(car)
     uri = URI.parse(CARS_SERVER_ADDRESS)
 
     post_params = {
       :car_number => car.car_number,
-      :crew_name  => car.crew_name,
+      :car_name  => car.crew_name,
       :vin_number => car.vin_number
     }
 
@@ -50,11 +24,65 @@ module Synchronization
     begin
       http = Net::HTTP.new(uri.host, uri.port)
       response = http.start {|htt| htt.request(req)}
-    rescue StandardError
+
+      raise "An error occured while trying POST information on neigbor server!" if response.code.to_i != 201
+
+    rescue
       Rails.logger.error "Unnable to POST information on cars server! (#{CARS_SERVER_ADDRESS})"
       return false
     end
       Rails.logger.info "Synchronization is succesfull!"
+      return true
+  end
+
+  def self.update_crew_on_support_server(car)
+    car_identifier = CARS_SERVER_ADDRESS_CUSTOM_CAR + car.id.to_s + ".json"
+    uri = URI.parse(car_identifier)
+
+    post_params = {
+      car_number:   car.car_number,
+      car_name:     car.crew_name,
+      vin_number:   car.vin_number,
+      on_duty:      car.on_duty,
+      on_a_mission: car.on_a_mission
+    }
+
+    req = Net::HTTP::Put.new(uri.path)
+    req.body = JSON.generate(post_params)
+    req["Content-Type"] = "application/json"
+    req["Accept"] = "application/json"
+
+    begin
+      http = Net::HTTP.new(uri.host, uri.port)
+      response = http.start {|htt| htt.request(req)}
+
+      raise "An error occured while trying UPDATE information on neigbor server!" if response.code.to_i != 204
+    rescue
+      Rails.logger.error "Unnable to UPDATE information on cars server to update #{car.crew_name}! (#{car_identifier})"
+      return false
+    end
+      Rails.logger.info "Synchronization is succesfull! (Car #{car.crew_name} updated)"
+      return true
+  end
+
+  def self.destroy_crew_on_support_server(car)
+    car_identifier = CARS_SERVER_ADDRESS_CUSTOM_CAR + car.id.to_s + ".json"
+    uri = URI.parse(car_identifier)
+
+    req = Net::HTTP::Delete.new(uri.path)
+    req["Content-Type"] = "application/json"
+    req["Accept"] = "application/json"
+
+    begin
+      http = Net::HTTP.new(uri.host, uri.port)
+      response = http.start {|htt| htt.request(req)}
+
+      raise "An error occured while trying UPDATE information on neigbor server!" if response.code.to_i != 204
+    rescue
+      Rails.logger.error "Unnable to DESTROY crew on suport server #{car.crew_name}! (#{car_identifier})"
+      return false
+    end
+      Rails.logger.info "Synchronization is succesfull! (Car #{car.crew_name} deleted)"
       return true
   end
 
@@ -73,15 +101,13 @@ module Synchronization
 
     requests.each do |request|
       Rails.logger.info  "Updating car with VIN #{request["details"]["vin_number"]}"
-      hash_data = {
-        
-
-      }
-      status = Crew.update_coordinates request["car"],
+      status = Crew.update_crew request["car"],
                                        request["details"]["vin_number"],
                                        request["details"]["car_number"],
                                        request["details"]["latitude"],
-                                       request["details"]["longitude"]
+                                       request["details"]["longitude"],
+                                       request["statuses"]["on_duty"],
+                                       request["statuses"]["on_a_mission"]
       if status
         Rails.logger.info "Crews #{request["car"]} coordinates succesfully updated!"
       else

@@ -81,7 +81,7 @@ class ClaimsController < ApplicationController
 
   def edit
     @claim = Claim.find(params[:id])
-    @crews = Crew.where("on_duty = ? AND on_a_mission = ? AND latitude IS NOT NULL AND longitude IS NOT NULL", true, false)
+    @crews = Crew.available
     @crews.each do |crew|
       crew.class.module_eval { attr_accessor :distance }
       crew.distance = Geocoder::Calculations.distance_between(
