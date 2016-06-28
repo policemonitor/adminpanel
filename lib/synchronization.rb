@@ -69,19 +69,20 @@ module Synchronization
       return false
     end
 
+    Rails.logger.info  "Synchronization started at #{Time.now}"
+
     requests.each do |request|
       Rails.logger.info  "Updating car with VIN #{request["details"]["vin_number"]}"
-      crew = Crew.find_by(
-                          crew_name: request["car"],
-                          vin_number: request["details"]["vin_number"],
-                          car_number: request["details"]["car_number"]
-                       )
-      if !crew.nil?
-        crew.update_attributes(
-                          longitude: request["details"]["longitude"],
-                          latitude: request["details"]["latitude"]
-                       )
+      hash_data = {
+        
 
+      }
+      status = Crew.update_coordinates request["car"],
+                                       request["details"]["vin_number"],
+                                       request["details"]["car_number"],
+                                       request["details"]["latitude"],
+                                       request["details"]["longitude"]
+      if status
         Rails.logger.info "Crews #{request["car"]} coordinates succesfully updated!"
       else
         Rails.logger.error "There is no such car with VIN  #{request["details"]["vin"]}!"
