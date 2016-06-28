@@ -1,0 +1,31 @@
+<div class="modal fade" id="destroy_crew_window" tabindex="-1" role="dialog" aria-labelledby="destroy_window_label">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3>Обережно!</h3>
+        <h4>Цю дію неможливо відмінити!</h4>
+        <p>Для того щоб видалити екіпаж, будь ласка, введіть
+          <b>VIN</b> номер машини у поле нижче.
+        </p>
+        <div class="form-group">
+          <input placeholder="VIN номер автомобіля екіпажу" class="form-control" id="confirmation_input" type="text" onchange="check_confirmation()">
+        </div>
+        <%= button_to "Видалити!", @crew, id: "destroy_button", class: "btn btn-primary btn-danger btn-lg  btn-block", method: :delete, disabled: true %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function check_confirmation() {
+    var sample_data = document.getElementById('vin_number').value;
+    var inputed_data = document.getElementById('confirmation_input').value;
+
+    if (sample_data == inputed_data) {
+      document.getElementById('destroy_button').disabled = false;
+    }
+  };
+</script>
