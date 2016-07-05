@@ -4,13 +4,11 @@ module Synchronization
   # See notices in 'schedule.rb'
 
   require 'json'
-  CARS_SERVER_ADDRESS = "http://localhost:5000/cars.json"
-  CARS_SERVER_ADDRESS_CUSTOM_CAR = "http://localhost:5000/cars/"
+  CARS_SERVER_ADDRESS = APP_CONFIG["car_server_address"]
+  SYNCHRONIZATION_KEY = APP_CONFIG["access_token"]
 
   CREATE_SUCCEED_STATUS = 201
   UPDATE_SUCCEED_STATUS = 204
-
-  SYNCHRONIZATION_KEY = "abcde12345"
 
   def self.add_crew_to_support_server(car)
     uri = URI.parse(CARS_SERVER_ADDRESS)
@@ -42,7 +40,7 @@ module Synchronization
   end
 
   def self.update_crew_on_support_server(car)
-    car_identifier = CARS_SERVER_ADDRESS_CUSTOM_CAR + car.id.to_s + ".json"
+    car_identifier = CARS_SERVER_ADDRESS + "/cars/" + car.id.to_s + ".json"
     uri = URI.parse(car_identifier)
 
     post_params = {
@@ -73,7 +71,7 @@ module Synchronization
   end
 
   def self.destroy_crew_on_support_server(car)
-    car_identifier = CARS_SERVER_ADDRESS_CUSTOM_CAR + car.id.to_s + ".json"
+    car_identifier = CARS_SERVER_ADDRESS + "/cars/" + car.id.to_s + ".json"
     uri = URI.parse(car_identifier)
 
     delete_params = {
