@@ -5,13 +5,14 @@ module Synchronization
 
   require 'json'
   CARS_SERVER_ADDRESS = APP_CONFIG["car_server_address"]
-  SYNCHRONIZATION_KEY = APP_CONFIG["access_token"]
+  SYNCHRONIZATION_KEY = APP_CONFIG["key"]
 
+  GET_SUCCEED_STATUS    = 200
   CREATE_SUCCEED_STATUS = 201
   UPDATE_SUCCEED_STATUS = 204
 
   def self.add_crew_to_support_server(car)
-    uri = URI.parse(CARS_SERVER_ADDRESS)
+    uri = URI.parse(CARS_SERVER_ADDRESS + "/cars.json")
 
     post_params = {
       car_number: car.car_number,
@@ -43,7 +44,7 @@ module Synchronization
     car_identifier = CARS_SERVER_ADDRESS + "/cars/" + car.id.to_s + ".json"
     uri = URI.parse(car_identifier)
 
-    post_params = {
+    update_params = {
       car_number:   car.car_number,
       car_name:     car.crew_name,
       vin_number:   car.vin_number,
@@ -53,7 +54,7 @@ module Synchronization
     }
 
     req = Net::HTTP::Put.new(uri.path)
-    req.body = JSON.generate(post_params)
+    req.body = JSON.generate(update_params)
     req["Content-Type"] = "application/json"
     req["Accept"] = "application/json"
 
@@ -97,15 +98,31 @@ module Synchronization
   end
 
   def self.daemon_synchronize
+    car_index = CARS_SERVER_ADDRESS + "/cars.json"
+    uri = URI.parse(car_index)
+
+    index_params = {
+      key:          SYNCHRONIZATION_KEY
+    }
+
+    req = Net::HTTP::Get.new(uri.path)
+    req.body = JSON.generate(index_params)
+    req["Content-Type"] = "application/json"
+    req["Accept"] = "application/json"
+
     require 'open-uri'
     begin
-      requests = JSON.load(open(CARS_SERVER_ADDRESS + "?key=" + SYNCHRONIZATION_KEY))
+      http = Net::HTTP.new(uri.host, uri.port)
+      response = http.start {|htt| htt.request(req)}
+      raise "An error occured while trying GET index information from neigbor server!" if response.code.to_i != GET_SUCCEED_STATUS
+
 
     rescue StandardError
       Rails.logger.error "Unnable to fetch information on cars server #{CARS_SERVER_ADDRESS} !"
       Rails.logger.info  "Using old data about crews!"
       return false
     end
+    requests = JSON.load(response.body)
 
     Rails.logger.info  "Synchronization started at #{Time.now}"
 
@@ -121,7 +138,7 @@ module Synchronization
       if status
         Rails.logger.info "Crews #{request["car"]} coordinates succesfully updated!"
       else
-        Rails.logger.error "There is no such car with VIN  #{request["details"]["vin"]}!"
+        Rails.logger.error "Crew wasn't updated!"
       end
     end
   end

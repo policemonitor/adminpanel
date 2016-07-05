@@ -11,5 +11,4 @@ capybara-*.html
 public/assets/
 /output.html
 Gemfile.lock
-/config/config.yml
 config/config.yml
