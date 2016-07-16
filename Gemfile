@@ -35,12 +35,12 @@ gem 'web-console', group: :development
 
 gem 'whenever', require: false
 
+gem 'phony_rails'
+gem 'twilio-ruby'
 
 group :test do
   gem 'factory_girl_rails', :require => false
 end
-
-gem 'twilio-ruby'
 
 group :development, :test do
   gem 'railroady'

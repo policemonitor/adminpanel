@@ -115,6 +115,10 @@ GEM
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     pg (0.18.4)
+    phony (2.15.26)
+    phony_rails (0.14.2)
+      activesupport (>= 3.0)
+      phony (~> 2.12)
     pkg-config (1.1.7)
     rack (1.6.4)
     rack-test (0.6.3)
@@ -238,6 +242,7 @@ DEPENDENCIES
   jquery-turbolinks
   jquery-ui-rails
   pg
+  phony_rails
   railroady
   rails (= 4.2.6)
   rspec-rails (~> 3.4)

@@ -1,8 +1,10 @@
 class Claim < ActiveRecord::Base
   VALID_LASTNAME_REGEX = /\A\D{5,50}\z/
-  TELEPHONE_FORMAT_REGEX = /\A[\+]\d{1,2}[\(]\d{2,6}[\)]\d{3,10}\z/
+  # TELEPHONE_FORMAT_REGEX = /\A[\+]\d{1,2}[\(]\d{2,6}[\)]\d{3,10}\z/
   COORDINATES_REGEX_LATITUDE = /\A[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)\z/
   COORDINATES_REGEX_LONGITUDE = /\A[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)\z/
+
+  phony_normalize :phone, default_country_code: 'UA'
 
   has_and_belongs_to_many :crews
   belongs_to :administrators
@@ -13,9 +15,7 @@ class Claim < ActiveRecord::Base
             length: { minimum: 5, message: " закоротке" },
             format: { with: VALID_LASTNAME_REGEX, message: " містить неприпустимі символи" }
 
-  validates :phone,
-            presence: { message: " не може бути порожнім" },
-            format: { with: TELEPHONE_FORMAT_REGEX, message: " має невірний формат" }
+  validates_plausible_phone :phone, country_code: 'UA'
 
   validates :theme,
             presence: { message: " не може бути порожньою" }
