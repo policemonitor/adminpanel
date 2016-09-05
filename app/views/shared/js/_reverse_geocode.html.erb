@@ -1,4 +1,4 @@
-<script src="https://maps.googleapis.com/maps/api/js?language=uk"></script>
+<%= javascript_include_tag "http://maps.google.com/maps/api/js?language=uk&key=#{ APP_CONFIG['google-map-key'] }" %>
 <script>
   window.onload = geocodeLatLng();
   function geocodeLatLng() {

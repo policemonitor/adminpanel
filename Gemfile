@@ -31,8 +31,6 @@ gem 'validates_timeliness', '~> 4.0'
 gem 'geocoder'
 gem 'gmaps4rails'
 
-gem 'web-console', group: :development
-
 gem 'whenever', require: false
 
 gem 'phony_rails'
@@ -43,11 +41,12 @@ group :test do
 end
 
 group :development, :test do
+  gem 'better_errors', '~> 2.1', '>= 2.1.1'
   gem 'railroady'
   gem 'byebug'
   gem 'brakeman', :require => false
   # Access an IRB console on exception pages or by using <%= console %> in views
-  #gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'rspec-rails', '~> 3.4'
   gem 'capybara'

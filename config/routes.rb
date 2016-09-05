@@ -15,19 +15,19 @@ Rails.application.routes.draw do
   post   'login'    => 'sessions#create'
   delete 'logout'   => 'sessions#destroy'
 
-  get    'thanks' => 'claims#thankyoupage'
-  get    'map' => 'claims#map'
+  get    'thanks'   => 'claims#thankyoupage'
+  get    'map'      => 'claims#map'
+  get    'login'    => 'sessions#new'
   get    'fulllist' => 'crews#fulllist'
-  get    'blocked' => 'claims#blocked'
+  get    'blocked'  => 'claims#blocked'
 
   get    'crewslist' => 'claims#crews_list'
-
-  get    'search' => 'claims#index'
+  get    'search'    => 'claims#index'
   get    'allincomeclaims' => 'claims#all_income_claims'
 
   post   'claims/new' => 'claims#new'
-  post   'API' => 'claims#create'
+  post   'API'        => 'claims#create'
 
-  get    'signup' => 'administrators#new'
+  get    'signup'     => 'administrators#new'
   post   'disable'    => 'administrators#disable'
 end

@@ -4,7 +4,7 @@ class ClaimsController < ApplicationController
 
   require 'json'
 
-  # Not authorised users can only create claim!
+  # Not authorised users can create claim!
 
   # User can only create claim. In future he will get opportunity took search
   # it's claim by entering [id + phone] combination into secrch field
@@ -77,6 +77,7 @@ class ClaimsController < ApplicationController
       marker.title claim.theme
       marker.infowindow claim_card(claim)
     end
+    @default_location = { latitude: APP_CONFIG["def_lat"], longitude: APP_CONFIG["def_lng"] }
   end
 
   def edit
