@@ -38,4 +38,12 @@ class Claim < ActiveRecord::Base
       nil
     end
   end
+
+  def self.unreaded
+    find_by_sql("SELECT claims.*
+                 FROM   claims
+                        RIGHT JOIN accesses
+                                ON claims.id = accesses.claim_id
+                 ORDER  BY claims.created_at ASC ")
+  end
 end

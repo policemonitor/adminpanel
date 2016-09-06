@@ -13,7 +13,7 @@ class ClaimsController < ApplicationController
   # Administrator MUST UPDATE claim after recieving it.
 
   before_action :signed_in_administrator, only: [:all_income_claims, :edit, :update, :destroy, :map, :crews_list, :show, :blocked]
-  before_action :is_ADMIN, only: [:all_income_claims, :crews_list, :edit, :update, :destroy, :map]
+  before_action :is_ADMIN, only: [:new_claims, :all_income_claims, :crews_list, :edit, :update, :destroy, :map]
   before_action :is_accessable, only: [:edit]
   before_action :is_blocked_by_me, only: [:update]
 
@@ -142,6 +142,13 @@ class ClaimsController < ApplicationController
     else
       flash[:danger] = "Виникла помилка під час виконання!"
       redirect_to @claim
+    end
+  end
+
+  def new_claims
+    @claims = Claim.unreaded
+    respond_to do |format|
+      format.json { render json: @claims }
     end
   end
 
