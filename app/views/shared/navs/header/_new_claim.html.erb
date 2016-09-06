@@ -1,0 +1,15 @@
+<%= link_to "#", id: "new_claim", hidden: "true" do %>
+  <span class="glyphicon glyphicon-bell" id="new_claim_bell" aria-hidden="true"></span>
+  <span>Нових звернень: </span>
+  <span id="claims_number"></span>
+<% end %>
+<script>
+  function pulse() {
+      $('#new_claim_bell').fadeIn(300).fadeOut(500);
+  }
+  setInterval(pulse, 1000);
+
+  $('#new_claim').click(function(){
+    $('#mail-box').toggle();
+  });
+</script>
