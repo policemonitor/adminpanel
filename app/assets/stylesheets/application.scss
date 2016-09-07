@@ -288,7 +288,7 @@
  }
 
 #mail-box {
-  z-index: 4;
+  z-index: 100;
   position: absolute;
   margin-top: -15px;
 }
@@ -312,4 +312,16 @@
 
 a:focus {
   outline: 0;
+}
+
+.devider-line {
+
+}
+
+#new_claim {
+  visibility: hidden;
+}
+
+#new-messages {
+  list-style: none;
 }

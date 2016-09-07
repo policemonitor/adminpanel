@@ -40,10 +40,12 @@ class Claim < ActiveRecord::Base
   end
 
   def self.unreaded
-    find_by_sql("SELECT claims.*
-                 FROM   claims
-                        RIGHT JOIN accesses
-                                ON claims.id = accesses.claim_id
-                 ORDER  BY claims.created_at ASC ")
+    find_by_sql("
+        SELECT *
+        FROM   claims
+        WHERE  status = false
+               AND claims.id NOT IN (SELECT claim_id
+                                     FROM   accesses)
+        ORDER BY CLAIMS.CREATED_AT ASC")
   end
 end

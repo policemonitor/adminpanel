@@ -40,9 +40,10 @@ callout = function () {
     },
     success: function (data) {
       if (!$.isArray(data) || !data.length) {
-        $("#new_claim").hide();
+        $("#new_claim").css("visibility", "hidden");
       } else {
-        $("#new_claim").show();
+        $("#new_claim").css("visibility", "visible");
+        $("#claims_number").text(data.length);
       }
     }
   }).always(function () {
