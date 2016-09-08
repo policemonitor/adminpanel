@@ -293,6 +293,10 @@
   margin-top: -15px;
 }
 
+a:focus {
+  outline: 0;
+}
+
 .claims-list {
   height: 400px;
   width: 100%;
@@ -300,28 +304,41 @@
   padding: 10px;
   box-shadow: 0px 0px 17px 0px rgba(163,163,163,0.89);
 
+  #close_new_claim {
+    cursor: pointer;
+  }
+
   .header {
     width: 100%;
-    height: 15px;
+  }
+
+  .list {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 325px;
+
+    a {
+      color: black;
+      transition: color 0.5s ease;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #A9A9A9;
+      text-decoration: none;
+    }
+
+    .devider-line {
+      margin: 10px 5% 5px 5%;
+    }
+
+    #new-messages {
+      list-style: none;
+      padding-left: 0px;
+    }
   }
 }
 
-#close_new_claim {
-  cursor: pointer;
-}
-
-a:focus {
-  outline: 0;
-}
-
-.devider-line {
-
-}
-
-#new_claim {
+#new_claims_list {
   visibility: hidden;
-}
-
-#new-messages {
-  list-style: none;
 }

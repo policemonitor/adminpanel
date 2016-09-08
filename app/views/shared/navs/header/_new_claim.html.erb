@@ -1,4 +1,4 @@
-<%= link_to "#", id: "new_claim" do %>
+<%= link_to "#", id: "new_claims_list" do %>
   <span class="glyphicon glyphicon-bell" id="new_claim_bell" aria-hidden="true"></span>
   <span>Нових звернень: </span>
   <span id="claims_number"></span>
@@ -9,7 +9,7 @@
   }
   setInterval(pulse, 1000);
 
-  $('#new_claim').click(function(){
+  $('#new_claims_list').click(function(){
     $('#mail-box').toggle();
   });
 </script>

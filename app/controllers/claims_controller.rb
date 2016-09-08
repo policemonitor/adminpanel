@@ -27,12 +27,16 @@ class ClaimsController < ApplicationController
     respond_to do |format|
       if @claim.save
 
+        # Disabled, becaulse it's out of trial account on Twilio
+
         #client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
         #client.account.sms.messages.create(
         #   from: TWILIO_CONFIG['from'],
         #   to: @claim.phone,
         #   body: "Звернення №#{@claim.id} зареєстровано!"
         #)
+
+
         format.html do
           redirect_to thanks_path(id: @claim.id)
         end
@@ -131,12 +135,12 @@ class ClaimsController < ApplicationController
 
       @claim.access.delete if !@claim.access.nil?
 
-      client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
-      client.account.sms.messages.create(
-        from: TWILIO_CONFIG['from'],
-        to: @claim.phone,
-        body: "Звернення №#{@claim.id} розглянуто!"
-      )
+      #client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
+      #client.account.sms.messages.create(
+      #  from: TWILIO_CONFIG['from'],
+      #  to: @claim.phone,
+      #  body: "Звернення №#{@claim.id} розглянуто!"
+      #)
 
       flash[:success] = 'Наказ надано! Повідомьте екіпажі!'
       redirect_to crewslist_path(claim: @claim.id), turbolinks: false
@@ -173,7 +177,6 @@ class ClaimsController < ApplicationController
   end
 
   def is_accessable
-    # TODO
     # if this claim is accessable -> create block row in Access and add 3 minutes expiration
     # else push a message that this page is now accessed
 

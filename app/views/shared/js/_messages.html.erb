@@ -1,0 +1,99 @@
+<script>
+  var previous_messages = [];
+  var delay = 10000;                                                               // Delay in microseconds to update markers on map,
+  var callout = function () {
+    // Update list of new claims in header
+    $.ajax({
+      type: 'GET',
+      url: '/new_claims',
+      async: true,
+      beforeSend: function (xhr) {
+        if (xhr && xhr.overrideMimeType) {
+          xhr.overrideMimeType('application/json;charset=utf-8');
+        }
+      },
+      dataType: 'json',
+      error: function () {
+        $("#new_claim").text("Помилка модуля заяв!");
+        $("#empty_list").show();
+      },
+      success: function (data) {
+        if (!$.isArray(data) || !data.length) {
+          $("#new_claims_list").css("visibility", "hidden");
+        } else {
+          $("#new_claims_list").css("visibility", "visible");
+          $("#claims_number").text(data.length);
+
+          if (equal(data, previous_messages)) {
+            console.log("Nothing to change");
+          } else {
+
+            delete_from_messages_list(difference(previous_messages, data));                                // Objects to delete
+            add_to_messages_list(difference(data, previous_messages));                                     // Objects to add
+
+            previous_messages = data.slice(0);
+          }
+        }
+      }
+    }).always(function () {
+        setTimeout(callout, delay);
+    });
+  };
+
+  callout();
+
+  function difference(a, b) {
+    if (a === []) return [];
+    if (b === []) return a;
+    var difference = [];
+
+    for (i = 0; i < a.length; i++) {
+      var found = false;
+      for (j = 0; j < b.length; j++)
+        if (a[i].id == b[j].id) {
+          found = true;
+          break;
+        }
+      if (found == false) difference.push(a[i]);
+    }
+    return difference;
+  };
+
+  function equal(a, b) {
+    if (a.length != b.length) return false;
+    for (i = 0; i < a.length; i++)
+      if (a[i].id != b[i].id)
+        return false;
+    return true;
+  };
+
+  function compile_message(message) {
+    return "<li data-message_id=" + message.id + ">" +
+              "<a data-no-turbolink='false' href='/claims/" + message.id +  "/edit'>" +
+                "<h4>" + message.theme.trimToLength(40) + "</h4>" +
+              "</a>" +
+                         message.text.trimToLength(80) +
+              "<hr class='devider-line'>" +
+            "</li>"
+  };
+
+  function add_to_messages_list(messages_list) {
+    for (i = 0; i < messages_list.length; i++)
+      $(compile_message(messages_list[i])).prependTo("#new-messages").hide().slideDown();
+  };
+
+  function delete_from_messages_list(messages_list) {
+    for (i = 0; i < messages_list.length; i++)
+      $("li[data-message_id='" + messages_list[i].id + "']").hide('slow', function(){ $target.remove(); });
+  };
+
+  $('#new_claims_list').click(function(){
+    $('#mail-box').toggle();
+  });
+
+  String.prototype.trimToLength = function(m) {
+    return (this.length > m)
+      ? jQuery.trim(this).substring(0, m).split(" ").slice(0, -1).join(" ") + "..."
+      : this;
+  };
+</script>

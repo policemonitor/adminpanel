@@ -10,9 +10,10 @@
     </ul>
     <ul class="nav navbar-nav navbar-right hidden-xs">
       <% if current_administrator %>
-      <li>
-        <%= render "shared/navs/header/new_claim" %>
-      </li>
+        <% if signed_in_ADMIN? %>
+          <%= render "shared/js/messages" %>
+          <li><%= render "shared/navs/header/new_claim" %></li>
+        <% end %>
       <li>
         <%= link_to current_administrator.lastname, current_administrator, class: "navbar-link" %>
       </li>

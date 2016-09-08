@@ -20,35 +20,3 @@
 //= require underscore
 //= require gmaps/google
 //= require_tree .
-
-var delay = 5000,                                                               // Delay in microseconds to update markers on map
-
-callout = function () {
-  $.ajax({
-    type: 'GET',
-    url: '/new_claims',
-    async: true,
-    beforeSend: function (xhr) {
-      if (xhr && xhr.overrideMimeType) {
-        xhr.overrideMimeType('application/json;charset=utf-8');
-      }
-    },
-    dataType: 'json',
-    error: function () {
-      $("#new_claim").text("Помилка модуля заяв!");
-      $("#empty_list").show();
-    },
-    success: function (data) {
-      if (!$.isArray(data) || !data.length) {
-        $("#new_claim").css("visibility", "hidden");
-      } else {
-        $("#new_claim").css("visibility", "visible");
-        $("#claims_number").text(data.length);
-      }
-    }
-  }).always(function () {
-      setTimeout(callout, delay);
-  });
-};
-
-callout();
