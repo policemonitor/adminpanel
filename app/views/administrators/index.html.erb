@@ -22,7 +22,7 @@
                 <td><%= rank_to_word(administrator) %></td>
                 <td><%= administrator.personal_number %></td>
                 <td><%= administrator.login %></td>
-                <td><%= link_to "Переглянути", administrator, data: { "no-turbolink": true } %></td>
+                <td><%= link_to "Переглянути", administrator, data: {'no-turbolink': true } %></td>
                 <td><%= link_to "Редагувати", edit_administrator_path(administrator), data: { "no-turbolink": true } %></td>
               </tr>
               <% end %>

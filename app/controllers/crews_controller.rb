@@ -29,7 +29,7 @@ class CrewsController < ApplicationController
   end
 
   def index
-    if (params.has_key?(:query))
+    if params.has_key?(:query)
       @crews = Crew.search(params[:query])
     else
       @crews = Crew.where(deleted: false)

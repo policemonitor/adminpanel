@@ -123,8 +123,7 @@ class ClaimsController < ApplicationController
 
   def update
     @claim = Claim.find(params[:id])
-    @claim.update_attribute(:status, true)
-    @claim.update_attribute(:administrator_id, current_administrator.id)
+    @claim.update_attributes(status: true, administrator_id: current_administrator.id)
     if @claim.update_attributes(claim_update_params)
 
       @claim.crew_ids.each do |crew|
@@ -133,7 +132,7 @@ class ClaimsController < ApplicationController
         @crew.save
       end
 
-      @claim.access.delete if !@claim.access.nil?
+      @claim.access.delete unless @claim.access.nil?
 
       #client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
       #client.account.sms.messages.create(

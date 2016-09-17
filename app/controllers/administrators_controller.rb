@@ -10,9 +10,9 @@ class AdministratorsController < ApplicationController
   # List of administrators can only been viewed by HR
   # Any special features for administrators cannot be accessed by HR
 
-  before_action :signed_in_administrator, only: [:edit, :update, :show, :new, :index, :destroy, :disable]
+  before_action :signed_in_administrator, only: [:edit, :update, :show, :new, :index, :destroy]
   before_action :correct_administrator,   only: [:edit, :update, :show]
-  before_action :correct_hr,              only: [:new, :index, :destroy, :disable]
+  before_action :correct_hr,              only: [:new, :index, :destroy]
 
   def new
     @administrator = Administrator.new
@@ -71,8 +71,8 @@ class AdministratorsController < ApplicationController
   def correct_administrator
     @administrator = Administrator.find(params[:id])
     if current_administrator.rank != HR_RANK
-      if !current_administrator?(@administrator)
-        flash[:danger] = "Немає прав на виконання цієї операції!"
+      unless current_administrator?(@administrator)
+        flash[:danger] = 'Немає прав на виконання цієї операції!'
         redirect_to login_path
       end
     end
@@ -80,7 +80,7 @@ class AdministratorsController < ApplicationController
 
   def correct_hr
     if current_administrator.rank != HR_RANK
-      flash[:danger] = "Немає прав на виконання цієї операції!"
+      flash[:danger] = 'Немає прав на виконання цієї операції!'
       redirect_to login_path
     end
   end

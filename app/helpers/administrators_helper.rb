@@ -5,6 +5,5 @@ module AdministratorsHelper
       notice += "<li>#{msg}</li>"
     end
     notice += "</ul>"
-    return notice
   end
 end
