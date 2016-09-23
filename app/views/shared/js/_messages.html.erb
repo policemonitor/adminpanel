@@ -24,14 +24,14 @@
           $("#new_claims_list").css("visibility", "visible");
           $("#claims_number").text(data.length);
 
-          if (equal(data, previous_messages)) {
-            console.log("Nothing to change");
-          } else {
-
+          if (!equal(data, previous_messages)) {
             delete_from_messages_list(difference(previous_messages, data));                                // Objects to delete
             add_to_messages_list(difference(data, previous_messages));                                     // Objects to add
 
             previous_messages = data.slice(0);
+          }
+          if (data.length == 0) {
+            $('#mail-box').hide();
           }
         }
       }
