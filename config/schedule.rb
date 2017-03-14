@@ -8,7 +8,7 @@
 
 # Every reboot
 # => Run support server on port 5000
-# => Run main server on port whenever you like
+# => Run main server on port whatever you like
 
 # Help: whenever --help
 
