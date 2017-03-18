@@ -1,0 +1,48 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <%= form_tag investigators_index_path, method: 'get' do %>
+    <div class="col-md-8 col-md-offset-2">
+      <h3>Пошук слідчого</h3>
+      <div class="row">
+        <div class="col-md-9">
+          <div class="form-group">
+            <%= label_tag :query, "Введіть пошуковий запит", class: "control-label pull-left" %>
+            <%= text_field_tag :query,
+                                  params[:query],
+                                  placeholder: "прізвище, і'мя або по батькові",
+                                  class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <%= submit_tag "Search", :name => nil, class: "btn btn-lg btn-primary btn-block", id: "first-coordinates-button", value: "Шукати" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <% if !@investigators.nil? %>
+      <% @investigators.each do |investigator| %>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="media">
+              <div class="media-body media-middle">
+                <p>
+                  <h5><%= investigator.try(:lastname) %></h5>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col-md-6 col-md-offset-3">
+        <h3>У базі даних не міститься жодної інформації стосовно слідчих!</h3>
+      </div>
+    <% end %>
+  </div>
+</div>

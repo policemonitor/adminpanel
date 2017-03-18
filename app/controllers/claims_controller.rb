@@ -110,6 +110,36 @@ class ClaimsController < ApplicationController
     end
   end
 
+  def assign_investigator
+    if params[:id] == nil
+      flash[:danger] = 'Звернення не обрано!'
+      redirect_to allincomeclaims_path
+    else
+      @claim = Claim.find(params[:id])
+      @investigators = Investigator.all
+    end
+  end
+
+  def edit_assigned_investigator
+    @claim = Claim.find(params[:id])
+    if @claim.update_attributes(claim_update_investigator_params)
+      @claim.access.delete unless @claim.access.nil?
+
+      #client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
+      #client.account.sms.messages.create(
+      #  from: TWILIO_CONFIG['from'],
+      #  to: @claim.phone,
+      #  body: "Слідчий звернення №#{@claim.id}: #{@claim.investigator}"
+      #)
+
+      flash[:success] = 'Слідчого призначено!'
+      redirect_to allincomeclaims_path
+    else
+      flash[:danger] = "Виникла помилка під час виконання!"
+      redirect_to @claim
+    end
+  end
+
   def thankyoupage
   end
 
@@ -160,7 +190,7 @@ class ClaimsController < ApplicationController
 
   def is_blocked_by_me
     @claim = Claim.find(params[:id])
-    redirect_to blocked_path(id: @claim.id) if @claim.status == true || @claim.access.administrator_id != current_administrator.id
+    redirect_to blocked_path(id: @claim.id) if !@claim.access.nil? && @claim.access.administrator_id != current_administrator.id
   end
 
   def claim_params
@@ -168,7 +198,11 @@ class ClaimsController < ApplicationController
   end
 
   def claim_update_params
-    params.require(:claim).permit(:administrator_id, crew_ids: [])
+    params.require(:claim).permit(:administrator_id, :investigator_id, crew_ids: [])
+  end
+
+  def claim_update_investigator_params
+    params.require(:claim).permit(:investigator_id)
   end
 
   def access_params

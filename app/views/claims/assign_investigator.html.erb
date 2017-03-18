@@ -1,0 +1,32 @@
+<div class="container-fluid">
+   <div class="row">
+      <%= form_for @claim, method: :post, :url => edit_claim_investigator_path do |f| %>
+      <%= hidden_field_tag 'id', @claim.id %>
+      <div class="col-md-4">
+         <h2>Призначення слідчого на справу</h2>
+         <%= f.submit "Призначити слідчого", class: "btn btn-danger  btn-block" %>
+      </div>
+      <div class="col-md-8">
+         <div class="row">
+            <% if !@investigators.nil? %>
+            <% @investigators.each do |investigator| %>
+            <div class="col-md-6">
+               <div class="card">
+                  <div class="media">
+                    <%= f.radio_button :investigator_id, investigator.id %>
+                    <%= f.label :investigator_id, investigator.try(:lastname) %>
+                  </div>
+               </div>
+             </div>
+               <% end %>
+            <% else %>
+                 <div class="col-md-6 col-md-offset-3">
+                   <h3>У базі даних не міститься жодної інформації стосовно слідчих!</h3>
+                 </div>
+               <% end %>
+            </div>
+         </div>
+      </div>
+      <% end %>
+   </div>
+</div>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :investigators
   resources :administrators
   resources :crews
   resources :claims do
@@ -20,9 +21,11 @@ Rails.application.routes.draw do
   get    'fulllist' => 'crews#fulllist'
   get    'blocked'  => 'claims#blocked'
   get    'new_claims' => 'claims#new_claims'
+  post   'edit_claim_investigator' => 'claims#edit_assigned_investigator'
 
   get    'crewslist' => 'claims#crews_list'
   get    'search'    => 'claims#index'
+  get    'assign_investigator' => 'claims#assign_investigator'
   get    'allincomeclaims' => 'claims#all_income_claims'
 
   post   'claims/new' => 'claims#new'

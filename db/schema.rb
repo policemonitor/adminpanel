@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160628144051) do
+ActiveRecord::Schema.define(version: 20170314214813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,10 @@ ActiveRecord::Schema.define(version: 20160628144051) do
     t.integer  "crew_id"
     t.integer  "administrator_id"
     t.boolean  "status",           default: false
+    t.integer  "investigator_id"
   end
+
+  add_index "claims", ["investigator_id"], name: "index_claims_on_investigator_id", using: :btree
 
   create_table "claims_crews", id: false, force: :cascade do |t|
     t.integer "crew_id",  null: false
@@ -72,5 +75,11 @@ ActiveRecord::Schema.define(version: 20160628144051) do
 
   add_index "crews", ["car_number"], name: "index_crews_on_car_number", unique: true, using: :btree
   add_index "crews", ["vin_number"], name: "index_crews_on_vin_number", unique: true, using: :btree
+
+  create_table "investigators", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "lastname"
+  end
 
 end
