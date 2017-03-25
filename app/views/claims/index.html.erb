@@ -21,9 +21,9 @@
             <%= label_tag :phone_number, "Ваш номер телефону", class: "control-label pull-left" %>
             <%= text_field_tag :phone_number,
                                   params[:phone_number],
-                                  placeholder: "+ 38(044)3344553",
+                                  placeholder: "+ 380443344553",
                                   class: "form-control",
-                                  pattern: "[+][0-9]{1,2}[(][0-9]{2,6}[)][0-9]{3,10}",
+                                  pattern: "[+][0-9]{10,12}",
                                   required: true %>
           </div>
         </div>
