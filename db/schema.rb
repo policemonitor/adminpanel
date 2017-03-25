@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314214813) do
+ActiveRecord::Schema.define(version: 20170325114656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 20170314214813) do
     t.string   "longitude"
     t.string   "theme"
     t.text     "text"
-    t.integer  "crew_id"
     t.integer  "administrator_id"
     t.boolean  "status",           default: false
     t.integer  "investigator_id"
@@ -80,6 +79,14 @@ ActiveRecord::Schema.define(version: 20170314214813) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "lastname"
+  end
+
+  create_table "tmp_last_name", id: false, force: :cascade do |t|
+    t.text "unnest"
+  end
+
+  create_table "tmp_themes", id: false, force: :cascade do |t|
+    t.text "unnest"
   end
 
 end
