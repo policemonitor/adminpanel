@@ -12,8 +12,14 @@ class ClaimsController < ApplicationController
   # Administrator has all privileges to manipulate claims.
   # Administrator MUST UPDATE claim after recieving it.
 
-  before_action :signed_in_administrator, only: [:all_income_claims, :edit, :update, :destroy, :map, :crews_list, :show, :blocked, :assign_investigator, :edit_assigned_investigator]
-  before_action :is_ADMIN, only: [:new_claims, :all_income_claims, :crews_list, :edit, :update, :destroy, :map]
+  before_action :signed_in_administrator, only: [:all_income_claims, :edit,
+                                                 :update, :destroy, :map,
+                                                 :crews_list, :show, :blocked,
+                                                 :assign_investigator,
+                                                 :edit_assigned_investigator]
+
+  before_action :is_ADMIN, only: [:new_claims, :all_income_claims, :crews_list,
+                                                 :edit, :update, :destroy, :map]
   before_action :is_accessable, only: [:edit]
   before_action :is_blocked_by_me, only: [:update]
 
@@ -70,6 +76,7 @@ class ClaimsController < ApplicationController
     end
   end
 
+  # Without search params
   def all_income_claims
     @claim = Claim.all
   end
@@ -83,6 +90,10 @@ class ClaimsController < ApplicationController
       marker.infowindow claim_card(claim)
     end
     @default_location = { latitude: APP_CONFIG["def_lat"], longitude: APP_CONFIG["def_lng"] }
+  end
+
+  def temperature_map
+    render json: Claim.select("id, theme, latitude, longitude, created_at").in_period(params[:start_date], params[:end_date]).order('created_at asc')
   end
 
   def edit
