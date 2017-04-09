@@ -13,3 +13,25 @@
 #text-from-slider-space {
   margin-top: 5px;
 }
+
+#map-container {
+  width: 100%;
+  position: fixed;
+  margin-left: -15px;
+  margin-top: -73px;
+  height: 100vh;
+ }
+ #map-canvas {
+   min-width: 100%;
+   height: 100%;
+   z-index: -10;
+   position: absolute;
+ }
+
+ #floating-panel {
+     position: absolute;
+     top: -5px;
+     z-index: 5;
+     padding: 8px;
+     text-align: center;
+ }

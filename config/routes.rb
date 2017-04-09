@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   root to: 'static_pages#landing'
 
+  get    'temperature_map' => 'static_pages#temperature_map'
+
   get    'login'    => 'sessions#new'
   post   'login'    => 'sessions#create'
   delete 'logout'   => 'sessions#destroy'
@@ -28,7 +30,7 @@ Rails.application.routes.draw do
   get    'allincomeclaims'         => 'claims#all_income_claims'
   post   'claims/new'              => 'claims#new'
   post   'API'                     => 'claims#create'
-  get    'API/temperature_map'     => 'claims#temperature_map'
+  get    'api/temperature_map'     => 'claims#temperature_map'
 
   get    'signup'     => 'administrators#new'
   post   'disable'    => 'administrators#disable'
