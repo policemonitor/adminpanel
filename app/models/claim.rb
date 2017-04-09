@@ -51,7 +51,7 @@ class Claim < ActiveRecord::Base
   end
 
   def self.in_period(start_date, end_date)
-    case
+      case
       when (!start_date.nil? && start_date != '') && (!end_date.nil? && end_date != '')
         where(created_at: start_date..end_date)
       when (!start_date.nil? && start_date != '') && (end_date.nil? || end_date == '')
