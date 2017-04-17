@@ -1,51 +1,54 @@
 <div class="container-fluid top-fixed">
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div id="carousel-root" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carousel-root" data-slide-to="0" class="active"></li>
-          <li data-target="#carousel-root" data-slide-to="1"></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-          <div class="item active">
-            <%= image_tag 'slider/slider_1.jpg', class: "img-responsive" %>
-            <div class="carousel-caption">
-              <h2>Безпека</h2>
-              <p>Це наше завдання!</p>
+    <div class="col-md-8 col-md-offset-2">
+      <div class="row">
+        <div class="col-md-4">
+          <h2 class="title">Посилання</h2>
+          <ul class="menu_list">
+              <li class="menu_item"><%= link_to "Надати заяву", claims_new_path, class: "options_menu" %></li>
+              <li class="menu_item"><%= link_to "Пошук заяви у системі", search_path, class: "options_menu" %></li>
+              <li class="menu_item"><%= link_to "Статистичні матеріали", temperature_map_path, class: "options_menu" %></li>
+          </ul>
+        </div>
+        <div class="col-md-8">
+          <div id="carousel-root" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carousel-root" data-slide-to="0" class="active"></li>
+              <li data-target="#carousel-root" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <%= image_tag 'slider/slider_1.jpg', class: "img-responsive" %>
+                <div class="carousel-caption">
+                  <h2>Безпека</h2>
+                  <p>Це наше завдання!</p>
+                </div>
+              </div>
+              <div class="item">
+                <%= image_tag 'slider/slider_2.jpg', class: "img-responsive" %>
+                <div class="carousel-caption">
+                  <h2>Впевненність</h2>
+                  <p>Ми виконаємо наші зобов'язання!</p>
+                </div>
+              </div>
             </div>
+            <a class="left carousel-control" href="#carousel-root" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-root" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
           </div>
-          <div class="item">
-            <%= image_tag 'slider/slider_2.jpg', class: "img-responsive" %>
-            <div class="carousel-caption">
-              <h2>Впевненність</h2>
-              <p>Ми виконаємо наші зобов'язання!</p>
-            </div>
+          <div id="text-from-slider-space">
+              <h2>Громадська фіксація правопорушень</h2>
+              <p>Цей сервіс є зручним інструментом для того щоб повідомити про будь-який
+              інцедент, що порушує права громадян України. <b>Наша мета</b> - спростити
+              отриання допомоги у складних ситуаціях для населення.</p>
           </div>
         </div>
-        <a class="left carousel-control" href="#carousel-root" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-root" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
       </div>
-    </div>
-  </div>
-  <div class="row" id="text-from-slider-space">
-    <div class="col-md-2 col-md-offset-3">
-      <ul class="list-group">
-        <li class="list-group-item unrounded-borders"><b>Швидкі посилання</b></li>
-        <li class="list-group-item unrounded-borders"><%= link_to "Надати заяву", claims_new_path %></li>
-        <li class="list-group-item unrounded-borders"><%= link_to "Пошук заяви у системі", search_path %></li>
-      </ul>
-    </div>
-    <div class="col-md-4">
-      <h1>Громадська фіксація правопорушень</h1>
-      <p>Цей сервіс є зручним інструментом для того щоб повідомити про будь-який
-      інцедент, що порушує права громадян України. <b>Наша мета</b> - спростити
-      отриання допомоги у складних ситуаціях для населення.</p>
     </div>
   </div>
 </div>
