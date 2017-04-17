@@ -10,6 +10,10 @@
   border-radius: 0px !important;
 }
 
+.right-spaced {
+  margin-right: 0 !important;
+}
+
 #text-from-slider-space {
   margin-top: 5px;
 }
@@ -21,6 +25,7 @@
   margin-top: -73px;
   height: 100vh;
  }
+
  #map-canvas {
    min-width: 100%;
    height: 100%;
@@ -29,9 +34,8 @@
  }
 
  #floating-panel {
-     position: absolute;
-     top: -5px;
-     z-index: 5;
-     padding: 8px;
-     text-align: center;
+   position: absolute;
+   z-index: 5;
+   top: 0;
+   width: 100%;
  }

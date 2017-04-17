@@ -2,12 +2,7 @@
         src="https://maps.googleapis.com/maps/api/js?key=<%= APP_CONFIG['google-map-key'] %>&libraries=visualization&callback=initMap">
 </script>
 
-<script>
-$('#dp input').datepicker({
-  format: "dd/mm/yyyy",
-  autoclose: true
-});
-
+<script type="text/javascript">
   var map, heatmap;
 
   window.initMap = function() {

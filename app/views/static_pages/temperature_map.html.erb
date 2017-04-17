@@ -1,24 +1,52 @@
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.datepicker').datepicker({
+    format: "dd/mm/yyyy",
+    autoclose: true
+  });
+});
+</script>
 
 <div id="floating-panel">
-  <div class="btn-group" role="group" aria-label="...">
-      <button class="btn btn-default" onclick="toggleHeatmap()">Приховати мапу</button>
-      <button class="btn btn-default" onclick="changeGradient()">Змінити колір</button>
-      <button class="btn btn-default" onclick="changeRadius()">Змінити радіус</button>
-      <button class="btn btn-default" onclick="changeOpacity()">Змінити прозорість</button>
-  </div>
-  <input type="text" class='datepicker dp' id="start_datepicker" placeholder="Початкова дата" style="height:31px;width:120px;">
-  <input type="text" class="datepicker dp" id="end_datepicker"   placeholder="Кінцева дата"   style="height:31px;width:120px;" >
-  <script type="text/javascript">
-  $(document).ready(function(){
-    $('.datepicker').datepicker({
-      format: "dd/mm/yyyy",
-      autoclose: true
-    });
-  });
-  </script>
-
-
-  <button class="btn btn-default" onclick="getPeriod()">Пошук</button>
+  <nav class="navbar navbar-default topnav" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header hidden-xs">
+        <%= link_to root_path, class: "navbar-brand" do  %>
+        <%= image_tag "system/gerald.gif", class: "gerald", alt: "Brand"%>
+        <% end %>
+      </div>
+      <ul class="nav navbar-nav">
+        <li>
+          <%= link_to "Громадська фіксація правопорушень", root_path, class: "brand-name" %></li>
+        <li>
+          <p class="navbar-text">
+            <b>Температурна мапа звернень</b>
+            <%= link_to "#",
+                        data: { toggle: "modal", target: "#temperature_map_window"},
+                        onclick: "jQuery -> $('#temperature_map_window').modal();",
+                        class: "navbar-link" do %>
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            <% end %>
+          </p>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right right-spaced">
+        <li>
+          <!--
+          <div class="btn-group" role="group" aria-label="...">
+              <button class="btn btn-default" onclick="toggleHeatmap()">Приховати мапу</button>
+              <button class="btn btn-default" onclick="changeGradient()">Змінити колір</button>
+              <button class="btn btn-default" onclick="changeRadius()">Змінити радіус</button>
+              <button class="btn btn-default" onclick="changeOpacity()">Змінити прозорість</button>
+          </div>
+          -->
+          <input type="text" class='datepicker dp' id="start_datepicker" placeholder="Початкова дата" style="height:33px;width:140px;">
+          <input type="text" class="datepicker dp" id="end_datepicker"   placeholder="Кінцева дата"   style="height:33px;width:140px;" >
+          <button class="btn btn-default navbar-btn" onclick="getPeriod()">Пошук</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </div>
 
 <div class="container-fluid">
@@ -28,3 +56,4 @@
 </div>
 
 <%= render "shared/js/temperature_map" %>
+<%= render "shared/modals/temperature_map_modal" %>
