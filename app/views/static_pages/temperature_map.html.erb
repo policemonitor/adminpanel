@@ -6,8 +6,17 @@
       <button class="btn btn-default" onclick="changeRadius()">Змінити радіус</button>
       <button class="btn btn-default" onclick="changeOpacity()">Змінити прозорість</button>
   </div>
-  <input type="text" class="dp" data-provide='datepicker' id="start_datepicker" placeholder="Початкова дата" style="height:31px;width:120px;" >
-  <input type="text" class="dp" data-provide='datepicker' id="end_datepicker"   placeholder="Кінцева дата"   style="height:31px;width:120px;" >
+  <input type="text" class='datepicker dp' id="start_datepicker" placeholder="Початкова дата" style="height:31px;width:120px;">
+  <input type="text" class="datepicker dp" id="end_datepicker"   placeholder="Кінцева дата"   style="height:31px;width:120px;" >
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+      format: "dd/mm/yyyy",
+      autoclose: true
+    });
+  });
+  </script>
+
 
   <button class="btn btn-default" onclick="getPeriod()">Пошук</button>
 </div>
