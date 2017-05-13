@@ -29,8 +29,8 @@ Rails.application.routes.draw do
   get    'assign_investigator'     => 'claims#assign_investigator'
   get    'allincomeclaims'         => 'claims#all_income_claims'
   post   'claims/new'              => 'claims#new'
-  post   'API'                     => 'claims#create'
-  get    'api/temperature_map'     => 'claims#temperature_map'
+  post   'api/new_claim'           => 'claims#create'
+  get    'api/claims_map'          => 'claims#temperature_map'
 
   get    'signup'     => 'administrators#new'
   post   'disable'    => 'administrators#disable'
