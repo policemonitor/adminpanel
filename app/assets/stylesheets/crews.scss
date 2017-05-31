@@ -34,3 +34,192 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+#list {
+  height: auto;
+  width: auto;
+  border-radius: 16px 16px;
+  border-color: #fff;
+  border-style: solid;
+  box-shadow: 2px 2px 10px #B1B1B1;
+  background-color: white;
+  border-width: 7px;
+  position: absolute;
+  z-index: 10;
+  right: 35px;
+  top: 30px;
+}
+
+.form_list {
+  height: auto;
+  width: auto;
+  border-radius: 16px 16px;
+  border-color: #fff;
+  border-style: solid;
+  box-shadow: 2px 2px 10px #B1B1B1;
+  background-color: white;
+  border-width: 7px;
+  position: fixed;
+  z-index: 10;
+  right: 35px;
+  top: 30px;
+}
+
+/**
+**          Search pannel
+**/
+
+.search-panel {
+  height: 90px;
+  width: 60%;
+  padding: 11px 15px 0px 15px;
+  box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.2);
+  background-color: white;
+  border-radius: 0px;
+  border: 1px solid transparent;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  display: none;
+  position: absolute;
+}
+
+.search-form {
+  width: 100%;
+  border: 0px;
+  outline: 0px;
+  background: transparent;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.search-form:focus {
+  border-bottom: 1px solid #a8a8a8;
+}
+
+.ui-state-focus {
+  background: #d3d3d3 !important;
+  border: 1px solid #d3d3d3 !important;
+  text-decoration: none !important;
+}
+
+.ui-widget-content {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  border: 1px solid white ;
+}
+
+.ui-menu-item {
+  border: 0px;
+  text-decoration: none;
+}
+
+/**
+**          Map settings
+**/
+
+#map-container {
+  width: 100%;
+  position: fixed;
+  height: 100vh;
+}
+
+#map-canvas {
+  width: 100%;
+  z-index: 3;
+  height: 100%;
+  position: absolute;
+}
+
+/**
+**            Cards and pannels
+**/
+
+.card-row {                                                                     // Row of crews
+  width: 100%;
+  height: 100%;
+  box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.2);
+  background-color: white;
+  padding: 5px 15px 5px 15px;
+}
+
+#card-header {                                                                  // Header in row of crews
+  border-radius: 0%;
+  background-color: white;
+  box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.2);
+  margin-bottom: 10px;
+}
+
+.card-element {                                                                 // Crew element
+  height: 60px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
+  box-shadow: 2px 3px 5px 0px  rgba(0,0,0,0.2);
+  background-color: white;
+}
+
+.list-over-map {
+  z-index: 1;
+  top: 10px;
+}
+
+.panel {                                                                        // Pannel of crew with sliding-down
+  box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.2);
+  background-color: white;
+  border-radius: 0px;
+  padding: 5px 15px 5px 15px;
+}
+
+.panel-heading {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.panel-body {
+  padding: 5px 10px 0px 10px;
+}
+
+ul > .panel-body {
+  margin-left: 0px;
+}
+
+.properties-list {                                                              // Data in pannels
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+.broken-car {                                                                   // Label for broken cars
+  color: red;
+}
+
+.gerald {
+  margin-top: -13px;
+  height: 46px;
+}
+
+.spacing-fix {
+  padding: 0px;
+}
+
+.crew-item {
+  cursor: pointer;
+}
+
+.crew_menu {
+  margin-top: -70px;
+}
+
+.crew_header_center {
+  padding: 10px;
+}
+
+#glyphicon-search-spaced{
+  top: -18px;
+}
+
+#search_query{
+  height: 50px;
+}
+
+#search-icon {
+  color: rgba(97, 93, 91, 0.85);
+}

@@ -1,0 +1,26 @@
+<div class="panel">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <%= link_to "Екіпаж: " + car.crew_name, "#" + car.crew_name, data: { toggle: "collapse" } %>
+      <div class="pull-right">
+        <% if !car.on_duty?%>
+          <span class="glyphicon glyphicon-ban-circle broken-car"
+                aria-hidden="true" data-container="body"
+                data-toggle="popover" data-placement="right"
+                data-content="На ремонті" ></span>
+        <% end %>
+      </div>
+    </h4>
+  </div>
+  <div id="<%= car.crew_name %>" class="panel-collapse collapse">
+    <div class="panel-body">
+      <ul class="properties-list">
+        <li>Оновлено: <%= car.updated_at.strftime("%H:%m %B, %d") %></li>
+        <li>Номер: <%= car.car_number %>, <%= link_to "налаштування", edit_crew_path(car) %></li>
+        <li>
+          Статус: <%= car.on_a_mission? ? "на виїзді" : "вільний" %><%= sanitize(", <b>у ремонті</b>") unless car.on_duty? %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

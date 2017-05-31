@@ -1,0 +1,22 @@
+<%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=geometry&key=#{APP_CONFIG['google-map-key']}" %>
+
+<div class="container-fluid" style="margin-left: 15px;">
+  <div class="row spacing-fix">
+    <div class="col-md-3 list-over-map crew_menu">
+      <div class="card-row">
+        <h3 id="list-header">Список екіпажів
+          <%= link_to "#", class: "pull-right", id: "search-icon" do %>
+              <span class="glyphicon glyphicon-search" id="glyphicon-search-spaced"></span>
+          <% end %>
+        </h3>
+        <div class="panel-group">
+          <%= render partial: "crews/live_map/car", collection: @cars %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 spacing-fix list-over-map">
+      <%= render "crews/live_map/search" %>
+    </div>
+    <%= render "crews/live_map/map" %>
+  </div>
+</div>

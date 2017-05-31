@@ -1,0 +1,85 @@
+<div id="map-container">
+  <div id="map-canvas"></div>
+</div>
+<script>
+  /**
+   **            Map initializing
+   **/
+
+  var map = new GMaps({
+    el: '#map-canvas',
+    lat: <%= APP_CONFIG["def_lat"] %>,
+    lng: <%= APP_CONFIG["def_lng"] %>,
+    zoom: 10,
+    disableDefaultUI: true
+  });
+
+  /**
+   *            Live map update with AJAX queries
+   **/
+
+  var delay = 5000,                                                               // Delay in microseconds to update markers on map
+
+      callout = function () {
+        $.ajax({
+          type: 'GET',
+          url: '/api/crews_map',
+          async: true,
+          beforeSend: function (xhr) {
+            if (xhr && xhr.overrideMimeType) {
+              xhr.overrideMimeType('application/json;charset=utf-8');
+            }
+          },
+          dataType: 'json',
+          success: function (data) {
+            map.removeMarkers();
+
+            for (i = 0; i < data.length; i++) {
+              console.log(data[i]);
+            }
+
+            map.addMarkers(data);
+          }
+        }).always(function () {
+          setTimeout(callout, delay);
+        });
+      };
+  callout();
+
+  function move_map_to (latitude, longitude) {                                    // Interface to move center of map to the specific place
+    map.map.panTo({lat: latitude, lng: longitude});
+  }
+
+  /**
+   **              Autocomplete function for live search
+   **/
+
+  $("#search_query").autocomplete({
+    source: function (request, response) {
+      var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+      var array = $.grep(<%= raw @cars.to_json %>, function (value) {          // Get all crew from list, that already listed in the first request
+        return matcher.test(value.crew_name) || matcher.test(value.car_number);
+      });
+      response(array);
+    },
+    select: function (event, ui) {
+      $.ajax({                                                                  // Get fresh information about crew's position
+        type: 'GET',
+        url: '/crews/' + ui.item.id,
+        async: true,
+        beforeSend: function (xhr) {
+          if (xhr && xhr.overrideMimeType) {
+            xhr.overrideMimeType('application/json;charset=utf-8');
+          }
+        },
+        dataType: 'json',
+        success: function (data) {
+          $("#search_query").val("Екіпаж " + ui.item.crew_name + ", держ. знак " + ui.item.car_number);
+          move_map_to(parseFloat(data.latitude), parseFloat(data.longitude));
+        }
+      });
+    }
+  }).data("uiAutocomplete")._renderItem = function (ul, item) {
+    return $("<li></li>").data("item.autocomplete", item).append("<a>Екіпаж " + item.crew_name + ", держ. знак " + item.car_number + "</a>").appendTo(ul);
+  };
+</script>>

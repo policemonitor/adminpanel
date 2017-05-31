@@ -18,8 +18,10 @@ Rails.application.routes.draw do
   post   'login'    => 'sessions#create'
   delete 'logout'   => 'sessions#destroy'
 
-  get    'thanks'                  => 'claims#thankyoupage'
   get    'map'                     => 'claims#map'
+  get    'crews_map'               => 'crews#live_map'
+
+  get    'thanks'                  => 'claims#thankyoupage'
   get    'fulllist'                => 'crews#fulllist'
   get    'blocked'                 => 'claims#blocked'
   get    'new_claims'              => 'claims#new_claims'
@@ -29,7 +31,9 @@ Rails.application.routes.draw do
   get    'assign_investigator'     => 'claims#assign_investigator'
   get    'allincomeclaims'         => 'claims#all_income_claims'
   post   'claims/new'              => 'claims#new'
+
   post   'api/new_claim'           => 'claims#create'
+  get    'api/crews_map'           => 'crews#api_live_map'
   get    'api/claims_map'          => 'claims#temperature_map'
 
   get    'signup'     => 'administrators#new'

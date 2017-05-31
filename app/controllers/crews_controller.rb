@@ -1,11 +1,12 @@
 class CrewsController < ApplicationController
   include CrewsHelper
   include SessionsHelper
-  include Synchronization
 
   # There is no access by unauthorised persons!
-
   before_action :signed_in_administrator, only: [:new, :create, :edit, :update, :destroy, :fulllist, :index, :show]
+
+  # Request new info before map update
+  before_action :get_markers, only: [:live_map, :api_live_map]
 
   def new
     @crew = Crew.new
@@ -14,14 +15,8 @@ class CrewsController < ApplicationController
   def create
     @crew = Crew.new(crew_params)
     if @crew.save
-      if Synchronization.add_crew_to_support_server(@crew.dup)
-        flash[:success] = "Новий екіпаж додано!"
+        flash[:success] = "Новий запис додано!"
         redirect_to crews_path
-      else
-        @crew.destroy
-        flash[:danger] = "Помилка синхронізації з сервером автомобілів!"
-        redirect_to crews_path
-      end
     else
       flash[:danger] = flash_errors(@crew)
       redirect_to action: 'new'
@@ -50,23 +45,9 @@ class CrewsController < ApplicationController
 
   def update
     @crew = Crew.find(params[:id])
-    rollback = {
-      car_number:   @crew.car_number,
-      vin_number:   @crew.vin_number,
-      crew_name:    @crew.crew_name,
-      on_duty:      @crew.on_duty,
-      on_a_mission: @crew.on_a_mission
-    }
     if @crew.update_attributes(crew_update_params)
-      if Synchronization.update_crew_on_support_server(@crew.clone)
-        flash[:success] = "Екіпаж оновленно!"
-        redirect_to crews_path
-      else
-        @crew.update_attributes(rollback)
-
-        flash[:danger] = "Помилка синхронізації з сервером автомобілів!"
-        redirect_to crews_path
-      end
+      flash[:success] = "Екіпаж оновленно!"
+      redirect_to crews_path
     else
       flash[:danger] = flash_errors(@crew)
       redirect_to edit_crew_path(@crew)
@@ -75,17 +56,37 @@ class CrewsController < ApplicationController
 
   def destroy
     crew = Crew.find(params[:id])
-    if Synchronization.destroy_crew_on_support_server(crew)
-      if Crew.find(params[:id]).update_attribute(:deleted, true)
-        flash[:success] = "Екіпаж розформовано!"
-      else
-        flash[:danger] = "Виникла помилка!"
-      end
+    if Crew.find(params[:id]).update_attribute(:deleted, true)
+      flash[:success] = "Екіпаж розформовано!"
     else
-      flash[:danger] = "Помилка синхронізації з сервером автомобілів!"
+      flash[:danger] = "Виникла помилка!"
     end
 
     redirect_to crews_path
+  end
+
+  # Map with live reload
+
+  def live_map
+  end
+
+  def api_live_map
+    render json: @hash
+  end
+
+  def get_markers
+    @cars = Crew.where(deleted: false)
+    @hash = Gmaps4rails.build_markers(@cars) do |car, marker|
+      marker.lat car.latitude
+      marker.lng car.longitude
+      marker.title "Екіпаж: #{car.crew_name}"
+      marker.infowindow "Екіпаж #{car.crew_name}, держ. знак #{car.car_number}"
+      marker.picture({
+                         :url => "https://mt.googleapis.com/vt/icon/name=icons/onion/27-cabs.png",
+                         :width => 32,
+                         :height => 32
+                     })
+    end
   end
 
   private
