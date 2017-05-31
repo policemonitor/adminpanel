@@ -3,7 +3,7 @@ class CrewsController < ApplicationController
   include SessionsHelper
 
   # There is no access by unauthorised persons!
-  before_action :signed_in_administrator, only: [:new, :create, :edit, :update, :destroy, :fulllist, :index, :show]
+  before_action :signed_in_administrator, only: [:new, :create, :edit, :update, :destroy, :fulllist, :index, :show, :live_map, :api_live_map]
 
   # Request new info before map update
   before_action :get_markers, only: [:live_map, :api_live_map]

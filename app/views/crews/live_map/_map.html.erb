@@ -33,11 +33,6 @@
           dataType: 'json',
           success: function (data) {
             map.removeMarkers();
-
-            for (i = 0; i < data.length; i++) {
-              console.log(data[i]);
-            }
-
             map.addMarkers(data);
           }
         }).always(function () {
@@ -47,7 +42,9 @@
   callout();
 
   function move_map_to (latitude, longitude) {                                    // Interface to move center of map to the specific place
-    map.map.panTo({lat: latitude, lng: longitude});
+    if (!isNaN(latitude) && !isNaN(longitude)) {
+      map.map.panTo({lat: latitude, lng: longitude});
+    }
   }
 
   /**
