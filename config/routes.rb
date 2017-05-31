@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   post   'claims/new'              => 'claims#new'
 
   post   'api/new_claim'           => 'claims#create'
+  post   'api/update_crew'         => 'crews#api_update'
   get    'api/crews_map'           => 'crews#api_live_map'
   get    'api/claims_map'          => 'claims#temperature_map'
 

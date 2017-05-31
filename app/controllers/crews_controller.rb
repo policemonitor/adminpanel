@@ -89,6 +89,25 @@ class CrewsController < ApplicationController
     end
   end
 
+  # API for crews coordinates update
+  def api_update
+    if params[:vin_number] == nil
+      render json: "credentials aren't given", status: :unprocessable_entity
+    else
+      @crew = Crew.where(vin_number: params[:vin_number]).first
+      if @crew.nil?
+        render json: "given credentials are wrong", status: :unprocessable_entity
+        return
+      end
+
+      if @crew.update_attributes(api_crew_update_params)
+        render json: { vin_number: @crew.vin_number, latitude: @crew.latitude, longitude: @crew.longitude}, status: :created
+      else
+        render json: @crew.errors, status: :unprocessable_entity
+      end
+    end
+  end
+
   private
 
   def crew_params
@@ -97,5 +116,9 @@ class CrewsController < ApplicationController
 
   def crew_update_params
     params.require(:crew).permit(:car_number, :vin_number, :crew_name, :on_duty, :on_a_mission)
+  end
+
+  def api_crew_update_params
+    params.require(:crew).permit(:vin_number, :latitude, :longitude)
   end
 end
