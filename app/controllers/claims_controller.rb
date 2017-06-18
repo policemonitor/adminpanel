@@ -32,16 +32,7 @@ class ClaimsController < ApplicationController
 
     respond_to do |format|
       if @claim.save
-
-        # Disabled, becaulse it's out of trial account on Twilio
-
-        #client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
-        #client.account.sms.messages.create(
-        #   from: TWILIO_CONFIG['from'],
-        #   to: @claim.phone,
-        #   body: "Звернення №#{@claim.id} зареєстровано!"
-        #)
-
+        send_sms(@claim.phone, "Звернення №#{@claim.id} зареєстровано!")
 
         format.html do
           redirect_to thanks_path(id: @claim.id)
@@ -136,12 +127,7 @@ class ClaimsController < ApplicationController
     if @claim.update_attributes(claim_update_investigator_params)
       @claim.access.delete unless @claim.access.nil?
 
-      #client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
-      #client.account.sms.messages.create(
-      #  from: TWILIO_CONFIG['from'],
-      #  to: @claim.phone,
-      #  body: "Слідчий звернення №#{@claim.id}: #{@claim.investigator}"
-      #)
+      send_sms("Слідчий звернення №#{@claim.id}: #{@claim.investigator}")
 
       flash[:success] = 'Слідчого призначено!'
       redirect_to allincomeclaims_path
@@ -175,12 +161,7 @@ class ClaimsController < ApplicationController
 
       @claim.access.delete unless @claim.access.nil?
 
-      #client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
-      #client.account.sms.messages.create(
-      #  from: TWILIO_CONFIG['from'],
-      #  to: @claim.phone,
-      #  body: "Звернення №#{@claim.id} розглянуто!"
-      #)
+      send_sms(@claim.phone, "Звернення №#{@claim.id} розглянуто!")
 
       flash[:success] = 'Наказ надано! Повідомьте екіпажі!'
       redirect_to crewslist_path(claim: @claim.id), turbolinks: false
@@ -198,6 +179,19 @@ class ClaimsController < ApplicationController
   end
 
   private
+
+  def send_sms(phone, text)
+    begin
+      client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
+      client.account.sms.messages.create(
+        from: TWILIO_CONFIG['from'],
+        to: phone,
+        body: text
+      )
+    rescue => e
+      print "failed to send sms: " + e.message
+    end
+  end
 
   def is_blocked_by_me
     @claim = Claim.find(params[:id])
